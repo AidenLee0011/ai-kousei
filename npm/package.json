@@ -1,0 +1,15 @@
+{
+  "name": "buntai-lint",
+  "version": "0.4.0",
+  "description": "日本語リンター。コミット・報告書・エージェント間・対顧客の文章を公用文作成の考え方とJTFスタイルガイドを根拠に検査する。Japanese writing linter where every rule cites a Japanese public standard. Zero dependencies, no LLM, no network.",
+  "keywords": ["japanese", "linter", "校正", "日本語", "文体", "proofreading", "ai-writing", "technical-writing", "commit-msg", "textlint", "report"],
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/AidenLee0011/buntai.git" },
+  "homepage": "https://aidenlee0011.github.io/buntai/",
+  "bin": { "buntai": "bin/buntai.js" },
+  "main": "lint.js",
+  "files": ["bin", "lint.js", "rules", "README.md"],
+  "engines": { "node": ">=14" },
+  "dependencies": {},
+  "scripts": { "test": "node bin/buntai.js lint -m \"fix: キャッシュ追加\" --lang ja" }
+}

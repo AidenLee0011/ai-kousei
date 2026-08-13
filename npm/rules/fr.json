@@ -1,0 +1,99 @@
+{
+  "lang": "fr",
+  "name": "Français",
+  "version": "0.1.0",
+  "maturity": "starter",
+  "detect": { "stopwords": ["le", "la", "les", "des", "une", "est", "pour", "avec", "dans", "cette", "sur", "qui"], "weight": 1 },
+  "template": {
+    "commit": "{type}: {résumé, 60 caractères max}\n\nPourquoi: {problème en une ligne}\nQuoi: {modification en une à trois lignes}\nVérifié: {méthode de vérification en une ligne}",
+    "pr": "## Résumé\n{une ligne}\n\n## Pourquoi\n{problème}\n\n## Quoi\n{modification}\n\n## Vérifié\n{méthode et résultat}\n\n## Impact\n{périmètre affecté, retour arrière}"
+  },
+  "structural": {
+    "subject_max_width": 72,
+    "subject_no_period": "[.]$",
+    "body_sections": ["Pourquoi", "Quoi", "Vérifié"],
+    "bullet_max": 7
+  },
+  "rules": [
+    {
+      "id": "fr-important-de-noter",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "[Ii]l est important de (?:noter|souligner)|[Ii]l convient de noter",
+      "title": "Il est important de noter",
+      "why": "Formule passe-partout des textes générés, sans sujet ni information.",
+      "fix": "Énoncer le fait directement."
+    },
+    {
+      "id": "fr-monde-actuel",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "any",
+      "pattern": "[Dd]ans le monde (?:d'aujourd'hui|actuel)|[ÀA] l'ère (?:du|de la)",
+      "title": "Ouverture sur le monde actuel",
+      "why": "Introduction de billet de blog. Un commit n'a pas besoin de contexte d'époque.",
+      "fix": "Supprimer."
+    },
+    {
+      "id": "fr-en-conclusion",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "body",
+      "pattern": "[Ee]n conclusion|[Ee]n résumé|[Pp]our conclure",
+      "title": "Phrase de conclusion",
+      "why": "Trois lignes de corps n'appellent pas de conclusion.",
+      "fix": "Supprimer."
+    },
+    {
+      "id": "fr-non-seulement",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "non seulement\\b.{0,40}\\bmais (?:aussi|également)",
+      "title": "non seulement … mais aussi",
+      "why": "Calque de not just X but Y.",
+      "fix": "Ne garder que la seconde partie."
+    },
+    {
+      "id": "fr-de-plus",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "body",
+      "pattern": "[Dd]e plus,|[Pp]ar ailleurs,|[Ee]n outre,",
+      "title": "Connecteurs d'énumération",
+      "why": "Enchaîner les paragraphes par connecteurs est un tic de génération.",
+      "fix": "Séparer les phrases."
+    },
+    {
+      "id": "fr-nhesitez-pas",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "[Nn]'hésitez pas|[Bb]onne lecture|[Jj]'espère que (?:cela|ça) (?:vous )?aide",
+      "title": "Adresse au lecteur",
+      "why": "Un message de commit n'a pas de lecteur à qui s'adresser.",
+      "fix": "Supprimer."
+    },
+    {
+      "id": "fr-considerablement",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "considérablement|nettement amélioré|grandement|de manière significative",
+      "title": "Adverbes d'intensité",
+      "why": "Une emphase sans chiffre n'apporte rien.",
+      "fix": "Donner le chiffre : 820 ms vers 210 ms."
+    },
+    {
+      "id": "fr-vague-subject",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "^(?:\\w+(?:\\([^)]*\\))?:\\s*)?(?:[Dd]ivers(?:es)? |[Qq]uelques |[Pp]etites? )?(?:corrections?|ajustements?|améliorations?|mises? à jour)[.\\s]*$",
+      "title": "Objet sans contenu",
+      "why": "Corrections diverses ne dit rien que le diff ne montre.",
+      "fix": "Nommer l'objet et le résultat."
+    }
+  ]
+}

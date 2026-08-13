@@ -1,0 +1,99 @@
+{
+  "lang": "es",
+  "name": "Español",
+  "version": "0.1.0",
+  "maturity": "starter",
+  "detect": { "stopwords": ["el", "la", "los", "las", "una", "para", "con", "que", "este", "esta", "por", "del"], "weight": 1 },
+  "template": {
+    "commit": "{tipo}: {resumen, máx. 60 caracteres}\n\nPor qué: {problema en una línea}\nQué: {cambio en una a tres líneas}\nVerificado: {método de verificación en una línea}",
+    "pr": "## Resumen\n{una línea}\n\n## Por qué\n{problema}\n\n## Qué\n{cambio}\n\n## Verificado\n{método y resultado}\n\n## Impacto\n{alcance afectado, reversión}"
+  },
+  "structural": {
+    "subject_max_width": 72,
+    "subject_no_period": "[.]$",
+    "body_sections": ["Por qué", "Qué", "Verificado"],
+    "bullet_max": 7
+  },
+  "rules": [
+    {
+      "id": "es-importante-destacar",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "[Ee]s importante (?:destacar|señalar|tener en cuenta)|[Cc]abe (?:destacar|mencionar)",
+      "title": "Es importante destacar que",
+      "why": "Muletilla habitual del texto generado: sin sujeto y sin información.",
+      "fix": "Enunciar el hecho directamente."
+    },
+    {
+      "id": "es-mundo-actual",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "any",
+      "pattern": "[Ee]n el mundo actual|[Ee]n la era (?:digital|de)",
+      "title": "Apertura sobre el mundo actual",
+      "why": "Entrada de artículo. Un commit no necesita contexto de época.",
+      "fix": "Eliminar."
+    },
+    {
+      "id": "es-en-conclusion",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "body",
+      "pattern": "[Ee]n conclusión|[Ee]n resumen|[Pp]ara concluir",
+      "title": "Frase de cierre",
+      "why": "Tres líneas de cuerpo no piden un resumen.",
+      "fix": "Eliminar."
+    },
+    {
+      "id": "es-no-solo-sino",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "no s[oó]lo\\b.{0,40}\\bsino (?:también|que)",
+      "title": "no solo … sino también",
+      "why": "Calco de not just X but Y.",
+      "fix": "Conservar solo la segunda parte."
+    },
+    {
+      "id": "es-ademas",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "body",
+      "pattern": "[Aa]demás,|[Pp]or otro lado,|[Aa]simismo,",
+      "title": "Conectores de enumeración",
+      "why": "Encadenar párrafos con conectores es un patrón de generación.",
+      "fix": "Separar las frases."
+    },
+    {
+      "id": "es-espero-que-ayude",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "[Ee]spero que (?:esto |te |le )?(?:sea de ayuda|ayude)|[Nn]o dudes en|[Ss]umérgete",
+      "title": "Dirigirse al lector",
+      "why": "Un mensaje de commit no tiene lector al que dirigirse.",
+      "fix": "Eliminar."
+    },
+    {
+      "id": "es-considerablemente",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "considerablemente|notablemente|de manera significativa|enormemente",
+      "title": "Adverbios de intensidad",
+      "why": "El énfasis sin cifra no aporta nada.",
+      "fix": "Dar la cifra: 820 ms a 210 ms."
+    },
+    {
+      "id": "es-vague-subject",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "^(?:\\w+(?:\\([^)]*\\))?:\\s*)?(?:[Vv]arias? |[Aa]lgunas? |[Pp]equeñas? )?(?:correcciones?|ajustes?|mejoras?|actualizaci[oó]n(?:es)?)[.\\s]*$",
+      "title": "Asunto sin contenido",
+      "why": "Varias correcciones no dice nada que el diff no muestre.",
+      "fix": "Nombrar el objeto y el resultado."
+    }
+  ]
+}
