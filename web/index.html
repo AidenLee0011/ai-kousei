@@ -244,11 +244,21 @@ function render(){
   $("#prev").innerHTML = html || "<span class='note'>paste a commit message above</span>";
 }
 
+// The page is reachable as /nativecommit, /nativecommit/ and /nativecommit/index.html.
+// A bare relative fetch breaks on the first of those, so the base is computed.
+const RULES = location.pathname.replace(/\/index\.html$/, "").replace(/\/$/, "") + "/rules/";
+
 async function boot(){
-  await Promise.all(LANGS.map(async l => {
-    const res = await fetch("rules/" + l + ".json");
-    PACKS[l] = await res.json();
-  }));
+  try {
+    await Promise.all(LANGS.map(async l => {
+      const res = await fetch(RULES + l + ".json");
+      if (!res.ok) throw new Error(RULES + l + ".json -> " + res.status);
+      PACKS[l] = await res.json();
+    }));
+  } catch (e) {
+    $("#detect").textContent = "rule packs failed to load: " + e.message;
+    return;
+  }
   const sel = $("#lang");
   const tb = $("#packs tbody");
   for (const l of LANGS){
