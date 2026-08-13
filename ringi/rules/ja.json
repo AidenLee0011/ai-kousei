@@ -1,7 +1,7 @@
 {
   "lang": "ja",
   "name": "日本語",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "maturity": "sourced",
   "policy": "すべての規則は下記 sources のいずれかに根拠を持つ。根拠のない規則は ja-extra.json に隔離する。",
   "sources": {
@@ -106,7 +106,7 @@
       "sections": {
         "title": "報告項目の欠落: {missing}",
         "why": "見出しを追えば全体の内容がつかめるようにする。",
-        "fix": "`natc template --lang {lang}` の型に沿って書く。",
+        "fix": "`ringi template --lang {lang}` の型に沿って書く。",
         "source": "公用文作成の考え方 Ⅲ-2-エ"
       },
       "sentence_long": {
@@ -499,6 +499,124 @@
         "before": "大幅に高速化しました。",
         "after": "p95 応答 820ms → 210ms（-74%）。"
       }
+    },
+    {
+      "id": "ja-customer-plain-form",
+      "severity": "error",
+      "weight": 12,
+      "scope": "body",
+      "profiles": [
+        "customer"
+      ],
+      "pattern": "(?:である|だ|した|する|ない)。",
+      "title": "対顧客の文面が常体",
+      "why": "通知・依頼・照会・回答など、特定の相手を対象とした文書では敬体（です・ます体）を用いる。",
+      "fix": "敬体に直す。「変更した。」→「変更しました。」",
+      "example": {
+        "before": "メンテナンスのため、9月1日にサービスを停止する。",
+        "after": "メンテナンスのため、9月1日にサービスを停止します。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-1-ア 文体の選択",
+        "quote": "通知、依頼、照会、回答など、特定の相手を対象とした文書では敬体（です・ます体）を用いる。"
+      }
+    },
+    {
+      "id": "ja-customer-jargon",
+      "severity": "warn",
+      "weight": 8,
+      "scope": "any",
+      "profiles": [
+        "customer"
+      ],
+      "pattern": "デプロイ|リファクタリング|マージ|ロールバック|インシデント|バッチ|エンドポイント|キャッシュ削除|コミット",
+      "title": "社内用語がそのまま出ている",
+      "why": "専門用語は、相手に通じるかどうかを見極めて使う。通じない場合は言い換える。",
+      "fix": "日常語に言い換える。「デプロイしました」→「新しい機能を公開しました」",
+      "example": {
+        "before": "本日デプロイを実施し、キャッシュ削除を行いました。",
+        "after": "本日、新機能を公開しました。表示が古い場合は再読み込みをお願いします。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅱ 用語の使い方",
+        "quote": "専門用語は、相手に通じる言葉に言い換える。"
+      }
+    },
+    {
+      "id": "ja-agent-vague-term",
+      "severity": "error",
+      "weight": 12,
+      "scope": "any",
+      "profiles": [
+        "agent"
+      ],
+      "pattern": "適宜|随時|可能な限り|なるべく|必要に応じて|いくつか|多少|そのあたり",
+      "title": "機械が解釈できない曖昧語",
+      "why": "言葉の係り方によって複数の意味に取れることがないようにする。受け手が機械の場合、曖昧語は実行不能を意味する。",
+      "fix": "数値・条件・対象を明示する。「適宜再試行」→「最大3回、10秒間隔で再試行」",
+      "example": {
+        "before": "エラー時は適宜リトライし、必要に応じて通知する。",
+        "after": "エラー時は最大3回・10秒間隔でリトライする。3回失敗したら Slack #ops へ通知する。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-シ 文の書き方",
+        "quote": "言葉の係り方によって複数の意味に取れることがないようにする。"
+      }
+    },
+    {
+      "id": "ja-agent-unstated-subject",
+      "severity": "warn",
+      "weight": 8,
+      "scope": "body",
+      "profiles": [
+        "agent"
+      ],
+      "pattern": "(?:実施|対応|確認|処理)(?:した|します|済み)。",
+      "title": "誰が何をしたのかが書かれていない",
+      "why": "主語と述語の関係が分かるようにする。受け手が機械の場合、動作主が欠けると追跡できない。",
+      "fix": "動作主と対象を書く。「対応済み。」→「決済APIのリトライ上限を3回に変更した。」",
+      "example": {
+        "before": "確認しました。対応済み。",
+        "after": "決済APIのリトライ上限を3回に変更した。再現手順3件で再現しないことを確認した。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-オ 文の書き方",
+        "quote": "主語と述語の関係が分かるようにする。"
+      }
     }
-  ]
+  ],
+  "profiles": {
+    "commit": {
+      "label": "コミット・PR（記録）",
+      "off": []
+    },
+    "report": {
+      "label": "社内報告書",
+      "off": [
+        "ja-koyo-body-polite",
+        "ja-missing-sections"
+      ],
+      "note": "報告書は敬体も実測 20.6% で使われるため、敬体そのものは咎めない。文体の統一と見出し階層は検査する。"
+    },
+    "agent": {
+      "label": "エージェント間の受け渡し",
+      "off": [
+        "ja-koyo-body-polite"
+      ],
+      "note": "機械が読む前提。曖昧語と装飾を強く禁じ、構造を固定する。"
+    },
+    "customer": {
+      "label": "対顧客の文面",
+      "off": [
+        "ja-koyo-body-polite",
+        "ja-jtf-heading-desumasu",
+        "ja-missing-sections"
+      ],
+      "note": "通知・依頼など特定の相手を対象とした文書は敬体を用いる（公用文 Ⅲ-1-ア）。記録文書とは規則が反転する。"
+    }
+  }
 }

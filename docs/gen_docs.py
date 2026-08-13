@@ -30,7 +30,7 @@ def hero():
     o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">' % (W, H, W, H, JP))
     o.write('<rect width="%d" height="%d" fill="%s"/>' % (W, H, BG))
     o.write('<text x="30" y="38" font-size="19" font-weight="700" fill="%s">AI が書いた日本語コミットは、日本語話者が書くコミットと形が違う</text>' % INK)
-    o.write('<text x="30" y="62" font-size="13" fill="%s">nativecommit はその差を、公的文書の条文を根拠に指摘して直す。</text>' % DIM)
+    o.write('<text x="30" y="62" font-size="13" fill="%s">ringi はその差を、公的文書の条文を根拠に指摘して直す。</text>' % DIM)
 
     def card(x, y, w, h, tag, color, lines, foot):
         o.write('<rect x="%d" y="%d" width="%d" height="%d" rx="9" fill="%s" fill-opacity="0.05" stroke="%s" stroke-opacity="0.5"/>' % (x, y, w, h, color, color))
@@ -90,7 +90,7 @@ def architecture():
     box(30, 354, 250, 78, "実測コーパス", ["人手コミット 96 / LLM 30", "公開報告書 8 件 8,181 文"], GOOD, True)
 
     o.write('<text x="330" y="72" font-size="11.5" font-weight="700" fill="%s">2. 規則ファイル</text>' % DIM)
-    box(330, 82, 300, 350, "natc/rules/ja.json", [
+    box(330, 82, 300, 350, "ringi/rules/ja.json", [
         "1 規則 = pattern + severity + weight",
         "        + source{doc, loc, quote}",
         "        + example{before, after}",
@@ -111,7 +111,7 @@ def architecture():
 
     o.write('<text x="680" y="72" font-size="11.5" font-weight="700" fill="%s">3. 実行</text>' % DIM)
     box(680, 82, 230, 84, "commit-msg フック", ["merge/squash/fixup は除外", "error があれば exit 1"])
-    box(680, 178, 230, 84, "natc lint / rules", ["次にやること 1 行 → 5 件", "各指摘に条番号と引用"])
+    box(680, 178, 230, 84, "ringi lint / rules", ["次にやること 1 行 → 5 件", "各指摘に条番号と引用"])
     box(680, 274, 230, 84, "ブラウザデモ", ["同じ JSON を読む", "判定がずれない"])
     box(680, 370, 230, 62, "bench/", ["閾値の再測定"])
     arrow(634, 200, 676, 124)
@@ -153,8 +153,44 @@ def bench():
     return o.getvalue()
 
 
+def profiles():
+    """One tool, four rule sets. The same sentence flips between them."""
+    W, H = 1200, 560
+    o = io.StringIO()
+    o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">' % (W, H, W, H, JP))
+    o.write('<rect width="%d" height="%d" fill="%s"/>' % (W, H, BG))
+    o.write('<text x="30" y="36" font-size="18" font-weight="700" fill="%s">用途ごとに規則が変わる。対顧客では敬体が正解、記録では敬体が誤り。</text>' % INK)
+    o.write('<text x="30" y="58" font-size="12.5" fill="%s">ringi lint --profile commit | report | agent | customer</text>' % DIM)
+    rows = [
+        ("報告書  --profile report",
+         ["本日、キャッシュ機構の全面刷新を行いました。これにより、", "応答速度が大幅に改善されたと考えております。"],
+         ["1 概要  商品詳細APIの応答改善", "2 対応  Redis を前段に追加。TTL 300秒", "3 結果  p95 820ms → 210ms", "以上"],
+         "誇張・冗長・数値なし", "見出し階層 第1→1→(1)→ア、結果は実測値"),
+        ("エージェント間  --profile agent",
+         ["エラー時は適宜リトライし、必要に応じて通知する。", "確認しました。対応済み。"],
+         ["エラー時は最大3回・10秒間隔でリトライする。", "3回失敗したら Slack #ops へ通知する。"],
+         "曖昧語・動作主なし = 機械が実行できない", "数値・条件・対象を明示"),
+        ("対顧客  --profile customer",
+         ["本日デプロイを実施し、キャッシュ削除を行った。", "ご利用は可能である。"],
+         ["本日、新機能を公開しました。", "表示が古い場合は再読み込みをお願いします。"],
+         "常体・社内用語", "敬体・日常語（公用文 Ⅲ-1-ア / Ⅱ 用語）"),
+    ]
+    y = 84
+    for title, before, after, bad, good in rows:
+        o.write('<text x="30" y="%d" font-size="13.5" font-weight="700" fill="%s">%s</text>' % (y + 16, INK, esc(title)))
+        for x, txt, tag, note, col in ((30, before, "AS-IS", bad, BAD), (620, after, "TO-BE", good, GOOD)):
+            o.write('<rect x="%d" y="%d" width="550" height="112" rx="8" fill="%s" fill-opacity="0.05" stroke="%s" stroke-opacity="0.45"/>' % (x, y + 26, col, col))
+            o.write('<text x="%d" y="%d" font-size="11" font-weight="700" fill="%s">%s</text>' % (x + 14, y + 46, col, tag))
+            for i, ln in enumerate(txt):
+                o.write('<text x="%d" y="%d" font-size="12.5" fill="%s" font-family="Consolas,Noto Sans Mono CJK JP,monospace">%s</text>' % (x + 14, y + 68 + i * 20, INK, esc(ln)))
+            o.write('<text x="%d" y="%d" font-size="11.5" fill="%s">%s</text>' % (x + 14, y + 128, DIM, esc(note)))
+        y += 162
+    o.write('</svg>')
+    return o.getvalue()
+
+
 if __name__ == "__main__":
-    for name, fn in (("hero.svg", hero), ("architecture.svg", architecture), ("bench.svg", bench)):
+    for name, fn in (("hero.svg", hero), ("profiles.svg", profiles), ("architecture.svg", architecture), ("bench.svg", bench)):
         path = os.path.join(HERE, name)
         with io.open(path, "w", encoding="utf-8") as f:
             f.write(fn())

@@ -1,6 +1,6 @@
-"""nativecommit — deterministic linter for non-English commit messages and PR bodies.
+"""ringi — deterministic linter for non-English commit messages and PR bodies.
 
-No network, no LLM, no dependencies. Rules live in natc/rules/*.json and are the
+No network, no LLM, no dependencies. Rules live in ringi/rules/*.json and are the
 single source of truth shared with the browser demo.
 """
 from __future__ import annotations
@@ -152,7 +152,7 @@ EN_LABELS = {
     "sections": {
         "title": "report sections missing: {missing}",
         "why": "The standard report shape is what makes a human-written log scannable.",
-        "fix": "Run `natc template --lang {lang}`.",
+        "fix": "Run `ringi template --lang {lang}`.",
     },
 }
 
@@ -290,7 +290,11 @@ def _structural(pack: dict, subject: str, body: str) -> list:
     return out
 
 
-def lint(text: str, lang: str | None = None, packs: dict | None = None) -> dict:
+def lint(text: str, lang: str | None = None, packs: dict | None = None,
+         profile: str = "commit") -> dict:
+    """profile picks the rule set: a record, a report, an agent handoff or a
+    customer facing message. Some rules invert between them, which is why the
+    profile is explicit rather than guessed."""
     packs = packs if packs is not None else load_packs()
     subject, body = split_message(text)
     full = (subject + "\n" + body).strip()
@@ -300,9 +304,14 @@ def lint(text: str, lang: str | None = None, packs: dict | None = None) -> dict:
     active = [packs[COMMON]] if COMMON in packs else []
     if lang and lang in packs:
         active.append(packs[lang])
+    prof = ((packs.get(lang) or {}).get("profiles") or {}).get(profile, {})
+    off = set(prof.get("off", []))
 
     for pack in active:
         for rule in pack.get("rules", []):
+            only = rule.get("profiles")
+            if (only and profile not in only) or rule["id"] in off:
+                continue
             scope = rule.get("scope", "any")
             target = _scope_text(scope, subject, body)
             if not target:
@@ -328,13 +337,15 @@ def lint(text: str, lang: str | None = None, packs: dict | None = None) -> dict:
             )
 
     if lang and lang in packs:
-        findings += _structural(packs[lang], subject, body)
+        findings += [f for f in _structural(packs[lang], subject, body) if f["id"] not in off]
 
     findings.sort(key=lambda f: (SEVERITY_ORDER.get(f["severity"], 9), -f["weight"]))
     score = max(0, 100 - sum(f["weight"] for f in findings))
     errors = sum(1 for f in findings if f["severity"] == "error")
     return dict(
         lang=lang,
+        profile=profile,
+        profile_label=prof.get("label", profile),
         lang_name=(packs.get(lang) or {}).get("name") if lang else None,
         maturity=(packs.get(lang) or {}).get("maturity") if lang else None,
         subject=subject,

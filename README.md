@@ -1,24 +1,42 @@
-# nativecommit
+# ringi 稟議
 
-![MIT](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![deps](https://img.shields.io/badge/dependencies-0-brightgreen) ![rules](https://img.shields.io/badge/ja%20rules-19%20sourced-orange)
+![MIT](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![deps](https://img.shields.io/badge/dependencies-0-brightgreen) ![rules](https://img.shields.io/badge/ja%20rules-23%20sourced-orange) ![no api](https://img.shields.io/badge/API%20calls-none-brightgreen)
 
-**日本語のコミット・PR・報告文を、公的文書の条文を根拠に直すリンター。**
-A deterministic linter that holds Japanese commit messages, pull requests and reports to the standards published by Japanese public bodies.
+**その日本語、稟議に通る形になっていますか。**
+報告書・エージェント間の受け渡し・対顧客の文面を、公的文書の条文を根拠に検査する決定論リンター。
 
-モデル呼び出しなし・ネットワークなし・依存パッケージなし ・ デモ: <http://118.130.18.231:8500/nativecommit/>
+モデル呼び出しなし・ネットワークなし・依存パッケージなし ・ デモ: <http://118.130.18.231:8500/ringi/>
 
 ![AS-IS to TO-BE](docs/hero.png)
 
 ```bash
-pip install nativecommit
-natc hook install --lang ja     # これだけ。次のコミットから効く
+pip install ringi
+ringi hook install --lang ja        # コミット
+ringi lint report.md --profile report      # 報告書
+ringi lint task.md   --profile agent       # エージェント間の受け渡し
+ringi lint notice.md --profile customer    # 対顧客の文面
 ```
+
+---
+
+## 用途は 4 つ。用途が変われば正解も変わる
+
+対顧客では敬体が正解、記録では敬体が誤り。同じ文が用途によって合格にも不合格にもなるため、用途は推測せず `--profile` で明示する。
+
+![profiles](docs/profiles.png)
+
+| プロファイル | 対象 | 主な検査 |
+|---|---|---|
+| `commit` | コミット・PR（記録） | 常体・体言止め、件名で内容がつかめるか、報告 3 項目 |
+| `report` | 社内報告書 | 見出し階層（第1 → 1 → （1） → ア）、文体の統一、誇張と冗長 |
+| `agent` | エージェント間の受け渡し | 曖昧語の禁止（適宜・随時・必要に応じて）、動作主の明示 |
+| `customer` | 対顧客の文面 | 敬体の強制、社内用語の言い換え、AI 特有の誇張の除去 |
 
 ---
 
 ## なぜ効くのか（実測）
 
-AI が書いた日本語のコミット本文は、ほぼ必ず「です・ます体の説明文」になる。日本語話者が書くコミットは常体か体言止めの記録である。感覚ではなく数えられる差である。
+AI が書いた日本語の本文は、ほぼ必ず「です・ます体の説明文」になる。日本語話者が書く記録は常体か体言止めである。感覚ではなく数えられる差である。
 
 ![benchmark](docs/bench.png)
 
@@ -28,9 +46,9 @@ AI が書いた日本語のコミット本文は、ほぼ必ず「です・ま�
 | 文体（常体・敬体）の混在 | 1.0% | 80.0% |
 | 一文 60 字超 | 2.1% | 33.3% |
 | 受身形の多用 | 0.0% | 13.3% |
-| **コミット拒否（error 発火）** | **2.1%** | **86.7%** |
+| **拒否（error 発火）** | **2.1%** | **86.7%** |
 
-人手側は LLM が普及する前（2022 年 11 月以前）のコミットだけを集めているため、ここでの発火は誤検出として数える。再現手順は [`bench/`](bench/)。
+人手側は LLM が普及する前（2022 年 11 月以前）のコミットだけを集めているため、ここでの発火は誤検出として数える。
 
 ```bash
 python bench/run.py --lang ja --rules
@@ -44,7 +62,7 @@ python bench/run.py --lang ja --rules
 
 | 出典 | 発行 | 使っている箇所 |
 |---|---|---|
-| [公用文作成の考え方（文化審議会建議）](https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/93651301_01.pdf) | 文化審議会・2022-01-07 | 文体の選択、一文の長さ、受身、二重否定、同じ助詞の連続、項目の階層 |
+| [公用文作成の考え方（文化審議会建議）](https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/93651301_01.pdf) | 文化審議会・2022-01-07 | 文体の選択、一文の長さ、受身、二重否定、同じ助詞の連続、項目の階層、用語の言い換え |
 | [JTF日本語標準スタイルガイド（翻訳用）](https://www.jtf.jp/pdf/jtf_style_guide.pdf) | 日本翻訳連盟 | 見出しは常体または体言止め、和文の句読点、半角カタカナ |
 | [textlint-rule-preset-ja-technical-writing](https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing) | textlint-ja | 弱い表現、冗長表現、読点の数、漢字の連続 |
 | [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) | textlint-ja | 誇張表現、太字ラベルの箇条書き、コロン継続 |
@@ -53,13 +71,15 @@ python bench/run.py --lang ja --rules
 指摘には必ず条番号と原文引用が付く。
 
 ```
-$ natc lint --lang ja
-next: 常体か体言止めに直す。「導入しました」→「導入した」または「導入」
-日本語  score 75/100  errors 1  warnings 2  [commit blocked]
-1. [ERROR] L2 本文が敬体（です・ます体）  → 常体か体言止めに直す
-     found: しました。
+$ ringi lint --profile customer notice.md
+next: 敬体に直す。「変更した。」→「変更しました。」
+日本語 / 対顧客の文面  score 80/100  errors 1  warnings 1  [blocked]
+1. [ERROR] L2 対顧客の文面が常体  → 敬体に直す
+     found: する。
      src:   公用文作成の考え方（文化審議会建議） Ⅲ-1-ア 文体の選択
-     rule:  ja-koyo-body-polite
+     rule:  ja-customer-plain-form
+2. [warn ] L2 社内用語がそのまま出ている  → 「デプロイしました」→「新しい機能を公開しました」
+     src:   公用文作成の考え方（文化審議会建議） Ⅱ 用語の使い方
 ```
 
 ---
@@ -72,14 +92,20 @@ next: 常体か体言止めに直す。「導入しました」→「導入し�
 
 ```json
 {
-  "id": "ja-jtf-heading-desumasu",
+  "id": "ja-customer-plain-form",
   "severity": "error",
-  "scope": "subject",
-  "pattern": "(?:です|ます|ました|ません|でした)[。\\s]*$",
-  "title": "件名が敬体で終わっている",
-  "fix": "体言止めにする",
-  "example": { "before": "feat: …を変更しました", "after": "feat: …を変更" },
-  "source": { "doc": "jtf", "loc": "1.1.2 見出し（p.10）", "quote": "常体または体言止め。" }
+  "profiles": ["customer"],
+  "pattern": "(?:である|だ|した|する|ない)。",
+  "title": "対顧客の文面が常体",
+  "fix": "敬体に直す。「変更した。」→「変更しました。」",
+  "example": {
+    "before": "メンテナンスのため、9月1日にサービスを停止する。",
+    "after":  "メンテナンスのため、9月1日にサービスを停止します。"
+  },
+  "source": {
+    "doc": "koyobun", "loc": "Ⅲ-1-ア 文体の選択",
+    "quote": "通知、依頼、照会、回答など、特定の相手を対象とした文書では敬体（です・ます体）を用いる。"
+  }
 }
 ```
 
@@ -87,38 +113,24 @@ next: 常体か体言止めに直す。「導入しました」→「導入し�
 
 ---
 
-## AS-IS → TO-BE
-
-指摘だけでは書き直せない。全規則に書き換え例を同梱している（`natc rules --lang ja`）。
-
-| | AS-IS | TO-BE |
-|---|---|---|
-| 件名 | `fix: 各種修正` / `feat: …を変更しました` | `fix: 決済リトライの上限を3回に変更` |
-| 本文 | Redis キャッシュを導入しました。TTL は 300 秒に設定されています。 | なぜ: 応答が遅い / なにを: Redis を前段に追加。TTL 300 秒 / 確認: p95 820ms → 210ms |
-| 箇条書き | `- **重要**: TTL を 300 秒に設定` / `- ✅ キャッシュ追加` | `- TTL: 300 秒` / `- キャッシュ追加` |
-| 効果 | 革命的なキャッシュ導入により、すべての課題を解決します。 | p95 応答が 820ms から 210ms に短縮。 |
-| 推量 | これで解決したと思います。 | 再現手順 3 件で再現しないことを確認。 |
-
----
-
 ## 使い方
 
 ```bash
-natc lint .git/COMMIT_EDITMSG      # ファイル
-natc lint -m "fix: 各種修正"        # 文字列
-git log -1 --format=%B | natc lint # 標準入力
-natc lint -m "..." --json          # 機械可読
-natc rules --lang ja               # 全規則 + 出典 + AS-IS/TO-BE
-natc metrics -m "..."              # 定量指標をコーパス実測値と並べる
-natc template --lang ja            # コミット / PR / 報告書テンプレート
-python -m natc selftest            # 73 規則 / 7 パック
+ringi lint .git/COMMIT_EDITMSG        # ファイル
+ringi lint -m "fix: 各種修正"          # 文字列
+git log -1 --format=%B | ringi lint   # 標準入力
+ringi lint report.md --profile report --json   # 機械可読
+ringi rules --lang ja                 # 全規則 + 出典 + AS-IS/TO-BE
+ringi metrics -m "..."                # 定量指標をコーパス実測値と並べる
+ringi template --lang ja              # コミット / PR / 報告書テンプレート
+python -m ringi selftest              # 77 規則 / 7 パック
 ```
 
-error があると exit 1、warning は表示のみ。merge・squash・fixup は対象外。出力は既定 5 件まで、1 行目が次にやること、全件は `--all`。
+error があると exit 1、warning は表示のみ。merge・squash・fixup は対象外。出力は既定 5 件まで、1 行目が次にやること、全件は `--all`。既定のプロファイルは `git config ringi.profile report` のように固定できる。
 
 ## 報告書テンプレート
 
-項目の階層は公用文作成の考え方 Ⅱ-6-ウ の順序（第1 → 1 → （1） → ア → （ア））に従う。文末は公開報告書の実測分布に合わせ体言止めを既定とする。
+項目の階層は公用文作成の考え方 Ⅱ-6-ウ の順序に従う。文末は公開報告書の実測分布に合わせ体言止めを既定とする。
 
 ```
 件名: {内容}について（報告）
@@ -139,8 +151,8 @@ error があると exit 1、warning は表示のみ。merge・squash・fixup は
 ## 貢献
 
 1. 日本語の規則追加には `source`（文書名・条番号・引用）と `example`（AS-IS / TO-BE）が必須。
-2. 他言語は `natc/rules/<code>.json` を追加し、その言語の公的文書・業界標準を出典にする。
-3. `python -m natc selftest` が通ること。
+2. 他言語は `ringi/rules/<code>.json` を追加し、その言語の公的文書・業界標準を出典にする。
+3. `python -m ringi selftest` が通ること。
 
 ## ライセンス
 
@@ -154,51 +166,70 @@ MIT。出典は条番号と短い引用のみを掲載し、原文の再配布�
 
 # English
 
-**A deterministic linter for Japanese commit messages, pull requests and reports, where every rule cites a Japanese public standard.**
+**Does this Japanese text pass review?**
 
-No model call. No network. No dependencies. English is deliberately out of scope.
+`ringi` (稟議, the Japanese document approval process) is a deterministic linter for Japanese
+reports, agent-to-agent handoffs, customer-facing copy and commit messages. Every rule cites a
+Japanese public standard. No model call, no network, no dependencies, no API cost.
 
 ```bash
-pip install nativecommit
-natc hook install --lang ja
+pip install ringi
+ringi lint notice.md --profile customer
 ```
+
+## Four profiles, because the correct style flips
+
+| profile | target | checks |
+|---|---|---|
+| `commit` | commits and pull requests | plain form, informative subject, why/what/verified |
+| `report` | internal reports | heading hierarchy, one sentence style, no hype |
+| `agent` | machine-to-machine handoff | no vague terms, explicit actor, numeric conditions |
+| `customer` | customer-facing text | polite form required, internal jargon rewritten |
+
+Polite form is an error in a commit record and required in a customer notice. The profile is
+explicit rather than guessed.
 
 ## Why it works
 
-A Japanese commit body written by an LLM is almost always polite-form prose (です・ます体). A Japanese engineer writes a terse record in 常体 or 体言止め. The gap is measurable.
+A Japanese body written by an LLM is almost always polite-form prose. A Japanese engineer writes a
+terse record. The gap is measurable.
 
 | signal | human commits, before 2022-11 (n=96) | LLM written (n=30) |
 |---|---:|---:|
 | polite form in the body | 1.0% | **83.3%** |
 | mixed sentence endings | 1.0% | 80.0% |
 | sentence over 60 characters | 2.1% | 33.3% |
-| passive voice overuse | 0.0% | 13.3% |
-| **commit rejected (error level)** | **2.1%** | **86.7%** |
+| **rejected (error level)** | **2.1%** | **86.7%** |
 
-The human half predates widespread chat LLMs, so any finding there counts as a false positive. Reproduce with `python bench/run.py --lang ja --rules`.
+The human half predates widespread chat LLMs, so any finding there counts as a false positive.
+Reproduce with `python bench/run.py --lang ja --rules`.
 
 ## What makes it different
 
-Every rule maps to a Japanese public standard or to a measured corpus: the Council for Cultural Affairs guidance on public documents (2022), the Japan Translation Federation style guide, the textlint-ja presets, and two corpora measured for this repository. A rule without a citation is rejected by the selftest, and each finding prints the clause number and the quoted line.
-
-Findings are actionable by construction: every rule ships a before/after rewrite, the CLI leads with the single next action, and output stops at five items.
+Every rule maps to a Japanese public standard or to a measured corpus: the Council for Cultural
+Affairs guidance on public documents (2022), the Japan Translation Federation style guide, the
+textlint-ja presets, and two corpora measured for this repository. A rule without a citation is
+rejected by the selftest, every finding prints the clause and the quoted line, and every rule ships
+a before/after rewrite so a finding is actionable.
 
 ## Commands
 
 ```bash
-natc lint .git/COMMIT_EDITMSG      # file
-natc lint -m "fix: 各種修正"        # string
-git log -1 --format=%B | natc lint # stdin
-natc lint -m "..." --json          # machine readable
-natc rules --lang ja               # rules with citations and before/after
-natc metrics -m "..."              # deterministic signals vs the corpus values
-natc template --lang ja            # commit / PR / report templates
-python -m natc selftest            # 73 rules / 7 packs
+ringi lint .git/COMMIT_EDITMSG        # file
+ringi lint -m "fix: 各種修正"          # string
+git log -1 --format=%B | ringi lint   # stdin
+ringi lint report.md --profile report --json
+ringi rules --lang ja                 # rules with citations and before/after
+ringi metrics -m "..."                # deterministic signals vs the corpus
+ringi template --lang ja              # commit / PR / report templates
+python -m ringi selftest              # 77 rules / 7 packs
 ```
 
 ## Contributing
 
-A Japanese rule needs `source` (document, clause, quote) and `example` (before, after). A new language goes in `natc/rules/<code>.json`, sourced from that language's public standards, not from intuition. `python -m natc selftest` must pass.
+A Japanese rule needs `source` (document, clause, quote) and `example` (before, after). A new
+language goes in `ringi/rules/<code>.json`, sourced from that language's public standards, not from
+intuition. `python -m ringi selftest` must pass.
 
 ## License
 

@@ -40,7 +40,7 @@ SKIP = re.compile(r"^(Merge|Revert|Bump |Update dependency|chore\(deps\))", re.I
 def search(term, page=1):
     q = '%s committer-date:<%s' % (term, CUTOFF)
     u = "https://api.github.com/search/commits?q=" + urllib.parse.quote(q) + "&per_page=60&page=%d" % page
-    r = urllib.request.Request(u, headers={"User-Agent": "natc-bench", "Accept": "application/vnd.github+json"})
+    r = urllib.request.Request(u, headers={"User-Agent": "ringi-bench", "Accept": "application/vnd.github+json"})
     return json.load(urllib.request.urlopen(r, timeout=40))
 
 

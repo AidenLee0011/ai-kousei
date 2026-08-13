@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>nativecommit — 公的文書の基準に沿った日本語コミット・報告リンター</title>
+<title>ringi — 公的文書の基準に沿った日本語コミット・報告リンター</title>
 <style>
   :root{
     --bg:#0f1115; --panel:#161a21; --line:#242a34; --fg:#e6e9ef; --dim:#98a2b3;
@@ -61,7 +61,7 @@
 </head>
 <body>
 <header>
-  <h1>nativecommit <span>— 公的文書の基準に沿った日本語コミット・PR・報告リンター</span></h1>
+  <h1>ringi <span>— その日本語、稟議に通る形になっていますか</span></h1>
   <div class="sub">規則はすべて出典付き（文化審議会建議「公用文作成の考え方」/ JTF日本語標準スタイルガイド / textlint-ja / 公開報告書 8,181 文の実測）。モデル呼び出しなし・ネットワークなし・依存なし。</div>
 </header>
 
@@ -70,7 +70,7 @@
     <section class="panel">
       <h2>入力</h2>
       <div class="row">
-        <select id="lang"></select>
+        <select id="lang"></select><select id="profile"><option value="commit">コミット・PR</option><option value="report">報告書</option><option value="agent">エージェント間</option><option value="customer">対顧客</option></select>
         <button data-sample="ai">LLM が書いた例</button>
         <button data-sample="human">人が書いた例</button>
         <button id="tpl">テンプレート挿入</button>
@@ -107,8 +107,8 @@
         <tr><td>LLM 生成</td><td class="num">30</td><td class="num">100%</td><td class="num"><span class="hi">86.7%</span></td></tr>
       </tbody></table>
       <h2 class="mt">導入</h2>
-      <code class="cmd">pip install nativecommit
-natc hook install --lang ja
+      <code class="cmd">pip install ringi
+ringi hook install --lang ja
 git commit          # 生成文らしいコミットはここで止まる</code>
       <p class="note">出力は既定で 5 件まで。1 行目が次にやること。全件は <code>--all</code>。</p>
     </section>
@@ -134,7 +134,7 @@ const EN_LABELS = {
   subject_long:{title:"subject {w} > {max} columns",why:"",fix:"Move the detail into the body."},
   subject_period:{title:"subject ends with a period",why:"",fix:"Drop the trailing period."},
   bullets:{title:"{n} bullets in the body",why:"",fix:"Keep the {max} that matter."},
-  sections:{title:"report sections missing: {missing}",why:"",fix:"Use natc template --lang {lang}."},
+  sections:{title:"report sections missing: {missing}",why:"",fix:"Use ringi template --lang {lang}."},
   sentence_long:{title:"sentence of {n} characters > {max}",why:"",fix:"Split the sentence."},
   max_ten:{title:"{n} commas in one sentence > {max}",why:"",fix:"Split the sentence or use a list."},
   kanji_run:{title:"{n} ideographs in a row > {max}",why:"",fix:"Break the compound."},
@@ -143,6 +143,15 @@ const EN_LABELS = {
 const SAMPLES = {
   ja:{ai:"feat: 商品詳細APIにRedisキャッシュを追加\n\n商品詳細APIの応答速度向上とデータベース負荷軽減のため、Redisキャッシュを導入しました。\nキャッシュの有効期限（TTL）は300秒に設定されています。\n- **重要**: 監視対象に追加しました",
       human:"fix: 商品詳細APIにRedisキャッシュを追加\n\nなぜ: 商品詳細APIの応答が遅く、DB負荷も高い\nなにを: Redis を前段に追加。TTL 300秒\n確認: p95 820ms → 210ms"},
+  jaReport:{ai:"件名: キャッシュ改善の件
+
+本日、キャッシュ機構の全面刷新を行いました。これにより、応答速度が大幅に改善されたと考えております。",
+           human:"件名: 商品詳細APIの応答改善について（報告）
+
+1 概要  Redis 追加により p95 応答を短縮
+2 対応  Redis を前段に追加。TTL 300秒
+3 結果  p95 820ms → 210ms
+以上"},
   ko:{ai:"feat: 개선\n\n다음과 같습니다. 성능이 매우 개선된 것 같습니다.\n함께 살펴보겠습니다.",
       human:"fix: 결제 재시도 상한 3회로 변경\n\n왜: 재시도가 무한 반복되어 큐가 밀림\n무엇: retry_max 를 3 으로 고정\n확인: 부하 테스트 1시간, 큐 적체 0"},
   zh:{ai:"feat: 优化\n\n首先，本次改动显著提升了性能。其次，代码可读性也得到了改善。\n希望本次变更对您有所帮助。",
@@ -236,14 +245,17 @@ function cite(pack, src){
   const doc = (pack.sources || {})[src.doc] || {};
   return ((doc.title || src.doc || "") + " " + (src.loc || "")).trim();
 }
-function lint(text, forced){
+function lint(text, forced, profile){
   const [subject, body] = splitMessage(text);
   const full = (subject + "\n" + body).trim();
   const lang = forced || detectLang(full);
   const findings = [];
+  const prof = ((PACKS[lang]||{}).profiles||{})[profile||'commit'] || {};
+  const off = new Set(prof.off || []);
   const active = [PACKS._common].concat(lang && PACKS[lang] ? [PACKS[lang]] : []);
   for (const pack of active){
     for (const r of (pack.rules || [])){
+      if ((r.profiles && r.profiles.indexOf(profile||'commit') < 0) || off.has(r.id)) continue;
       const scope = r.scope || "any";
       const target = scope === "subject" ? subject : scope === "body" ? body : full;
       if (!target) continue;
@@ -255,14 +267,14 @@ function lint(text, forced){
         source:cite(pack, r.source), example:r.example, match:m[0].slice(0,60)});
     }
   }
-  if (lang && PACKS[lang]) findings.push.apply(findings, structural(PACKS[lang], subject, body));
+  if (lang && PACKS[lang]) findings.push.apply(findings, structural(PACKS[lang], subject, body).filter(f => !off.has(f.id)));
   findings.sort((a,b) => (a.severity===b.severity ? b.weight-a.weight : a.severity==="error" ? -1 : 1));
   const errors = findings.filter(f => f.severity === "error").length;
-  return {lang, findings, errors, warns: findings.length-errors,
+  return {lang, profile: profile||'commit', profileLabel: prof.label || (profile||'commit'), findings, errors, warns: findings.length-errors,
           score: Math.max(0, 100 - findings.reduce((s,f)=>s+f.weight,0)), passed: errors === 0};
 }
 
-// Deterministic signals, same definitions as natc/metrics.py
+// Deterministic signals, same definitions as ringi/metrics.py
 function metrics(text){
   const body = text.split("\n").slice(1).join("\n").trim() || text;
   const s = body.split(/[。．\n]+/).map(x=>x.trim()).filter(Boolean);
@@ -280,9 +292,9 @@ function metrics(text){
 function render(){
   const text = $("#src").value;
   const forced = $("#lang").value || null;
-  const r = lint(text, forced);
+  const r = lint(text, forced, $("#profile").value);
   const pack = r.lang ? PACKS[r.lang] : null;
-  $("#detect").textContent = r.lang ? ("判定: " + pack.name + "（" + r.lang + " / " + pack.maturity + "）")
+  $("#detect").textContent = r.lang ? ("判定: " + pack.name + " / " + r.profileLabel + "（" + r.lang + " / " + pack.maturity + "）")
     : "言語を判定できません。英語は対象外です。";
   $("#score").textContent = r.score;
   const col = r.errors ? "var(--err)" : r.warns ? "var(--warn)" : "var(--ok)";
@@ -368,6 +380,7 @@ async function boot(){
   $("#more").onclick = () => { SHOW_ALL = true; render(); };
   $("#src").addEventListener("input", () => { SHOW_ALL = false; render(); });
   $("#lang").addEventListener("change", () => { SHOW_ALL = false; render(); });
+  $("#profile").addEventListener("change", () => { SHOW_ALL = false; render(); });
   $("#lang").value = "ja";
   $("#src").value = SAMPLES.ja.ai;
   renderRules();

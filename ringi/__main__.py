@@ -1,4 +1,4 @@
-"""natc CLI — lint / template / hook / langs / selftest."""
+"""ringi CLI — lint / template / hook / langs / selftest."""
 from __future__ import annotations
 
 import argparse
@@ -11,7 +11,7 @@ import sys
 from . import COMMON, __version__, detect_lang, lint, load_packs
 
 HOOK = """#!/bin/sh
-# nativecommit commit-msg hook
+# ringi commit-msg hook
 case "$2" in merge|squash|fixup) exit 0;; esac
 %s lint "$1" %s || exit 1
 """
@@ -41,13 +41,14 @@ def cmd_lint(a) -> int:
     else:
         text = sys.stdin.read()
     # A kanji-only subject cannot be told apart from Chinese by script alone, so a
-    # repository can pin its language: git config natc.lang ja
-    r = lint(text, a.lang or _git_config("natc.lang"))
+    # repository can pin its language: git config ringi.lang ja
+    r = lint(text, a.lang or _git_config("ringi.lang"),
+             profile=a.profile or _git_config("ringi.profile") or "commit")
     if a.json:
         _out(json.dumps(r, ensure_ascii=False, indent=2))
         return 0 if r["passed"] else 1
     if r["lang"] is None:
-        _out("natc: language not detected. English is out of scope on purpose "
+        _out("ringi: language not detected. English is out of scope on purpose "
              "(use blader/humanizer). Force with --lang ja|ko|zh|de|fr|es.")
         return 0
     # Output shape: the first line is the one thing to do next, then at most five
@@ -55,9 +56,9 @@ def cmd_lint(a) -> int:
     fs = r["findings"]
     if fs:
         _out("next: %s" % (fs[0].get("fix") or fs[0]["title"]))
-    _out("%s  score %d/100  errors %d  warnings %d  %s"
-         % (r["lang_name"], r["score"], r["errors"], r["warns"],
-            "[commit blocked]" if not r["passed"] else "[passes]"))
+    _out("%s / %s  score %d/100  errors %d  warnings %d  %s"
+         % (r["lang_name"], r["profile_label"], r["score"], r["errors"], r["warns"],
+            "[blocked]" if not r["passed"] else "[passes]"))
     if r["maturity"] == "starter":
         _out("  pack maturity: starter — rules are a first pass, contributions welcome")
     cap = len(fs) if (a.all or a.json) else 5
@@ -181,13 +182,13 @@ def cmd_hook(a) -> int:
         return 2
     path = os.path.join(gd, "hooks", "commit-msg")
     if a.action == "uninstall":
-        if os.path.exists(path) and "nativecommit" in open(path, encoding="utf-8").read():
+        if os.path.exists(path) and "ringi" in open(path, encoding="utf-8").read():
             os.remove(path)
             _out("removed %s" % path)
         return 0
-    cmd = a.cmd or ("%s -m natc" % os.path.basename(sys.executable).replace(".exe", ""))
+    cmd = a.cmd or ("%s -m ringi" % os.path.basename(sys.executable).replace(".exe", ""))
     if a.lang:
-        subprocess.run(["git", "config", "natc.lang", a.lang], capture_output=True, timeout=10)
+        subprocess.run(["git", "config", "ringi.lang", a.lang], capture_output=True, timeout=10)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(HOOK % (cmd, ("--lang " + a.lang) if a.lang else ""))
@@ -261,16 +262,28 @@ def cmd_selftest(a) -> int:
         assert src.get("loc") and src.get("quote"), rule["id"]
         exm = rule.get("example") or {}
         assert exm.get("before") and exm.get("after"), "no example: %s" % rule["id"]
-        # the AS-IS example must actually trip its own rule, and TO-BE must not
+        # the AS-IS example must actually trip its own rule, under its own profile
+        prof = (rule.get("profiles") or ["commit"])[0]
         sub_before = "x: y\n\n" + exm["before"] if rule.get("scope") == "body" else exm["before"]
-        hit = {f["id"] for f in lint(sub_before, "ja")["findings"]}
-        assert rule["id"] in hit, "example does not trip %s" % rule["id"]
+        hit = {f["id"] for f in lint(sub_before, "ja", profile=prof)["findings"]}
+        assert rule["id"] in hit, "example does not trip %s (profile %s)" % (rule["id"], prof)
 
     # deterministic metrics separate the two measured corpora in the right direction
     from .metrics import compute
     llm_like = compute("feat: キャッシュ追加\n\n商品APIの応答速度向上のため、キャッシュを導入しました。TTL は 300 秒に設定されています。")
     human_like = compute("fix: キャッシュ追加\n\nなぜ: 応答が遅い\nなにを: Redis を前段に追加。TTL 300 秒\n確認: p95 820ms → 210ms")
     assert llm_like["polite_rate"] > human_like["polite_rate"], (llm_like, human_like)
+
+    # profiles: the same sentence is right in one and wrong in another
+    notice = "\n".join(["お知らせ: メンテナンス実施", "", "9月1日にサービスを停止する。"])
+    assert "ja-customer-plain-form" in {f["id"] for f in lint(notice, "ja", profile="customer")["findings"]}
+    assert "ja-customer-plain-form" not in {f["id"] for f in lint(notice, "ja", profile="commit")["findings"]}
+    polite = "\n".join(["fix: キャッシュ追加", "", "TTL を 300 秒に設定しました。"])
+    assert "ja-koyo-body-polite" in {f["id"] for f in lint(polite, "ja", profile="commit")["findings"]}
+    assert "ja-koyo-body-polite" not in {f["id"] for f in lint(polite, "ja", profile="customer")["findings"]}
+    vague = "\n".join(["task: 再試行方針", "", "エラー時は適宜リトライする。"])
+    assert "ja-agent-vague-term" in {f["id"] for f in lint(vague, "ja", profile="agent")["findings"]}
+    assert "ja-agent-vague-term" not in {f["id"] for f in lint(vague, "ja", profile="commit")["findings"]}
 
     # Korean: template-shaped human report passes
     ok = ("fix: 결제 재시도 상한 3회로 변경\n\n"
@@ -304,7 +317,7 @@ def cmd_selftest(a) -> int:
 
 
 def main(argv=None) -> int:
-    p = argparse.ArgumentParser(prog="natc", description="commit messages that read like a human wrote them, in your language")
+    p = argparse.ArgumentParser(prog="ringi", description="commit messages that read like a human wrote them, in your language")
     p.add_argument("--version", action="version", version=__version__)
     sub = p.add_subparsers(dest="cmd", required=True)
 
@@ -312,6 +325,8 @@ def main(argv=None) -> int:
     q.add_argument("file", nargs="?", default="-")
     q.add_argument("-m", "--message")
     q.add_argument("--lang")
+    q.add_argument("--profile", choices=["commit", "report", "agent", "customer"],
+                   help="which rule set applies (default: commit, or git config ringi.profile)")
     q.add_argument("--json", action="store_true")
     q.add_argument("--quiet", action="store_true", help="findings only, no why/source")
     q.add_argument("--all", action="store_true", help="show every finding (default caps at 5)")
@@ -325,7 +340,7 @@ def main(argv=None) -> int:
     q = sub.add_parser("hook", help="install or remove the commit-msg hook")
     q.add_argument("action", choices=["install", "uninstall"])
     q.add_argument("--lang")
-    q.add_argument("--cmd", help="command used inside the hook (default: python -m natc)")
+    q.add_argument("--cmd", help="command used inside the hook (default: python -m ringi)")
     q.set_defaults(fn=cmd_hook)
 
     q = sub.add_parser("rules", help="print every rule with its citation and before/after example")

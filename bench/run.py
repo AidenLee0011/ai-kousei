@@ -14,7 +14,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(HERE))
-from natc import lint, load_packs  # noqa: E402
+from ringi import lint, load_packs  # noqa: E402
 
 
 def is_squash(msg):
