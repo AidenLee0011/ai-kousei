@@ -5,12 +5,14 @@
 **その日本語、AI が書いた文体になっていませんか。**
 報告書・エージェント間の受け渡し・対顧客の文面を、公的文書の条文を根拠に検査する決定論リンター。
 
+日本語 校正 / 日本語 リンター / AI 文章 判定 / コミットメッセージ 日本語 / Python 製・Node.js 不要・textlint の代替または併用。
+
 モデル呼び出しなし・ネットワークなし・依存パッケージなし ・ **[デモを開く](https://aidenlee0011.github.io/buntai/)**
 
 ![AS-IS to TO-BE](docs/hero.png)
 
 ```bash
-pip install buntai
+pip install buntai-lint
 buntai hook install --lang ja        # コミット
 buntai lint report.md --profile report      # 報告書
 buntai lint task.md   --profile agent       # エージェント間の受け渡し
@@ -53,6 +55,19 @@ AI が書いた日本語の本文は、ほぼ必ず「です・ます体の説�
 ```bash
 python bench/run.py --lang ja --rules
 ```
+
+
+### 誤検出はどれくらいか
+
+規則を増やすほど誤検出は増える。そこで**人が書いた本物の文章に対する発火率**を測っている。
+
+| 検査対象（すべて人が書いた文章） | プロファイル | error 発火 |
+|---|---|---:|
+| コミット 96 件（2022-11 以前） | commit | **2.1%** |
+| 公開報告書の本文 400 ブロック（JPCERT/CC） | report | **2.2%** |
+| 同上（わざと誤ったプロファイルで検査） | commit | 96.8% |
+
+用途に合ったプロファイルなら、人の文章はほぼ素通りする。用途を取り違えると全部止まる。だから `--profile` は推測せず明示する。
 
 ---
 
@@ -173,7 +188,7 @@ reports, agent-to-agent handoffs, customer-facing copy and commit messages. Ever
 Japanese public standard. No model call, no network, no dependencies, no API cost. [Live demo](https://aidenlee0011.github.io/buntai/).
 
 ```bash
-pip install buntai
+pip install buntai-lint
 buntai lint notice.md --profile customer
 ```
 
