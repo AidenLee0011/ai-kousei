@@ -5,7 +5,9 @@
 **AI に日本語のコミットや報告を書かせると、本文の敬体率が 1.0% から 83.3% に跳ねる。**
 buntai は、その差を公的文書の条文を根拠に、ローカルの正規表現だけで止めます。
 
-日本語 ・ [English](#english) ・ [한국어](#한국어) ・ [デモ](https://aidenlee0011.github.io/buntai/)
+**日本語** ・ [English](README.en.md) ・ [한국어](README.ko.md)
+
+[デモを開く](https://aidenlee0011.github.io/buntai/) ・ 日本語 校正 / 日本語 リンター / AI 文章 判定 / コミットメッセージ 日本語 / Node.js 不要
 
 ![AS-IS to TO-BE](docs/hero.png)
 
@@ -153,97 +155,3 @@ python bench/run.py --lang ja --rules      # 実測の再現
 日本語の規則追加には `source`（文書名・条番号・引用）と `example`（AS-IS / TO-BE）が必須です。他言語は `buntai/rules/<code>.json` を追加し、その言語の公的文書・業界標準を出典にしてください。`python -m buntai selftest` が通ること。
 
 MIT License。出典は条番号と短い引用のみを掲載し、原文の再配布は行っていません。
-
-<br>
-
-<details>
-<summary><h2>English</h2></summary>
-
-**Ask an LLM for a Japanese commit message and the polite-form rate in the body jumps from 1.0% to 83.3%.**
-buntai stops that with local regular expressions, and every rule points at a clause in a Japanese public standard.
-
-```bash
-pip install buntai-lint && buntai hook install --lang ja
-npx buntai-lint lint report.md --profile report
-```
-
-### What is actually different
-
-**1. Findings carry a clause number and the quoted line, and CI checks the quotes verbatim.**
-All 23 Japanese rules cite the Council for Cultural Affairs guidance on public documents (2022), the Japan Translation Federation style guide, or the textlint-ja presets. On every push, CI downloads the 18 cited documents and fails the build if a quoted line is not in the original. The first run of that check failed on 7 of the author's own quotes, which had drifted into paraphrase.
-
-**2. The rules invert by use.** Polite form is an error in a commit record and required in a customer notice, so the use is declared, not guessed.
-
-```
---profile commit    "導入しました" -> ERROR   records use plain form
---profile customer  "停止する。"   -> ERROR   notices use polite form
---profile agent     "適宜リトライ" -> ERROR   a machine cannot act on "as appropriate"
-```
-
-**3. Human writing passes, and that is measured.**
-
-| corpus, all written by people | profile | error rate |
-|---|---|---:|
-| 96 commits authored before 2022-11 | commit | **2.1%** |
-| 400 blocks from published reports (JPCERT/CC) | report | **2.2%** |
-| 30 commits written by an LLM | commit | **86.7%** |
-
-**4. No model call, no network, no dependencies.** Rules load in 4 ms, a message lints in 0.24 ms. A hook that needs an API key gets uninstalled.
-
-### Profiles
-
-| profile | target | checks |
-|---|---|---|
-| `commit` | commits and pull requests | plain form, informative subject, why / what / verified |
-| `report` | internal reports | heading hierarchy, one sentence style, no hype |
-| `agent` | machine-to-machine handoff | no vague terms, explicit actor, numeric conditions |
-| `customer` | customer-facing text | polite form required, internal jargon rewritten |
-
-Japanese is the sourced pack. Korean, Chinese, German, French and Spanish ship starter rules. English is out of scope on purpose.
-
-Reproduce the numbers with `python bench/run.py --lang ja --rules`.
-
-</details>
-
-<details>
-<summary><h2>한국어</h2></summary>
-
-**LLM 에게 일본어 커밋·보고를 시키면 본문 경체(です・ます) 비율이 1.0% 에서 83.3% 로 튑니다.**
-buntai 는 그 차이를 일본 공적문서의 조문을 근거로, 로컬 정규식만으로 잡습니다.
-
-```bash
-pip install buntai-lint && buntai hook install --lang ja
-npx buntai-lint lint report.md --profile report
-```
-
-### 무엇이 다른가
-
-**1. 지적에 조번호와 원문 인용이 붙고, CI 가 원문과 축자 대조합니다.**
-일본어 규칙 23건 전부가 「公用文作成の考え方」(문화심의회 건의, 2022) · JTF 일본어표준스타일가이드 · textlint-ja 중 하나를 인용합니다. CI 는 매 푸시마다 인용 원문 18건을 내려받아 대조하고, 불일치면 빌드를 떨어뜨립니다. **이 검사를 처음 돌렸을 때 작성자 본인의 인용 7건이 요약이라 걸렸습니다.**
-
-**2. 용도에 따라 규칙이 반전합니다.** 같은 경체가 기록에서는 오류, 대고객에서는 필수입니다. 그래서 추측하지 않고 `--profile` 로 선언합니다.
-
-**3. 사람이 쓴 글은 통과합니다. 측정했습니다.**
-
-| 대상 (전부 사람이 쓴 글) | 프로파일 | error 발화 |
-|---|---|---:|
-| 커밋 96건 (2022-11 이전) | commit | **2.1%** |
-| 공개 보고서 본문 400블록 (JPCERT/CC) | report | **2.2%** |
-| LLM 이 쓴 커밋 30건 | commit | **86.7%** |
-
-**4. 모델 호출·네트워크·의존성 0.** 규칙 로드 4ms, 메시지 1건 판정 0.24ms.
-
-### 프로파일
-
-| 프로파일 | 대상 | 주요 검사 |
-|---|---|---|
-| `commit` | 커밋·PR (기록) | 상체·체언止め, 제목만으로 내용 파악, 왜/무엇/확인 |
-| `report` | 사내 보고서 | 견출 계층(第1 → 1 → (1) → ア), 문체 통일, 과장·용장 |
-| `agent` | 에이전트 간 인계 | 모호어 금지, 동작주 명시 |
-| `customer` | 대고객 문면 | 경체 강제, 사내용어 언어화 |
-
-일본어가 주 대상입니다. 한국어·중국어·독일어·프랑스어·스페인어는 초기 규칙만 있고 출처 정비는 이제부터입니다. 영어는 의도적으로 제외했습니다.
-
-수치 재현: `python bench/run.py --lang ja --rules`
-
-</details>
