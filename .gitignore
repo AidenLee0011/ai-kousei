@@ -10,3 +10,6 @@ sources/raw/
 sources/ref/
 sources/reports/*.txt
 sources/reports/_tmp.pdf
+
+# demo recordings are build artifacts of the live page
+docs/media/*.webm
