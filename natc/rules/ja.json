@@ -1,0 +1,173 @@
+{
+  "lang": "ja",
+  "name": "日本語",
+  "version": "0.1.0",
+  "maturity": "curated",
+  "detect": { "script": "[\\u3040-\\u309F\\u30A0-\\u30FF]", "weight": 3 },
+  "template": {
+    "commit": "{type}: {要約（30字以内・体言止め）}\n\nなぜ: {背景・問題を1行}\nなにを: {変更点を1〜3行}\n確認: {検証方法を1行}",
+    "pr": "## 概要\n{1行}\n\n## なぜ\n{背景・問題}\n\n## なにを\n{変更点}\n\n## 確認\n{検証手順と結果}\n\n## 影響範囲\n{影響を受ける箇所・ロールバック手順}"
+  },
+  "structural": {
+    "subject_max_width": 60,
+    "subject_no_period": "[。．\\.]$",
+    "body_sections": ["なぜ", "なにを", "確認"],
+    "bullet_max": 7,
+    "labels": {
+      "subject_long": { "title": "件名 {w} 桁 > {max} 桁", "why": "長い件名は git log や一覧で切れる。", "fix": "詳細は本文へ移す。" },
+      "subject_period": { "title": "件名の句点", "why": "件名は見出しであり、文ではない。", "fix": "末尾の句点を消す。" },
+      "bullets": { "title": "本文の箇条書き {n} 件", "why": "箇条書きの羅列は生成文の癖で、変更理由が消える。", "fix": "重要な {max} 件に絞るか、コミットを分ける。" },
+      "sections": { "title": "報告項目の欠落: {missing}", "why": "型が決まっているから、人が書いたログは読み飛ばせる。", "fix": "`natc template --lang {lang}` を使う。" }
+    },
+    "tone": {
+      "title": "です・ます体と だ・である体 の混在",
+      "a": "(?:です|ます|ました|ません)[。\\n]",
+      "b": "(?:である|だった|した|ない)[。\\n]",
+      "why": "文体の混在は生成文の典型。人間は無意識に一方へ揃える。",
+      "fix": "コミットログは だ・である体（または体言止め）へ統一する。"
+    }
+  },
+  "rules": [
+    {
+      "id": "ja-hedge-dewanai",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "ではないでしょうか|のではないだろうか",
+      "title": "…ではないでしょうか",
+      "why": "生成文で最も多いぼかし表現。開発ログで問いかける必要はない。",
+      "fix": "断定に置き換える。「…と判断した」"
+    },
+    {
+      "id": "ja-ieru-desho",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "と言えるでしょう|と言えます|と言っても過言では",
+      "title": "…と言えるでしょう / 過言ではない",
+      "why": "評論調の定型。事実の報告に評論は不要。",
+      "fix": "事実だけを書く。「…になった」"
+    },
+    {
+      "id": "ja-juuyou-desu",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "any",
+      "pattern": "(?:こと|の)が(?:重要|大切|不可欠)で(?:す|ある)|が求められ(?:ます|る)",
+      "title": "…することが重要です",
+      "why": "主語のない一般論。誰が何をしたのかが消える。",
+      "fix": "主語と動作を書く。「…を追加した」"
+    },
+    {
+      "id": "ja-masani",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "まさに|非常に|極めて|大幅に改善",
+      "title": "強調副詞の多用",
+      "why": "数値のない強調は生成文の癖。",
+      "fix": "副詞を消し、数値を書く。「応答時間 820ms → 210ms」"
+    },
+    {
+      "id": "ja-tada-dake-dewanaku",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "(?:単なる|ただの|単に).{0,20}(?:ではなく|だけでなく)",
+      "title": "単なる…ではなく、…である",
+      "why": "英語 not just X, but Y の直訳構文。日本語話者はまず書かない。",
+      "fix": "後半だけ残す。"
+    },
+    {
+      "id": "ja-ikaga",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "いかがでしょうか|ぜひ.{0,10}(?:ください|みてください)|お役に立て",
+      "title": "読者への呼びかけ",
+      "why": "ブログ生成の締め文。コミットに読者はいない。",
+      "fix": "削除する。"
+    },
+    {
+      "id": "ja-ika-no-toori",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "body",
+      "pattern": "以下(?:の通り|のとおり)で(?:す|ある)|下記の(?:通り|とおり)",
+      "title": "以下の通りです",
+      "why": "箇条書きの前置き。前置きなしで書けば1行減る。",
+      "fix": "前置きを消して本文から始める。"
+    },
+    {
+      "id": "ja-kanousei-himeta",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "可能性を秘め|新たな(?:地平|一歩|世界)|の世界へ|革新的",
+      "title": "宣伝文句",
+      "why": "マーケティング生成文の語彙。",
+      "fix": "削除する。"
+    },
+    {
+      "id": "ja-watashitachi",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "私たちは|我々は",
+      "title": "一人称複数の主語",
+      "why": "日本語の技術文では主語を省くのが自然。生成文は英語の主語を残す。",
+      "fix": "主語を省略する。"
+    },
+    {
+      "id": "ja-matome",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "body",
+      "pattern": "^(?:まとめ|結論|最後に)[:：]?\\s*$|総じて|全体として",
+      "flags": "m",
+      "title": "まとめセクション",
+      "why": "3行の本文に要約は要らない。生成文は必ず締めを作る。",
+      "fix": "削除する。"
+    },
+    {
+      "id": "ja-vague-verb",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "^(?:\\w+(?:\\([^)]*\\))?:\\s*)?(?:各種)?(?:修正|更新|改善|調整|対応|変更)(?:しました|した)?[。\\s]*$",
+      "title": "何を変えたか分からない件名",
+      "why": "「各種修正」は差分を読めば分かることしか言っていない。",
+      "fix": "対象と結果を書く。「決済リトライの上限を3回に変更」"
+    },
+    {
+      "id": "ja-toshite-kinou",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "を通じて|に関して言えば|の観点から言うと",
+      "title": "冗長な接続表現",
+      "why": "翻訳調のつなぎ。削っても意味が変わらない。",
+      "fix": "削除するか助詞に置き換える。"
+    },
+    {
+      "id": "ja-sarani-kasanari",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "body",
+      "pattern": "さらに、|また、.{0,40}また、|そして、.{0,40}そして、",
+      "title": "接続詞の連鎖",
+      "why": "段落を接続詞でつなぐのは生成文の構文癖。",
+      "fix": "文を分ける。"
+    },
+    {
+      "id": "ja-nado-hedge",
+      "severity": "warn",
+      "weight": 4,
+      "scope": "any",
+      "pattern": "などが挙げられ|と思われ(?:ます|る)|かもしれません",
+      "title": "推量のぼかし",
+      "why": "実行済みの変更に推量は矛盾する。",
+      "fix": "確認した事実か、未確認かを明示する。"
+    }
+  ]
+}

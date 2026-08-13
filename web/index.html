@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nativecommit — commit messages that read like a person wrote them</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#161a21; --line:#242a34; --fg:#e6e9ef; --dim:#98a2b3;
+    --err:#e5534b; --warn:#d29922; --ok:#3fb950; --accent:#4c8dff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Noto Sans JP",sans-serif}
+  header{border-bottom:1px solid var(--line);padding:22px 28px}
+  h1{margin:0;font-size:20px;letter-spacing:-.2px}
+  h1 span{color:var(--dim);font-weight:400}
+  .sub{color:var(--dim);margin-top:6px;font-size:13px}
+  main{max-width:1180px;margin:0 auto;padding:22px 28px 60px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:940px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .panel h2{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);font-weight:600}
+  textarea{width:100%;height:230px;background:#0b0d12;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:12px;font:13px/1.7 "SFMono-Regular",Consolas,"Noto Sans Mono CJK KR",monospace;resize:vertical}
+  .row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center}
+  button,select{background:#1d232c;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:12.5px;cursor:pointer}
+  button:hover{border-color:var(--accent)}
+  button.on{border-color:var(--accent);color:#cfe0ff}
+  .score{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .score b{font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+  .bar{height:6px;background:#0b0d12;border-radius:3px;overflow:hidden;margin:10px 0 16px}
+  .bar i{display:block;height:100%;transition:width .18s}
+  .verdict{font-size:13px}
+  ul.f{list-style:none;margin:0;padding:0}
+  ul.f li{border-top:1px solid var(--line);padding:11px 0}
+  .tag{display:inline-block;font-size:10.5px;letter-spacing:.06em;padding:2px 6px;border-radius:4px;margin-right:8px;vertical-align:2px}
+  .tag.error{background:rgba(229,83,75,.15);color:var(--err);border:1px solid rgba(229,83,75,.35)}
+  .tag.warn{background:rgba(210,153,34,.13);color:var(--warn);border:1px solid rgba(210,153,34,.32)}
+  .ftitle{font-weight:600}
+  .fid{color:var(--dim);font-size:11.5px;margin-left:6px}
+  .fwhy{color:var(--dim);font-size:12.5px;margin-top:3px}
+  .ffix{font-size:12.5px;margin-top:2px;color:#bcd0ff}
+  .snip{font-family:Consolas,monospace;background:#0b0d12;border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:12px}
+  pre.prev{background:#0b0d12;border:1px solid var(--line);border-radius:8px;padding:12px;white-space:pre-wrap;word-break:break-word;font:13px/1.7 Consolas,"Noto Sans Mono CJK KR",monospace;margin:0}
+  pre.prev mark{background:rgba(229,83,75,.28);color:#ffd8d5;border-radius:3px;padding:0 2px}
+  pre.prev mark.w{background:rgba(210,153,34,.25);color:#ffe6b0}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left}
+  th{color:var(--dim);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  code.cmd{display:block;background:#0b0d12;border:1px solid var(--line);border-radius:6px;padding:9px 11px;font:12.5px/1.8 Consolas,monospace;margin:6px 0;color:#d7e2f5;overflow-x:auto}
+  .note{color:var(--dim);font-size:12.5px}
+  a{color:var(--accent)}
+  .mt{margin-top:18px}
+</style>
+</head>
+<body>
+<header>
+  <h1>nativecommit <span>— commit messages that read like a person wrote them, in your language</span></h1>
+  <div class="sub">Deterministic linter. No model call, no network. Japanese, Korean, Chinese, German, French, Spanish. English is out of scope by design.</div>
+</header>
+
+<main>
+  <div class="grid">
+    <section class="panel">
+      <h2>commit message</h2>
+      <div class="row">
+        <select id="lang"><option value="">auto detect</option></select>
+        <button data-sample="ai">generated sample</button>
+        <button data-sample="human">human report sample</button>
+        <button id="tpl">insert template</button>
+      </div>
+      <textarea id="src" spellcheck="false"></textarea>
+      <div class="row mt"><span class="note" id="detect"></span></div>
+      <h2 class="mt">what the rules matched</h2>
+      <pre class="prev" id="prev"></pre>
+    </section>
+
+    <section class="panel">
+      <h2>verdict</h2>
+      <div class="score"><b id="score">100</b><span class="note">/ 100</span><span class="verdict" id="verdict"></span></div>
+      <div class="bar"><i id="bar"></i></div>
+      <ul class="f" id="find"></ul>
+    </section>
+  </div>
+
+  <div class="grid mt">
+    <section class="panel">
+      <h2>rule packs</h2>
+      <table id="packs"><thead><tr><th>code</th><th>language</th><th>maturity</th><th class="num">rules</th></tr></thead><tbody></tbody></table>
+      <p class="note mt">Rules are plain JSON. One file per language, loaded by both the CLI and this page, so the demo and the hook can never drift apart.</p>
+    </section>
+
+    <section class="panel">
+      <h2>use it on your repository</h2>
+      <code class="cmd">pip install nativecommit
+natc hook install --lang ja
+git commit          # a generated-looking message is rejected before it lands</code>
+      <p class="note">The hook exits non-zero on any error level finding. Warnings are printed and let through. Merge, squash and fixup messages are skipped.</p>
+      <code class="cmd">natc lint .git/COMMIT_EDITMSG
+natc lint -m "fix: 各種修正" --lang ja --json
+natc template --lang ko --pr</code>
+      <p class="note">Every finding carries the reason and the rewrite in the language being linted, not in English.</p>
+    </section>
+  </div>
+</main>
+
+<script>
+const LANGS = ["_common","ja","ko","zh","de","fr","es"];
+const PACKS = {};
+const EN_LABELS = {
+  subject_long:{title:"subject {w} > {max} columns",why:"Long subjects get truncated in git log and in review lists.",fix:"Move the detail into the body."},
+  subject_period:{title:"subject ends with a period",why:"A commit subject is a headline, not a sentence.",fix:"Drop the trailing period."},
+  bullets:{title:"{n} bullets in the body",why:"A laundry list of bullets is a generation habit. It also hides the reason for the change.",fix:"Keep the {max} that matter, or split the commit."},
+  sections:{title:"report sections missing: {missing}",why:"The standard report shape is what makes a human-written log scannable.",fix:"Run `natc template --lang {lang}`."}
+};
+const SAMPLES = {
+  ja:{ai:"feat: ✨ 各種修正\n\n今回の変更は、まさに重要な改善ではないでしょうか。\n私たちは以下の通り対応しました。\n\n- リトライ処理の見直し\n- ログの整理\n\nいかがでしょうか。",
+      human:"fix: 決済リトライの上限を3回に変更\n\nなぜ: リトライが無限に繰り返され、キューが滞留した\nなにを: retry_max を3で固定し、超過分は dead-letter へ送る\n確認: 負荷試験1時間、キュー滞留 0"},
+  ko:{ai:"feat: 🚀 개선\n\n다음과 같습니다. 이번 변경으로 성능이 매우 개선된 것 같습니다.\n함께 살펴보겠습니다.\n\n- **캐시**: 도입함\n- **로그**: 정리했습니다\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
+      human:"fix: 결제 재시도 상한 3회로 변경\n\n왜: 재시도가 무한 반복되어 큐가 밀림\n무엇: retry_max 를 3 으로 고정, 초과 시 dead-letter 로 이동\n확인: 부하 테스트 1시간, 큐 적체 0"},
+  zh:{ai:"feat: 优化\n\n首先，本次改动显著提升了性能。其次，代码可读性也得到了改善。\n值得注意的是，这不仅仅是重构，而且是架构升级。\n希望本次变更对您有所帮助。",
+      human:"fix: 支付重试上限改为 3 次\n\n为什么: 重试无限循环，队列积压\n改动: retry_max 固定为 3，超出转入 dead-letter\n验证: 压测 1 小时，队列积压 0"},
+  de:{ai:"feat: Diverse Anpassungen\n\nIn der heutigen digitalen Welt ist es wichtig zu beachten, dass die Performance erheblich verbessert wurde.\nDarüber hinaus wurde nicht nur der Code aufgeräumt, sondern auch die Logs.\nZusammenfassend lässt sich sagen, dass die Änderung sinnvoll ist.",
+      human:"fix: Zahlungswiederholungen auf drei begrenzt\n\nWarum: Wiederholungen liefen endlos, die Warteschlange lief voll\nWas: retry_max auf 3 gesetzt, Rest geht in die Dead-Letter-Queue\nGeprüft: Lasttest eine Stunde, kein Rückstau"},
+  fr:{ai:"feat: Corrections diverses\n\nDans le monde d'aujourd'hui, il est important de noter que les performances ont été considérablement améliorées.\nDe plus, ce n'est non seulement un nettoyage mais aussi une refonte.\nEn conclusion, n'hésitez pas à relire.",
+      human:"fix: limite des tentatives de paiement fixée à trois\n\nPourquoi: les tentatives bouclaient sans fin et la file saturait\nQuoi: retry_max à 3, le surplus part en dead-letter\nVérifié: test de charge d'une heure, file à zéro"},
+  es:{ai:"feat: Varias correcciones\n\nEn el mundo actual, es importante destacar que el rendimiento mejoró considerablemente.\nAdemás, no solo se limpió el código sino también los registros.\nEn conclusión, espero que esto ayude.",
+      human:"fix: limite de reintentos de pago fijado en tres\n\nPor qué: los reintentos se repetian sin fin y la cola se saturaba\nQué: retry_max fijado en 3, el resto pasa a dead-letter\nVerificado: prueba de carga de una hora, cola en cero"}
+};
+
+const $ = s => document.querySelector(s);
+const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+
+function rx(p, f){ return new RegExp(p, f || ""); }
+function width(s){ let n=0; for (const c of s) n += /[ᄀ-ᅟ⺀-꓏가-힣豈-﫿︰-﹯＀-｠￠-￦]/.test(c) ? 2 : 1; return n; }
+
+function splitMessage(text){
+  const lines = text.replace(/\r\n/g,"\n").split("\n").filter(l => !l.startsWith("#"));
+  while (lines.length && !lines[0].trim()) lines.shift();
+  if (!lines.length) return ["",""];
+  return [lines[0].trim(), lines.slice(1).join("\n").replace(/^\n+|\n+$/g,"")];
+}
+
+function detectLang(text){
+  const sc = {};
+  for (const lang of LANGS){
+    if (lang === "_common" || !PACKS[lang]) continue;
+    const det = PACKS[lang].detect || {}; let s = 0;
+    if (det.script) s += (text.match(rx(det.script,"g")) || []).length * (det.weight || 1);
+    for (const w of (det.stopwords || [])) s += (text.match(rx("(?:^|[^\\w])" + w + "(?![\\w])","gi")) || []).length * (det.weight || 1);
+    if (s) sc[lang] = s;
+  }
+  let best = null;
+  for (const k in sc) if (best === null || sc[k] > sc[best]) best = k;
+  if (best && sc.ja && /[぀-ゟ゠-ヿ]/.test(text)) best = "ja";
+  return best && sc[best] >= 2 ? best : null;
+}
+
+function label(st, key, kw){
+  const base = Object.assign({}, EN_LABELS[key], (st.labels || {})[key] || {});
+  const out = {};
+  for (const k in base) out[k] = String(base[k]).replace(/\{(\w+)\}/g, (m,p) => kw[p] !== undefined ? kw[p] : m);
+  return out;
+}
+
+function structural(pack, subject, body){
+  const out = [], st = pack.structural || {}, lang = pack.lang;
+  if (st.subject_max_width && subject && width(subject) > st.subject_max_width)
+    out.push(Object.assign({id:lang+"-subject-too-long",severity:"warn",weight:6,match:subject.slice(0,40)}, label(st,"subject_long",{w:width(subject),max:st.subject_max_width})));
+  if (st.subject_no_period && subject && rx(st.subject_no_period).test(subject))
+    out.push(Object.assign({id:lang+"-subject-period",severity:"warn",weight:3,match:""}, label(st,"subject_period",{})));
+  if (st.bullet_max){
+    const n = (body.match(/^\s*(?:[-*]|\d+[.)])\s+/gm) || []).length;
+    if (n > st.bullet_max) out.push(Object.assign({id:lang+"-bullet-flood",severity:"warn",weight:7,match:""}, label(st,"bullets",{n:n,max:st.bullet_max})));
+  }
+  if ((st.body_sections||[]).length && body.split("\n").filter(l=>l.trim()).length >= 2){
+    const miss = st.body_sections.filter(s => body.toLowerCase().indexOf(s.toLowerCase()) < 0);
+    if (miss.length) out.push(Object.assign({id:lang+"-missing-sections",severity:"warn",weight:5,match:""}, label(st,"sections",{missing:miss.join(", "),lang:lang})));
+  }
+  const tone = st.tone;
+  if (tone && body && rx(tone.a,"g").test(body+"\n") && rx(tone.b,"g").test(body+"\n"))
+    out.push({id:lang+"-tone-mix",severity:"warn",weight:8,title:tone.title,why:tone.why,fix:tone.fix,match:""});
+  return out;
+}
+
+function lint(text, forced){
+  const [subject, body] = splitMessage(text);
+  const full = (subject + "\n" + body).trim();
+  const lang = forced || detectLang(full);
+  const findings = [];
+  const active = [PACKS._common].concat(lang && PACKS[lang] ? [PACKS[lang]] : []);
+  for (const pack of active){
+    for (const r of (pack.rules || [])){
+      const scope = r.scope || "any";
+      const target = scope === "subject" ? subject : scope === "body" ? body : full;
+      if (!target) continue;
+      const m = rx(r.pattern, r.flags || "").exec(target);
+      if (!m) continue;
+      const loc = (r.i18n || {})[lang] || {};
+      findings.push({id:r.id, severity:r.severity||"warn", weight:r.weight||5,
+        title:loc.title||r.title, why:loc.why||r.why, fix:loc.fix||r.fix, match:m[0].slice(0,60)});
+    }
+  }
+  if (lang && PACKS[lang]) findings.push.apply(findings, structural(PACKS[lang], subject, body));
+  findings.sort((a,b) => (a.severity===b.severity ? b.weight-a.weight : a.severity==="error" ? -1 : 1));
+  const errors = findings.filter(f => f.severity === "error").length;
+  return {lang, findings, errors, warns: findings.length-errors,
+          score: Math.max(0, 100 - findings.reduce((s,f)=>s+f.weight,0)), passed: errors === 0};
+}
+
+function render(){
+  const text = $("#src").value;
+  const forced = $("#lang").value || null;
+  const r = lint(text, forced);
+  const pack = r.lang ? PACKS[r.lang] : null;
+  $("#detect").textContent = r.lang
+    ? ("detected: " + pack.name + " (" + r.lang + ", " + pack.maturity + " pack)")
+    : "language not detected. English is out of scope on purpose. Pick a language to force a pack.";
+  $("#score").textContent = r.score;
+  const col = r.errors ? "var(--err)" : r.warns ? "var(--warn)" : "var(--ok)";
+  $("#score").style.color = col;
+  $("#bar").style.width = r.score + "%";
+  $("#bar").style.background = col;
+  $("#verdict").innerHTML = r.lang
+    ? (r.passed ? "<span style='color:var(--ok)'>hook would let this through</span>" : "<span style='color:var(--err)'>hook would reject this commit</span>")
+      + " &nbsp;<span class='note'>" + r.errors + " errors, " + r.warns + " warnings</span>"
+    : "";
+  $("#find").innerHTML = r.findings.length ? r.findings.map(f =>
+      "<li><span class='tag " + f.severity + "'>" + (f.severity === "error" ? "ERROR" : "WARN") + "</span>"
+      + "<span class='ftitle'>" + esc(f.title) + "</span><span class='fid'>" + f.id + "</span>"
+      + (f.match ? "<div class='fwhy'>found <span class='snip'>" + esc(f.match) + "</span></div>" : "")
+      + (f.why ? "<div class='fwhy'>" + esc(f.why) + "</div>" : "")
+      + (f.fix ? "<div class='ffix'>" + esc(f.fix) + "</div>" : "") + "</li>").join("")
+    : "<li class='note' style='border:0'>no findings</li>";
+
+  let html = esc(text);
+  const seen = {};
+  for (const f of r.findings){
+    if (!f.match || seen[f.match]) continue;
+    seen[f.match] = 1;
+    const e = esc(f.match).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    html = html.replace(new RegExp(e, "g"), m => "<mark class='" + (f.severity === "error" ? "" : "w") + "'>" + m + "</mark>");
+  }
+  $("#prev").innerHTML = html || "<span class='note'>paste a commit message above</span>";
+}
+
+async function boot(){
+  await Promise.all(LANGS.map(async l => {
+    const res = await fetch("rules/" + l + ".json");
+    PACKS[l] = await res.json();
+  }));
+  const sel = $("#lang");
+  const tb = $("#packs tbody");
+  for (const l of LANGS){
+    if (l === "_common") continue;
+    sel.insertAdjacentHTML("beforeend", "<option value='" + l + "'>" + PACKS[l].name + " (" + l + ")</option>");
+    tb.insertAdjacentHTML("beforeend", "<tr><td>" + l + "</td><td>" + PACKS[l].name + "</td><td>" + PACKS[l].maturity + "</td><td class='num'>" + PACKS[l].rules.length + "</td></tr>");
+  }
+  tb.insertAdjacentHTML("beforeend", "<tr><td>_common</td><td>every language</td><td>curated</td><td class='num'>" + PACKS._common.rules.length + "</td></tr>");
+  tb.insertAdjacentHTML("beforeend", "<tr><td>en</td><td>English</td><td>out of scope</td><td class='num'>0</td></tr>");
+
+  document.querySelectorAll("[data-sample]").forEach(b => b.onclick = () => {
+    const lang = $("#lang").value || "ja";
+    $("#lang").value = lang;
+    $("#src").value = SAMPLES[lang][b.dataset.sample];
+    render();
+  });
+  $("#tpl").onclick = () => { $("#src").value = PACKS[$("#lang").value || "ko"].template.commit; render(); };
+  $("#src").addEventListener("input", render);
+  $("#lang").addEventListener("change", render);
+  $("#lang").value = "ja";
+  $("#src").value = SAMPLES.ja.ai;
+  render();
+}
+boot();
+</script>
+</body>
+</html>
