@@ -5,9 +5,7 @@
 **その日本語、AI が書いた文体になっていませんか。**
 報告書・エージェント間の受け渡し・対顧客の文面を、公的文書の条文を根拠に検査する決定論リンター。
 
-モデル呼び出しなし・ネットワークなし・依存パッケージなし
-
-デモは手元で開ける: `git clone` 後に `python -m http.server -d docs/demo` → <http://localhost:8000>
+モデル呼び出しなし・ネットワークなし・依存パッケージなし ・ **[デモを開く](https://aidenlee0011.github.io/buntai/)**
 
 ![AS-IS to TO-BE](docs/hero.png)
 
@@ -172,7 +170,7 @@ MIT。出典は条番号と短い引用のみを掲載し、原文の再配布�
 
 `buntai` (文体, writing style) is a deterministic linter for Japanese
 reports, agent-to-agent handoffs, customer-facing copy and commit messages. Every rule cites a
-Japanese public standard. No model call, no network, no dependencies, no API cost. Demo: `python -m http.server -d docs/demo` after cloning.
+Japanese public standard. No model call, no network, no dependencies, no API cost. [Live demo](https://aidenlee0011.github.io/buntai/).
 
 ```bash
 pip install buntai
