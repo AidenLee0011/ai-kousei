@@ -281,7 +281,7 @@
       "source": {
         "doc": "ja_tech",
         "loc": "ja-no-weak-phrase",
-        "quote": "弱い日本語表現（〜かもしれない、〜と思う、可能性を示唆する）の利用を禁止する。"
+        "quote": "弱い日本語表現の利用を禁止する"
       },
       "example": {
         "before": "これで解決したと思います。",
@@ -299,8 +299,8 @@
       "fix": "短い形に直す。「更新を行った」→「更新した」",
       "source": {
         "doc": "ja_tech",
-        "loc": "ja-no-redundant-expression dict1/2/3/5",
-        "quote": "\"すること[助詞]できる\" は冗長な表現です。\"[サ変名詞]を行う\" は冗長な表現です。"
+        "loc": "ja-no-redundant-expression dict2",
+        "quote": "\"すること[助詞]できる\"は冗長な表現です。"
       },
       "example": {
         "before": "再実行することができます。設定の更新を行いました。",
@@ -397,7 +397,7 @@
       "source": {
         "doc": "ai_writing",
         "loc": "no-ai-list-formatting",
-        "quote": "✅ 完了した項目 / ❌ 失敗した項目 → 完了した項目 / 失敗した項目"
+        "quote": "リストアイテムで機械的な印象を与える可能性のある記述パターンを検出します。"
       },
       "example": {
         "before": "- ✅ キャッシュ追加\n- 🚀 速度改善",
@@ -416,7 +416,7 @@
       "source": {
         "doc": "ai_writing",
         "loc": "no-ai-hype-expressions",
-        "quote": "革命的な技術で業界を変えます。→ 効果的な技術で業界に変化をもたらします。"
+        "quote": "AIライティングで過度に使用されがちな誇張表現やハイプ的な表現を検出します。"
       },
       "example": {
         "before": "革命的なキャッシュ導入により、すべての課題を解決します。",
@@ -436,7 +436,7 @@
       "source": {
         "doc": "ai_writing",
         "loc": "no-ai-emphasis-patterns",
-        "quote": "これは**非常に**重要な項目です。→ これは重要な項目です。"
+        "quote": "AIが機械的に生成しがちな強調パターンを検出します。"
       },
       "example": {
         "before": "これは**非常に**重要な変更です。",
@@ -455,7 +455,7 @@
       "source": {
         "doc": "ai_writing",
         "loc": "no-ai-colon-continuation",
-        "quote": "実行します: → 実行方法は以下の通りです。"
+        "quote": "コロンの直後にブロック要素が続く英語的なパターンを検出します。"
       },
       "example": {
         "before": "次の作業を実行します:\n- 設定変更",
@@ -540,8 +540,8 @@
       },
       "source": {
         "doc": "koyobun",
-        "loc": "Ⅱ 用語の使い方",
-        "quote": "専門用語は、相手に通じる言葉に言い換える。"
+        "loc": "Ⅱ-2 専門用語の扱い",
+        "quote": "専門用語や外来語をむやみに用いないようにし、読み手に通じる言葉を選ぶ。"
       }
     },
     {

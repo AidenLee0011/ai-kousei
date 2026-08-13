@@ -18,3 +18,16 @@ jobs:
           python-version: ${{ matrix.python }}
       - run: python -m buntai selftest
       - run: python -m buntai lint -m "fix: キャッシュ追加" --lang ja
+
+  citations:
+    # Every rule quotes a clause. This job downloads the cited documents and
+    # checks the quotes verbatim, so a rule can never drift into invention.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests beautifulsoup4 pdfminer.six
+      - run: python sources/fetch_ja_sources.py
+      - run: python sources/verify_quotes.py --lang ja
