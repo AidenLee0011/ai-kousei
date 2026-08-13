@@ -1,0 +1,89 @@
+{
+  "lang": "de",
+  "name": "Deutsch",
+  "version": "0.1.0",
+  "maturity": "starter",
+  "detect": { "stopwords": ["der", "die", "das", "und", "nicht", "wurde", "werden", "für", "mit", "eine", "beim", "wegen"], "weight": 1 },
+  "template": {
+    "commit": "{typ}: {Zusammenfassung, max. 60 Zeichen}\n\nWarum: {Problem in einer Zeile}\nWas: {Änderung in ein bis drei Zeilen}\nGeprüft: {Prüfweg in einer Zeile}",
+    "pr": "## Zusammenfassung\n{eine Zeile}\n\n## Warum\n{Problem}\n\n## Was\n{Änderung}\n\n## Geprüft\n{Prüfweg und Ergebnis}\n\n## Auswirkung\n{Betroffene Stellen, Rollback}"
+  },
+  "structural": {
+    "subject_max_width": 72,
+    "subject_no_period": "[.]$",
+    "body_sections": ["Warum", "Was", "Geprüft"],
+    "bullet_max": 7
+  },
+  "rules": [
+    {
+      "id": "de-wichtig-zu-beachten",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "[Ee]s ist wichtig,? zu beachten|[Ee]s gilt zu (?:beachten|berücksichtigen)|[Ee]s sei angemerkt",
+      "title": "Es ist wichtig zu beachten",
+      "why": "Standardfloskel generierter Texte, ohne Subjekt und ohne Inhalt.",
+      "fix": "Direkt die Tatsache nennen."
+    },
+    {
+      "id": "de-heutige-welt",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "any",
+      "pattern": "[Ii]n der heutigen (?:digitalen |schnelllebigen )?(?:Welt|Zeit)|[Ii]m Zeitalter",
+      "title": "Einstieg über die heutige Welt",
+      "why": "Blog-Einleitung. Ein Commit braucht keine Epoche.",
+      "fix": "Streichen."
+    },
+    {
+      "id": "de-zusammenfassend",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "body",
+      "pattern": "[Zz]usammenfassend lässt sich sagen|[Aa]bschließend lässt sich",
+      "title": "Zusammenfassender Schlusssatz",
+      "why": "Drei Zeilen Text brauchen keine Zusammenfassung.",
+      "fix": "Streichen."
+    },
+    {
+      "id": "de-nicht-nur-sondern",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "nicht nur\\b.{0,40}\\bsondern auch",
+      "title": "nicht nur … sondern auch",
+      "why": "Direkte Übersetzung von not just X but Y.",
+      "fix": "Nur den zweiten Teil behalten."
+    },
+    {
+      "id": "de-darueber-hinaus",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "body",
+      "pattern": "[Dd]arüber hinaus|[Ff]erner|[Dd]es Weiteren",
+      "title": "Aufzählende Konnektoren",
+      "why": "Absätze mit Konnektoren zu verketten ist ein Modellmuster.",
+      "fix": "Sätze trennen."
+    },
+    {
+      "id": "de-erheblich",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "erheblich|deutlich verbessert|maßgeblich|signifikant",
+      "title": "Verstärkende Adverbien",
+      "why": "Betonung ohne Zahl ist keine Aussage.",
+      "fix": "Zahl nennen: 820 ms auf 210 ms."
+    },
+    {
+      "id": "de-vague-subject",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "^(?:\\w+(?:\\([^)]*\\))?:\\s*)?(?:[Dd]iverse |[Ee]inige |[Kk]leine )?(?:Fixes|Korrekturen|Anpassungen|Verbesserungen|Updates?)[.\\s]*$",
+      "title": "Betreff ohne Inhalt",
+      "why": "Anpassungen sagt nichts, was das Diff nicht zeigt.",
+      "fix": "Objekt und Ergebnis nennen."
+    }
+  ]
+}

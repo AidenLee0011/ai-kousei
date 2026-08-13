@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """Fetch the Japanese authorities the rule pack is derived from.
 
-Nothing here is invented. Every rule in ringi/rules/ja.json cites one of these
+Nothing here is invented. Every rule in buntai/rules/ja.json cites one of these
 documents, and this script is what pulls them so a reviewer can check the claim.
 
     python sources/fetch_ja_sources.py

@@ -19,8 +19,8 @@ dst_html = os.path.join(a.out, "index.html")
 if os.path.abspath(src_html) != os.path.abspath(dst_html):
     shutil.copy2(src_html, dst_html)
 n = 0
-for fn in os.listdir(os.path.join(ROOT, "ringi", "rules")):
+for fn in os.listdir(os.path.join(ROOT, "buntai", "rules")):
     if fn.endswith(".json"):
-        shutil.copy2(os.path.join(ROOT, "ringi", "rules", fn), os.path.join(a.out, "rules", fn))
+        shutil.copy2(os.path.join(ROOT, "buntai", "rules", fn), os.path.join(a.out, "rules", fn))
         n += 1
 print("built %s (%d rule packs)" % (a.out, n))

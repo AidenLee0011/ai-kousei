@@ -30,7 +30,7 @@ def hero():
     o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">' % (W, H, W, H, JP))
     o.write('<rect width="%d" height="%d" fill="%s"/>' % (W, H, BG))
     o.write('<text x="30" y="38" font-size="19" font-weight="700" fill="%s">AI が書いた日本語コミットは、日本語話者が書くコミットと形が違う</text>' % INK)
-    o.write('<text x="30" y="62" font-size="13" fill="%s">ringi はその差を、公的文書の条文を根拠に指摘して直す。</text>' % DIM)
+    o.write('<text x="30" y="62" font-size="13" fill="%s">buntai はその差を、公的文書の条文を根拠に指摘して直す。</text>' % DIM)
 
     def card(x, y, w, h, tag, color, lines, foot):
         o.write('<rect x="%d" y="%d" width="%d" height="%d" rx="9" fill="%s" fill-opacity="0.05" stroke="%s" stroke-opacity="0.5"/>' % (x, y, w, h, color, color))
@@ -90,7 +90,7 @@ def architecture():
     box(30, 354, 250, 78, "実測コーパス", ["人手コミット 96 / LLM 30", "公開報告書 8 件 8,181 文"], GOOD, True)
 
     o.write('<text x="330" y="72" font-size="11.5" font-weight="700" fill="%s">2. 規則ファイル</text>' % DIM)
-    box(330, 82, 300, 350, "ringi/rules/ja.json", [
+    box(330, 82, 300, 350, "buntai/rules/ja.json", [
         "1 規則 = pattern + severity + weight",
         "        + source{doc, loc, quote}",
         "        + example{before, after}",
@@ -111,7 +111,7 @@ def architecture():
 
     o.write('<text x="680" y="72" font-size="11.5" font-weight="700" fill="%s">3. 実行</text>' % DIM)
     box(680, 82, 230, 84, "commit-msg フック", ["merge/squash/fixup は除外", "error があれば exit 1"])
-    box(680, 178, 230, 84, "ringi lint / rules", ["次にやること 1 行 → 5 件", "各指摘に条番号と引用"])
+    box(680, 178, 230, 84, "buntai lint / rules", ["次にやること 1 行 → 5 件", "各指摘に条番号と引用"])
     box(680, 274, 230, 84, "ブラウザデモ", ["同じ JSON を読む", "判定がずれない"])
     box(680, 370, 230, 62, "bench/", ["閾値の再測定"])
     arrow(634, 200, 676, 124)
@@ -160,7 +160,7 @@ def profiles():
     o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">' % (W, H, W, H, JP))
     o.write('<rect width="%d" height="%d" fill="%s"/>' % (W, H, BG))
     o.write('<text x="30" y="36" font-size="18" font-weight="700" fill="%s">用途ごとに規則が変わる。対顧客では敬体が正解、記録では敬体が誤り。</text>' % INK)
-    o.write('<text x="30" y="58" font-size="12.5" fill="%s">ringi lint --profile commit | report | agent | customer</text>' % DIM)
+    o.write('<text x="30" y="58" font-size="12.5" fill="%s">buntai lint --profile commit | report | agent | customer</text>' % DIM)
     rows = [
         ("報告書  --profile report",
          ["本日、キャッシュ機構の全面刷新を行いました。これにより、", "応答速度が大幅に改善されたと考えております。"],

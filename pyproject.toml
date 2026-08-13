@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ringi"
+name = "buntai"
 version = "0.1.0"
 description = "Deterministic linter for commit messages and pull request bodies in languages other than English"
 readme = "README.md"
@@ -27,10 +27,10 @@ classifiers = [
 dependencies = []
 
 [project.scripts]
-ringi = "ringi.__main__:main"
+buntai = "buntai.__main__:main"
 
 [tool.setuptools]
-packages = ["ringi"]
+packages = ["buntai"]
 
 [tool.setuptools.package-data]
-ringi = ["rules/*.json"]
+buntai = ["rules/*.json"]

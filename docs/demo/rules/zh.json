@@ -1,0 +1,99 @@
+{
+  "lang": "zh",
+  "name": "中文",
+  "version": "0.1.0",
+  "maturity": "starter",
+  "detect": { "script": "[\\u4E00-\\u9FFF]", "weight": 1 },
+  "template": {
+    "commit": "{type}: {摘要，30字以内}\n\n为什么: {问题或背景，一行}\n改动: {变更内容，一到三行}\n验证: {验证方式，一行}",
+    "pr": "## 摘要\n{一行}\n\n## 为什么\n{问题或背景}\n\n## 改动\n{变更内容}\n\n## 验证\n{验证方式与结果}\n\n## 影响\n{影响范围与回滚方式}"
+  },
+  "structural": {
+    "subject_max_width": 60,
+    "subject_no_period": "[。.]$",
+    "body_sections": ["为什么", "改动", "验证"],
+    "bullet_max": 7
+  },
+  "rules": [
+    {
+      "id": "zh-shouxian-qici",
+      "severity": "error",
+      "weight": 10,
+      "scope": "body",
+      "pattern": "首先.{0,80}其次|其次.{0,80}(?:最后|最終)",
+      "title": "首先…其次…最后",
+      "why": "模板化的三段式结构是生成文本的标志。",
+      "fix": "直接写改动，不用连接词铺垫。"
+    },
+    {
+      "id": "zh-zhide-zhuyi",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "any",
+      "pattern": "值得(?:注意|一提)的是|需要指出的是",
+      "title": "值得注意的是",
+      "why": "评论式插入语，提交记录里不需要。",
+      "fix": "删除，直接陈述事实。"
+    },
+    {
+      "id": "zh-zongjie",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "body",
+      "pattern": "总而言之|综上所述|总的来说",
+      "title": "总结句",
+      "why": "三行正文不需要总结段。",
+      "fix": "删除。"
+    },
+    {
+      "id": "zh-not-just",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "不仅(?:仅)?(?:是)?.{0,25}(?:而且|还|更是)",
+      "title": "不仅…而且…",
+      "why": "英文 not just X but Y 的直译句式。",
+      "fix": "只保留后半句。"
+    },
+    {
+      "id": "zh-reader-address",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "让我们|希望(?:本文|这)?对(?:您|你).{0,6}有(?:所)?帮助|大家好",
+      "title": "面向读者的措辞",
+      "why": "提交信息没有读者。",
+      "fix": "删除。"
+    },
+    {
+      "id": "zh-adverb",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "极大地|显著(?:地|提升)|大幅(?:度)?|全面优化",
+      "title": "程度副词",
+      "why": "没有数字的强调没有依据。",
+      "fix": "写数字。例：响应 820ms → 210ms"
+    },
+    {
+      "id": "zh-era-opening",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "在当今.{0,10}(?:时代|背景下)|随着.{0,12}的(?:发展|普及)",
+      "title": "时代背景开场白",
+      "why": "文章式开场，提交记录不需要背景铺陈。",
+      "fix": "删除。"
+    },
+    {
+      "id": "zh-vague-subject",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "^(?:\\w+(?:\\([^)]*\\))?:\\s*)?(?:一些|部分|各种)?(?:修复|更新|优化|改进|调整)(?:了)?[。\\s]*$",
+      "title": "看不出改了什么的标题",
+      "why": "只写「优化」等于没写。",
+      "fix": "写对象和结果。例：支付重试上限改为 3 次"
+    }
+  ]
+}

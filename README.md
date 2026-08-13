@@ -1,20 +1,20 @@
-# ringi 稟議
+# buntai 文体
 
 ![MIT](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![deps](https://img.shields.io/badge/dependencies-0-brightgreen) ![rules](https://img.shields.io/badge/ja%20rules-23%20sourced-orange) ![no api](https://img.shields.io/badge/API%20calls-none-brightgreen)
 
-**その日本語、稟議に通る形になっていますか。**
+**その日本語、AI が書いた文体になっていませんか。**
 報告書・エージェント間の受け渡し・対顧客の文面を、公的文書の条文を根拠に検査する決定論リンター。
 
-モデル呼び出しなし・ネットワークなし・依存パッケージなし ・ デモ: <http://118.130.18.231:8500/ringi/>
+モデル呼び出しなし・ネットワークなし・依存パッケージなし ・ デモ: <https://aidenlee0011.github.io/buntai/demo/>
 
 ![AS-IS to TO-BE](docs/hero.png)
 
 ```bash
-pip install ringi
-ringi hook install --lang ja        # コミット
-ringi lint report.md --profile report      # 報告書
-ringi lint task.md   --profile agent       # エージェント間の受け渡し
-ringi lint notice.md --profile customer    # 対顧客の文面
+pip install buntai
+buntai hook install --lang ja        # コミット
+buntai lint report.md --profile report      # 報告書
+buntai lint task.md   --profile agent       # エージェント間の受け渡し
+buntai lint notice.md --profile customer    # 対顧客の文面
 ```
 
 ---
@@ -71,7 +71,7 @@ python bench/run.py --lang ja --rules
 指摘には必ず条番号と原文引用が付く。
 
 ```
-$ ringi lint --profile customer notice.md
+$ buntai lint --profile customer notice.md
 next: 敬体に直す。「変更した。」→「変更しました。」
 日本語 / 対顧客の文面  score 80/100  errors 1  warnings 1  [blocked]
 1. [ERROR] L2 対顧客の文面が常体  → 敬体に直す
@@ -116,17 +116,17 @@ next: 敬体に直す。「変更した。」→「変更しました。」
 ## 使い方
 
 ```bash
-ringi lint .git/COMMIT_EDITMSG        # ファイル
-ringi lint -m "fix: 各種修正"          # 文字列
-git log -1 --format=%B | ringi lint   # 標準入力
-ringi lint report.md --profile report --json   # 機械可読
-ringi rules --lang ja                 # 全規則 + 出典 + AS-IS/TO-BE
-ringi metrics -m "..."                # 定量指標をコーパス実測値と並べる
-ringi template --lang ja              # コミット / PR / 報告書テンプレート
-python -m ringi selftest              # 77 規則 / 7 パック
+buntai lint .git/COMMIT_EDITMSG        # ファイル
+buntai lint -m "fix: 各種修正"          # 文字列
+git log -1 --format=%B | buntai lint   # 標準入力
+buntai lint report.md --profile report --json   # 機械可読
+buntai rules --lang ja                 # 全規則 + 出典 + AS-IS/TO-BE
+buntai metrics -m "..."                # 定量指標をコーパス実測値と並べる
+buntai template --lang ja              # コミット / PR / 報告書テンプレート
+python -m buntai selftest              # 77 規則 / 7 パック
 ```
 
-error があると exit 1、warning は表示のみ。merge・squash・fixup は対象外。出力は既定 5 件まで、1 行目が次にやること、全件は `--all`。既定のプロファイルは `git config ringi.profile report` のように固定できる。
+error があると exit 1、warning は表示のみ。merge・squash・fixup は対象外。出力は既定 5 件まで、1 行目が次にやること、全件は `--all`。既定のプロファイルは `git config buntai.profile report` のように固定できる。
 
 ## 報告書テンプレート
 
@@ -151,8 +151,8 @@ error があると exit 1、warning は表示のみ。merge・squash・fixup は
 ## 貢献
 
 1. 日本語の規則追加には `source`（文書名・条番号・引用）と `example`（AS-IS / TO-BE）が必須。
-2. 他言語は `ringi/rules/<code>.json` を追加し、その言語の公的文書・業界標準を出典にする。
-3. `python -m ringi selftest` が通ること。
+2. 他言語は `buntai/rules/<code>.json` を追加し、その言語の公的文書・業界標準を出典にする。
+3. `python -m buntai selftest` が通ること。
 
 ## ライセンス
 
@@ -166,15 +166,15 @@ MIT。出典は条番号と短い引用のみを掲載し、原文の再配布�
 
 # English
 
-**Does this Japanese text pass review?**
+**Does this Japanese text read like a machine wrote it?**
 
-`ringi` (稟議, the Japanese document approval process) is a deterministic linter for Japanese
+`buntai` (文体, writing style) is a deterministic linter for Japanese
 reports, agent-to-agent handoffs, customer-facing copy and commit messages. Every rule cites a
 Japanese public standard. No model call, no network, no dependencies, no API cost.
 
 ```bash
-pip install ringi
-ringi lint notice.md --profile customer
+pip install buntai
+buntai lint notice.md --profile customer
 ```
 
 ## Four profiles, because the correct style flips
@@ -215,21 +215,21 @@ a before/after rewrite so a finding is actionable.
 ## Commands
 
 ```bash
-ringi lint .git/COMMIT_EDITMSG        # file
-ringi lint -m "fix: 各種修正"          # string
-git log -1 --format=%B | ringi lint   # stdin
-ringi lint report.md --profile report --json
-ringi rules --lang ja                 # rules with citations and before/after
-ringi metrics -m "..."                # deterministic signals vs the corpus
-ringi template --lang ja              # commit / PR / report templates
-python -m ringi selftest              # 77 rules / 7 packs
+buntai lint .git/COMMIT_EDITMSG        # file
+buntai lint -m "fix: 各種修正"          # string
+git log -1 --format=%B | buntai lint   # stdin
+buntai lint report.md --profile report --json
+buntai rules --lang ja                 # rules with citations and before/after
+buntai metrics -m "..."                # deterministic signals vs the corpus
+buntai template --lang ja              # commit / PR / report templates
+python -m buntai selftest              # 77 rules / 7 packs
 ```
 
 ## Contributing
 
 A Japanese rule needs `source` (document, clause, quote) and `example` (before, after). A new
-language goes in `ringi/rules/<code>.json`, sourced from that language's public standards, not from
-intuition. `python -m ringi selftest` must pass.
+language goes in `buntai/rules/<code>.json`, sourced from that language's public standards, not from
+intuition. `python -m buntai selftest` must pass.
 
 ## License
 

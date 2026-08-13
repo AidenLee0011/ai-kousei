@@ -106,7 +106,7 @@
       "sections": {
         "title": "報告項目の欠落: {missing}",
         "why": "見出しを追えば全体の内容がつかめるようにする。",
-        "fix": "`ringi template --lang {lang}` の型に沿って書く。",
+        "fix": "`buntai template --lang {lang}` の型に沿って書く。",
         "source": "公用文作成の考え方 Ⅲ-2-エ"
       },
       "sentence_long": {

@@ -1,0 +1,173 @@
+{
+  "lang": "ko",
+  "name": "한국어",
+  "version": "0.1.0",
+  "maturity": "curated",
+  "detect": { "script": "[\\uAC00-\\uD7A3]", "weight": 3 },
+  "template": {
+    "commit": "{타입}: {요약 30자 이내, 명사형 종결}\n\n왜: {문제·배경 1줄}\n무엇: {변경 1~3줄}\n확인: {검증 방법 1줄}",
+    "pr": "## 요약\n{1줄}\n\n## 왜\n{문제·배경}\n\n## 무엇\n{변경 내용}\n\n## 확인\n{검증 방법과 결과}\n\n## 영향\n{영향 범위·롤백 방법}"
+  },
+  "structural": {
+    "subject_max_width": 60,
+    "subject_no_period": "[.。]$",
+    "body_sections": ["왜", "무엇", "확인"],
+    "bullet_max": 7,
+    "labels": {
+      "subject_long": { "title": "제목 {w}칸 > {max}칸", "why": "제목이 길면 git log 와 리뷰 목록에서 잘린다.", "fix": "상세는 본문으로 옮긴다." },
+      "subject_period": { "title": "제목 끝의 마침표", "why": "제목은 문장이 아니라 표제다.", "fix": "끝의 마침표를 지운다." },
+      "bullets": { "title": "본문 글머리 {n}개", "why": "항목 나열은 생성문의 습관이고, 변경 이유가 묻힌다.", "fix": "중요한 {max}개만 남기거나 커밋을 나눈다." },
+      "sections": { "title": "보고 항목 누락: {missing}", "why": "형식이 정해져 있어야 사람이 쓴 로그를 훑어 읽을 수 있다.", "fix": "`buntai template --lang {lang}` 을 쓴다." }
+    },
+    "tone": {
+      "title": "종결어미 혼용",
+      "a": "(?:습니다|입니다|됩니다)[.\\n]",
+      "b": "(?:음|함|됨|임)[.\\n]|(?:했다|한다|였다)[.\\n]",
+      "why": "한 메시지 안에서 존댓말과 개조식이 섞이는 것은 생성문의 전형이다. 사람은 무의식적으로 하나로 통일한다.",
+      "fix": "커밋 로그는 개조식(명사형 종결)으로 통일한다."
+    }
+  },
+  "rules": [
+    {
+      "id": "ko-geot-gatda",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "(?:인|한|된|하는|되는)\\s*것\\s*같(?:습니다|다|아요)",
+      "title": "…인 것 같습니다",
+      "why": "이미 실행한 변경에 추측형은 모순이다. 생성문이 책임을 흐릴 때 쓰는 어미.",
+      "fix": "확인한 사실로 바꾼다. 확인 못 했으면 '미확인'이라고 쓴다."
+    },
+    {
+      "id": "ko-daeum-gwa-gatseumnida",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "body",
+      "pattern": "다음과\\s*같(?:습니다|다)|아래와\\s*같(?:습니다|이|다)",
+      "title": "다음과 같습니다",
+      "why": "목록 앞의 예고 문장. 지우면 한 줄이 줄고 뜻은 그대로다.",
+      "fix": "예고 문장을 지우고 바로 본문을 쓴다."
+    },
+    {
+      "id": "ko-not-just-but",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "단순(?:히|한).{0,20}(?:아니라|아닌)|(?:뿐만\\s*아니라).{0,30}(?:까지|도)",
+      "title": "단순히 …가 아니라 …입니다",
+      "why": "영어 not just X, but Y 구문의 번역체. 한국어 기술 문서에서는 드물다.",
+      "fix": "뒷부분만 남긴다."
+    },
+    {
+      "id": "ko-blog-tone",
+      "severity": "error",
+      "weight": 12,
+      "scope": "any",
+      "pattern": "(?:살펴보|알아보|정리해\\s*보|소개해\\s*드리)(?:겠습니다|았습니다|자|시죠)|함께\\s*보",
+      "title": "블로그 진행 어투",
+      "why": "커밋 메시지에는 독자가 없다. 생성문이 글 형태를 흉내 낼 때 나오는 표현.",
+      "fix": "삭제한다."
+    },
+    {
+      "id": "ko-yeoreobun",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "여러분|독자|이 글(?:에서|을)",
+      "title": "독자 호명",
+      "why": "커밋·PR 본문에 청중을 부르는 표현은 생성문 흔적이다.",
+      "fix": "삭제한다."
+    },
+    {
+      "id": "ko-emphasis-adverb",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "매우|굉장히|정말로?|훨씬\\s*더|대폭|획기적",
+      "title": "강조 부사",
+      "why": "수치 없는 강조는 근거가 없다.",
+      "fix": "부사를 지우고 수치를 쓴다. 예: 응답 820ms → 210ms"
+    },
+    {
+      "id": "ko-conclusion",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "body",
+      "pattern": "결론적으로|종합하(?:면|자면)|마무리하(?:며|자면)|정리하자면",
+      "title": "결론 문단",
+      "why": "세 줄짜리 본문에 요약이 붙는 것은 생성문 구조다.",
+      "fix": "삭제한다."
+    },
+    {
+      "id": "ko-tonghae",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "을\\s*통해|를\\s*통해|에\\s*대한\\s*(?:처리|작업|개선)",
+      "title": "'통해' · '대한' 남용",
+      "why": "번역체 연결어. 빼도 뜻이 같으면 군더더기다.",
+      "fix": "동사를 직접 쓴다. '캐시를 통해 개선' → '캐시를 붙여 단축'"
+    },
+    {
+      "id": "ko-vague-subject",
+      "severity": "error",
+      "weight": 14,
+      "scope": "subject",
+      "pattern": "^(?:\\w+(?:\\([^)]*\\))?:\\s*)?(?:각종\\s*|여러\\s*|일부\\s*)?(?:수정|개선|업데이트|리팩토링|정리|반영|적용|변경)(?:함|했습니다|하였습니다)?[.\\s]*$",
+      "title": "무엇을 바꿨는지 없는 제목",
+      "why": "'개선', '수정'만으로는 diff 를 열어야 안다.",
+      "fix": "대상과 결과를 쓴다. '결제 재시도 상한 3회로 변경'"
+    },
+    {
+      "id": "ko-successfully",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "성공적으로|원활하게|안정적으로\\s*(?:동작|작동)",
+      "title": "자화자찬 부사",
+      "why": "검증 결과 없이 성공을 단언하는 것은 생성문 습관이다.",
+      "fix": "검증 방법을 쓴다. '테스트 12건 통과'"
+    },
+    {
+      "id": "ko-halsu-itda",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "body",
+      "pattern": "할\\s*수\\s*있습니다.{0,80}할\\s*수\\s*있습니다",
+      "title": "'할 수 있습니다' 반복",
+      "why": "가능성 나열은 변경 보고가 아니다.",
+      "fix": "실제로 한 일을 쓴다."
+    },
+    {
+      "id": "ko-core-point",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "핵심은|포인트는|주목할\\s*점(?:은|이)",
+      "title": "'핵심은 …입니다'",
+      "why": "강조 장치로 문장을 하나 더 만드는 생성문 패턴.",
+      "fix": "핵심을 첫 줄에 바로 쓴다."
+    },
+    {
+      "id": "ko-hedge-boinda",
+      "severity": "warn",
+      "weight": 4,
+      "scope": "any",
+      "pattern": "것으로\\s*보(?:입니다|인다)|일\\s*수\\s*있습니다|예상됩니다",
+      "title": "추정 표현",
+      "why": "실행 완료된 변경에 추정은 어울리지 않는다.",
+      "fix": "측정했으면 수치를, 안 했으면 '미측정'을 쓴다."
+    },
+    {
+      "id": "ko-listy-body",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "body",
+      "pattern": "^\\s*[-*]\\s*\\*\\*[^*]+\\*\\*\\s*[:：]",
+      "flags": "m",
+      "title": "굵은 라벨 목록",
+      "why": "'- **항목**: 설명' 형태는 채팅 답변 서식이지 커밋 서식이 아니다.",
+      "fix": "라벨 없이 한 줄로 쓴다."
+    }
+  ]
+}
