@@ -124,10 +124,22 @@ TO-BE  エラー時は最大3回・10秒間隔でリトライする。3回失敗
 - 日本語以外（韓国語・中国語・ドイツ語・フランス語・スペイン語）は初期版の規則だけで、出典の整備はこれからです。
 - 英語は対象外です。英語向けは既存ツールが充実しています。
 
+## 近いツールとの違い
+
+「最初」でも「唯一」でもありません。日本語の AI 文体を扱うツールは既にあります。
+
+| ツール | 対象 | buntai との違い |
+|---|---|---|
+| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) | 散文の AI パターン | buntai は指摘に条番号を出し、CI が原文と照合する |
+| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) | JTF 表記規則 | 同 preset は JTF 2.1/2.2 版ベース。buntai は 4.0 版（2026-07-25, CC BY 4.0）を引用 |
+| [patina](https://github.com/devswha/patina) | KO/EN/ZH/JA の humanize | patina は書き換えまで行い commit-message 用の document type もある。buntai は書き換えず、指摘と条文だけ出す |
+| [humanizer-ja](https://github.com/gonta223/humanizer-ja) | 日本語 AI 文体 20 パターン | buntai は CLI・フック・誤検出率の実測値を持つ |
+
+違いは 3 点です。**根拠が条番号でたどれること**、**用途によって規則が反転すること**、**誤検出率を測って公開していること**。
+
 ## 作った理由
 
-textlint の AI ライティングプリセットは散文向けで、コミットや報告書という表面には誰も手を付けていませんでした。しかも、AI が書いた文章を直すための規則が作者の感覚で作られていると、直した結果が本当に自然なのかを誰も検証できません。
-
+AI が書いた文章を直すための規則が作者の感覚で作られていると、直した結果が本当に自然なのかを誰も検証できません。
 公的な文書規範という、すでに合意のある基準を機械可読にして、根拠を毎回提示する。それだけの道具です。
 
 規則の追加は歓迎します。条件は 2 つで、出典（文書名・条番号・引用）と、AS-IS / TO-BE の書き換え例です。

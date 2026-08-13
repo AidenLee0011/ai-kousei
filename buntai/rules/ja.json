@@ -9,22 +9,29 @@
       "title": "公用文作成の考え方（文化審議会建議）",
       "issuer": "文化審議会 / 文化庁",
       "date": "2022-01-07",
-      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/93651301_01.pdf"
+      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/93651301_01.pdf",
+      "version": "2022-01-07 建議（解説付き）",
+      "license": "文化庁公開資料"
     },
     "jtf": {
       "title": "JTF日本語標準スタイルガイド（翻訳用）",
       "issuer": "一般社団法人 日本翻訳連盟",
-      "url": "https://www.jtf.jp/pdf/jtf_style_guide.pdf"
+      "url": "https://www.jtf.jp/pdf/jtf_style_guide.pdf",
+      "version": "第4.0版 2026-07-25",
+      "license": "CC BY 4.0",
+      "note": "textlint-rule-preset-JTF-style は 2.1/2.2 版ベース。本パックは 4.0 版を引用する。"
     },
     "ja_tech": {
       "title": "textlint-rule-preset-ja-technical-writing",
       "issuer": "textlint-ja",
-      "url": "https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing"
+      "url": "https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing",
+      "license": "MIT"
     },
     "ai_writing": {
       "title": "textlint-rule-preset-ai-writing",
       "issuer": "textlint-ja",
-      "url": "https://github.com/textlint-ja/textlint-rule-preset-ai-writing"
+      "url": "https://github.com/textlint-ja/textlint-rule-preset-ai-writing",
+      "license": "MIT"
     },
     "jpcert_reports": {
       "title": "公開報告書コーパス（JPCERT/CC 活動報告 8 件・8,181 文）",
