@@ -35,6 +35,15 @@ SOURCES = [
     ("textlint_ja_technical", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-preset-ja-technical-writing/master/README.md", "text"),
     ("textlint_ai_writing", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-preset-ai-writing/main/README.md", "text"),
     ("textlint_ja_spacing", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-preset-ja-spacing/master/README.md", "text"),
+    # Individual textlint rules that a rule in ja.json cites directly.
+    ("rule_weak_phrase", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-ja-no-weak-phrase/master/README.md", "text"),
+    ("rule_redundant", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-ja-no-redundant-expression/master/README.md", "text"),
+    ("rule_max_ten", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-max-ten/master/README.md", "text"),
+    ("rule_kanji_run", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-max-kanji-continuous-len/master/README.md", "text"),
+    ("rule_doubled_joshi", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-no-doubled-joshi/master/README.md", "text"),
+    ("rule_double_neg", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-no-double-negative-ja/master/README.md", "text"),
+    ("rule_ga", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-no-doubled-conjunctive-particle-ga/master/README.md", "text"),
+    ("rule_dearu_desumasu", "https://raw.githubusercontent.com/textlint-ja/textlint-rule-no-mix-dearu-desumasu/master/README.md", "text"),
     # J-STAGE search API: research on translationese in Japanese.
     ("jstage_honyakucho", "https://api.jstage.jst.go.jp/searchapi/do?service=3&text=%E7%BF%BB%E8%A8%B3%E8%AA%BF&count=50", "text"),
     ("jstage_honyaku_buntai", "https://api.jstage.jst.go.jp/searchapi/do?service=3&text=%E7%BF%BB%E8%A8%B3%E6%96%87%E4%BD%93&count=50", "text"),

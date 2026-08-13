@@ -35,7 +35,7 @@ MEASURED = {"jpcert_reports", "human_commits"}  # measured corpora, not document
 
 def norm(s):
     """Whitespace and markdown escapes are rendering artifacts, not content."""
-    s = s.replace("\[", "[").replace("\]", "]").replace("\*", "*")
+    s = s.replace(chr(92) + "[", "[").replace(chr(92) + "]", "]").replace(chr(92) + "*", "*")
     return re.sub(r"\s+", "", s)
 
 
