@@ -1,138 +1,165 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>nativecommit — commit messages that read like a person wrote them</title>
+<title>nativecommit — 公的文書の基準に沿った日本語コミット・報告リンター</title>
 <style>
   :root{
     --bg:#0f1115; --panel:#161a21; --line:#242a34; --fg:#e6e9ef; --dim:#98a2b3;
     --err:#e5534b; --warn:#d29922; --ok:#3fb950; --accent:#4c8dff;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR","Noto Sans JP",sans-serif}
+  body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans","Noto Sans JP","Noto Sans KR",sans-serif}
   header{border-bottom:1px solid var(--line);padding:22px 28px}
   h1{margin:0;font-size:20px;letter-spacing:-.2px}
-  h1 span{color:var(--dim);font-weight:400}
+  h1 span{color:var(--dim);font-weight:400;font-size:15px}
   .sub{color:var(--dim);margin-top:6px;font-size:13px}
-  main{max-width:1180px;margin:0 auto;padding:22px 28px 60px}
+  main{max-width:1240px;margin:0 auto;padding:20px 28px 60px}
   .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-  @media(max-width:940px){.grid{grid-template-columns:1fr}}
+  @media(max-width:980px){.grid{grid-template-columns:1fr}}
   .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
-  .panel h2{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--dim);font-weight:600}
-  textarea{width:100%;height:230px;background:#0b0d12;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:12px;font:13px/1.7 "SFMono-Regular",Consolas,"Noto Sans Mono CJK KR",monospace;resize:vertical}
+  .panel h2{margin:0 0 12px;font-size:12px;letter-spacing:.08em;color:var(--dim);font-weight:700}
+  textarea{width:100%;height:210px;background:#0b0d12;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:12px;font:13px/1.8 Consolas,"Noto Sans Mono CJK JP",monospace;resize:vertical}
   .row{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center}
   button,select{background:#1d232c;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-size:12.5px;cursor:pointer}
   button:hover{border-color:var(--accent)}
-  button.on{border-color:var(--accent);color:#cfe0ff}
-  .score{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .score{display:flex;align-items:baseline;gap:12px}
   .score b{font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
-  .bar{height:6px;background:#0b0d12;border-radius:3px;overflow:hidden;margin:10px 0 16px}
+  .bar{height:6px;background:#0b0d12;border-radius:3px;overflow:hidden;margin:10px 0 14px}
   .bar i{display:block;height:100%;transition:width .18s}
-  .verdict{font-size:13px}
-  ul.f{list-style:none;margin:0;padding:0}
-  ul.f li{border-top:1px solid var(--line);padding:11px 0}
+  ol.f{list-style:none;margin:0;padding:0;counter-reset:f}
+  ol.f li{border-top:1px solid var(--line);padding:11px 0}
   .tag{display:inline-block;font-size:10.5px;letter-spacing:.06em;padding:2px 6px;border-radius:4px;margin-right:8px;vertical-align:2px}
   .tag.error{background:rgba(229,83,75,.15);color:var(--err);border:1px solid rgba(229,83,75,.35)}
   .tag.warn{background:rgba(210,153,34,.13);color:var(--warn);border:1px solid rgba(210,153,34,.32)}
   .ftitle{font-weight:600}
+  .ffix{font-size:13px;margin-top:3px;color:#bcd0ff}
+  .fsrc{font-size:12px;margin-top:4px;color:var(--dim)}
+  .fsrc a{color:var(--dim)}
   .fid{color:var(--dim);font-size:11.5px;margin-left:6px}
-  .fwhy{color:var(--dim);font-size:12.5px;margin-top:3px}
-  .ffix{font-size:12.5px;margin-top:2px;color:#bcd0ff}
-  .snip{font-family:Consolas,monospace;background:#0b0d12;border:1px solid var(--line);border-radius:4px;padding:0 5px;font-size:12px}
-  pre.prev{background:#0b0d12;border:1px solid var(--line);border-radius:8px;padding:12px;white-space:pre-wrap;word-break:break-word;font:13px/1.7 Consolas,"Noto Sans Mono CJK KR",monospace;margin:0}
+  details{margin-top:6px}
+  summary{cursor:pointer;font-size:12.5px;color:var(--dim)}
+  .ba{display:grid;grid-template-columns:64px 1fr;gap:6px 10px;margin-top:8px;font:12.5px/1.7 Consolas,"Noto Sans Mono CJK JP",monospace}
+  .ba .k{color:var(--dim);font-family:inherit}
+  .ba .v{background:#0b0d12;border:1px solid var(--line);border-radius:5px;padding:6px 8px;white-space:pre-wrap}
+  .ba .v.bad{border-color:rgba(229,83,75,.3)}
+  .ba .v.good{border-color:rgba(63,185,80,.3)}
+  pre.prev{background:#0b0d12;border:1px solid var(--line);border-radius:8px;padding:12px;white-space:pre-wrap;word-break:break-word;font:13px/1.8 Consolas,"Noto Sans Mono CJK JP",monospace;margin:0}
   pre.prev mark{background:rgba(229,83,75,.28);color:#ffd8d5;border-radius:3px;padding:0 2px}
   pre.prev mark.w{background:rgba(210,153,34,.25);color:#ffe6b0}
   table{border-collapse:collapse;width:100%;font-size:13px}
   th,td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left}
-  th{color:var(--dim);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em}
+  th{color:var(--dim);font-weight:700;font-size:11.5px;letter-spacing:.06em}
   td.num{text-align:right;font-variant-numeric:tabular-nums}
-  code.cmd{display:block;background:#0b0d12;border:1px solid var(--line);border-radius:6px;padding:9px 11px;font:12.5px/1.8 Consolas,monospace;margin:6px 0;color:#d7e2f5;overflow-x:auto}
+  code.cmd{display:block;background:#0b0d12;border:1px solid var(--line);border-radius:6px;padding:9px 11px;font:12.5px/1.9 Consolas,monospace;margin:6px 0;color:#d7e2f5;overflow-x:auto}
   .note{color:var(--dim);font-size:12.5px}
   a{color:var(--accent)}
   .mt{margin-top:18px}
+  .hi{color:var(--err);font-weight:700}
 </style>
 </head>
 <body>
 <header>
-  <h1>nativecommit <span>— commit messages that read like a person wrote them, in your language</span></h1>
-  <div class="sub">Deterministic linter. No model call, no network. Japanese, Korean, Chinese, German, French, Spanish. English is out of scope by design.</div>
+  <h1>nativecommit <span>— 公的文書の基準に沿った日本語コミット・PR・報告リンター</span></h1>
+  <div class="sub">規則はすべて出典付き（文化審議会建議「公用文作成の考え方」/ JTF日本語標準スタイルガイド / textlint-ja / 公開報告書 8,181 文の実測）。モデル呼び出しなし・ネットワークなし・依存なし。</div>
 </header>
 
 <main>
   <div class="grid">
     <section class="panel">
-      <h2>commit message</h2>
+      <h2>入力</h2>
       <div class="row">
-        <select id="lang"><option value="">auto detect</option></select>
-        <button data-sample="ai">generated sample</button>
-        <button data-sample="human">human report sample</button>
-        <button id="tpl">insert template</button>
+        <select id="lang"></select>
+        <button data-sample="ai">LLM が書いた例</button>
+        <button data-sample="human">人が書いた例</button>
+        <button id="tpl">テンプレート挿入</button>
       </div>
       <textarea id="src" spellcheck="false"></textarea>
       <div class="row mt"><span class="note" id="detect"></span></div>
-      <h2 class="mt">what the rules matched</h2>
+      <h2 class="mt">指摘箇所</h2>
       <pre class="prev" id="prev"></pre>
     </section>
 
     <section class="panel">
-      <h2>verdict</h2>
-      <div class="score"><b id="score">100</b><span class="note">/ 100</span><span class="verdict" id="verdict"></span></div>
+      <h2>判定</h2>
+      <div class="score"><b id="score">100</b><span class="note">/ 100</span><span id="verdict" style="font-size:13px"></span></div>
       <div class="bar"><i id="bar"></i></div>
-      <ul class="f" id="find"></ul>
+      <div class="note" id="next" style="margin-bottom:10px"></div>
+      <ol class="f" id="find"></ol>
+      <div class="row mt"><button id="more" style="display:none">残りを表示</button></div>
     </section>
   </div>
 
   <div class="grid mt">
     <section class="panel">
-      <h2>rule packs</h2>
-      <table id="packs"><thead><tr><th>code</th><th>language</th><th>maturity</th><th class="num">rules</th></tr></thead><tbody></tbody></table>
-      <p class="note mt">Rules are plain JSON. One file per language, loaded by both the CLI and this page, so the demo and the hook can never drift apart.</p>
+      <h2>この文章の定量指標</h2>
+      <table id="metrics"><thead><tr><th>指標</th><th class="num">この文章</th><th class="num">人手コミット</th><th class="num">LLM 生成</th></tr></thead><tbody></tbody></table>
+      <p class="note mt">人手コミット = 2022-11 以前の GitHub コミット 96 件。LLM 生成 = 同じ変更内容を LLM に書かせた 30 件。計測コードは bench/ に同梱。</p>
     </section>
 
     <section class="panel">
-      <h2>use it on your repository</h2>
+      <h2>実測</h2>
+      <table><thead><tr><th>コーパス</th><th class="num">n</th><th class="num">指摘あり</th><th class="num">コミット拒否</th></tr></thead>
+      <tbody>
+        <tr><td>人手・手書き（2022-11 以前）</td><td class="num">96</td><td class="num">63.5%</td><td class="num">2.1%</td></tr>
+        <tr><td>人手・squash マージ</td><td class="num">50</td><td class="num">100%</td><td class="num">6.0%</td></tr>
+        <tr><td>LLM 生成</td><td class="num">30</td><td class="num">100%</td><td class="num"><span class="hi">86.7%</span></td></tr>
+      </tbody></table>
+      <h2 class="mt">導入</h2>
       <code class="cmd">pip install nativecommit
 natc hook install --lang ja
-git commit          # a generated-looking message is rejected before it lands</code>
-      <p class="note">The hook exits non-zero on any error level finding. Warnings are printed and let through. Merge, squash and fixup messages are skipped.</p>
-      <code class="cmd">natc lint .git/COMMIT_EDITMSG
-natc lint -m "fix: 各種修正" --lang ja --json
-natc template --lang ko --pr</code>
-      <p class="note">Every finding carries the reason and the rewrite in the language being linted, not in English.</p>
+git commit          # 生成文らしいコミットはここで止まる</code>
+      <p class="note">出力は既定で 5 件まで。1 行目が次にやること。全件は <code>--all</code>。</p>
     </section>
+  </div>
+
+  <div class="panel mt">
+    <h2>規則と出典</h2>
+    <table id="rules"><thead><tr><th>規則</th><th>内容</th><th>出典</th><th>AS-IS → TO-BE</th></tr></thead><tbody></tbody></table>
   </div>
 </main>
 
 <script>
 const LANGS = ["_common","ja","ko","zh","de","fr","es"];
 const PACKS = {};
+const CORPUS = {
+  polite_rate:  {human:0.010, llm:0.717, label:"敬体率"},
+  passive_rate: {human:0.000, llm:0.148, label:"受身率"},
+  demonstrative_rate:{human:0.021, llm:0.324, label:"指示語率"},
+  suffix_abstract_rate:{human:0.010, llm:0.191, label:"抽象名詞化率"},
+  mean_len:     {human:24.7,  llm:39.7,  label:"一文平均字数"}
+};
 const EN_LABELS = {
-  subject_long:{title:"subject {w} > {max} columns",why:"Long subjects get truncated in git log and in review lists.",fix:"Move the detail into the body."},
-  subject_period:{title:"subject ends with a period",why:"A commit subject is a headline, not a sentence.",fix:"Drop the trailing period."},
-  bullets:{title:"{n} bullets in the body",why:"A laundry list of bullets is a generation habit. It also hides the reason for the change.",fix:"Keep the {max} that matter, or split the commit."},
-  sections:{title:"report sections missing: {missing}",why:"The standard report shape is what makes a human-written log scannable.",fix:"Run `natc template --lang {lang}`."}
+  subject_long:{title:"subject {w} > {max} columns",why:"",fix:"Move the detail into the body."},
+  subject_period:{title:"subject ends with a period",why:"",fix:"Drop the trailing period."},
+  bullets:{title:"{n} bullets in the body",why:"",fix:"Keep the {max} that matter."},
+  sections:{title:"report sections missing: {missing}",why:"",fix:"Use natc template --lang {lang}."},
+  sentence_long:{title:"sentence of {n} characters > {max}",why:"",fix:"Split the sentence."},
+  max_ten:{title:"{n} commas in one sentence > {max}",why:"",fix:"Split the sentence or use a list."},
+  kanji_run:{title:"{n} ideographs in a row > {max}",why:"",fix:"Break the compound."},
+  heading_order:{title:"mixed enumeration markers",why:"",fix:"Use one order."}
 };
 const SAMPLES = {
-  ja:{ai:"feat: ✨ 各種修正\n\n今回の変更は、まさに重要な改善ではないでしょうか。\n私たちは以下の通り対応しました。\n\n- リトライ処理の見直し\n- ログの整理\n\nいかがでしょうか。",
-      human:"fix: 決済リトライの上限を3回に変更\n\nなぜ: リトライが無限に繰り返され、キューが滞留した\nなにを: retry_max を3で固定し、超過分は dead-letter へ送る\n確認: 負荷試験1時間、キュー滞留 0"},
-  ko:{ai:"feat: 🚀 개선\n\n다음과 같습니다. 이번 변경으로 성능이 매우 개선된 것 같습니다.\n함께 살펴보겠습니다.\n\n- **캐시**: 도입함\n- **로그**: 정리했습니다\n\nCo-Authored-By: Claude <noreply@anthropic.com>",
-      human:"fix: 결제 재시도 상한 3회로 변경\n\n왜: 재시도가 무한 반복되어 큐가 밀림\n무엇: retry_max 를 3 으로 고정, 초과 시 dead-letter 로 이동\n확인: 부하 테스트 1시간, 큐 적체 0"},
-  zh:{ai:"feat: 优化\n\n首先，本次改动显著提升了性能。其次，代码可读性也得到了改善。\n值得注意的是，这不仅仅是重构，而且是架构升级。\n希望本次变更对您有所帮助。",
-      human:"fix: 支付重试上限改为 3 次\n\n为什么: 重试无限循环，队列积压\n改动: retry_max 固定为 3，超出转入 dead-letter\n验证: 压测 1 小时，队列积压 0"},
-  de:{ai:"feat: Diverse Anpassungen\n\nIn der heutigen digitalen Welt ist es wichtig zu beachten, dass die Performance erheblich verbessert wurde.\nDarüber hinaus wurde nicht nur der Code aufgeräumt, sondern auch die Logs.\nZusammenfassend lässt sich sagen, dass die Änderung sinnvoll ist.",
-      human:"fix: Zahlungswiederholungen auf drei begrenzt\n\nWarum: Wiederholungen liefen endlos, die Warteschlange lief voll\nWas: retry_max auf 3 gesetzt, Rest geht in die Dead-Letter-Queue\nGeprüft: Lasttest eine Stunde, kein Rückstau"},
-  fr:{ai:"feat: Corrections diverses\n\nDans le monde d'aujourd'hui, il est important de noter que les performances ont été considérablement améliorées.\nDe plus, ce n'est non seulement un nettoyage mais aussi une refonte.\nEn conclusion, n'hésitez pas à relire.",
-      human:"fix: limite des tentatives de paiement fixée à trois\n\nPourquoi: les tentatives bouclaient sans fin et la file saturait\nQuoi: retry_max à 3, le surplus part en dead-letter\nVérifié: test de charge d'une heure, file à zéro"},
-  es:{ai:"feat: Varias correcciones\n\nEn el mundo actual, es importante destacar que el rendimiento mejoró considerablemente.\nAdemás, no solo se limpió el código sino también los registros.\nEn conclusión, espero que esto ayude.",
-      human:"fix: limite de reintentos de pago fijado en tres\n\nPor qué: los reintentos se repetian sin fin y la cola se saturaba\nQué: retry_max fijado en 3, el resto pasa a dead-letter\nVerificado: prueba de carga de una hora, cola en cero"}
+  ja:{ai:"feat: 商品詳細APIにRedisキャッシュを追加\n\n商品詳細APIの応答速度向上とデータベース負荷軽減のため、Redisキャッシュを導入しました。\nキャッシュの有効期限（TTL）は300秒に設定されています。\n- **重要**: 監視対象に追加しました",
+      human:"fix: 商品詳細APIにRedisキャッシュを追加\n\nなぜ: 商品詳細APIの応答が遅く、DB負荷も高い\nなにを: Redis を前段に追加。TTL 300秒\n確認: p95 820ms → 210ms"},
+  ko:{ai:"feat: 개선\n\n다음과 같습니다. 성능이 매우 개선된 것 같습니다.\n함께 살펴보겠습니다.",
+      human:"fix: 결제 재시도 상한 3회로 변경\n\n왜: 재시도가 무한 반복되어 큐가 밀림\n무엇: retry_max 를 3 으로 고정\n확인: 부하 테스트 1시간, 큐 적체 0"},
+  zh:{ai:"feat: 优化\n\n首先，本次改动显著提升了性能。其次，代码可读性也得到了改善。\n希望本次变更对您有所帮助。",
+      human:"fix: 支付重试上限改为 3 次\n\n为什么: 重试无限循环，队列积压\n改动: retry_max 固定为 3\n验证: 压测 1 小时，队列积压 0"},
+  de:{ai:"feat: Diverse Anpassungen\n\nIn der heutigen digitalen Welt ist es wichtig zu beachten, dass die Performance erheblich verbessert wurde.",
+      human:"fix: Zahlungswiederholungen auf drei begrenzt\n\nWarum: Wiederholungen liefen endlos\nWas: retry_max auf 3 gesetzt\nGeprüft: Lasttest eine Stunde, kein Rückstau"},
+  fr:{ai:"feat: Corrections diverses\n\nDans le monde d'aujourd'hui, il est important de noter que les performances ont été considérablement améliorées.",
+      human:"fix: limite des tentatives de paiement fixée à trois\n\nPourquoi: les tentatives bouclaient sans fin\nQuoi: retry_max à 3\nVérifié: test de charge d'une heure, file à zéro"},
+  es:{ai:"feat: Varias correcciones\n\nEn el mundo actual, es importante destacar que el rendimiento mejoró considerablemente.",
+      human:"fix: limite de reintentos de pago fijado en tres\n\nPor qué: los reintentos se repetian sin fin\nQué: retry_max fijado en 3\nVerificado: prueba de carga de una hora, cola en cero"}
 };
+let SHOW_ALL = false;
 
 const $ = s => document.querySelector(s);
-const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
-
-function rx(p, f){ return new RegExp(p, f || ""); }
-function width(s){ let n=0; for (const c of s) n += /[ᄀ-ᅟ⺀-꓏가-힣豈-﫿︰-﹯＀-｠￠-￦]/.test(c) ? 2 : 1; return n; }
+const esc = s => String(s).replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const rx = (p,f) => new RegExp(p, f || "");
+function width(s){ let n=0; for (const c of s) n += /[ᄀ-ᅟ⺀-꓏가-힣豈-﫿︰-﹏＀-｠￠-￦]/.test(c) ? 2 : 1; return n; }
 
 function splitMessage(text){
   const lines = text.replace(/\r\n/g,"\n").split("\n").filter(l => !l.startsWith("#"));
@@ -140,7 +167,6 @@ function splitMessage(text){
   if (!lines.length) return ["",""];
   return [lines[0].trim(), lines.slice(1).join("\n").replace(/^\n+|\n+$/g,"")];
 }
-
 function detectLang(text){
   const sc = {};
   for (const lang of LANGS){
@@ -155,14 +181,12 @@ function detectLang(text){
   if (best && sc.ja && /[぀-ゟ゠-ヿ]/.test(text)) best = "ja";
   return best && sc[best] >= 2 ? best : null;
 }
-
 function label(st, key, kw){
   const base = Object.assign({}, EN_LABELS[key], (st.labels || {})[key] || {});
   const out = {};
   for (const k in base) out[k] = String(base[k]).replace(/\{(\w+)\}/g, (m,p) => kw[p] !== undefined ? kw[p] : m);
   return out;
 }
-
 function structural(pack, subject, body){
   const out = [], st = pack.structural || {}, lang = pack.lang;
   if (st.subject_max_width && subject && width(subject) > st.subject_max_width)
@@ -175,14 +199,43 @@ function structural(pack, subject, body){
   }
   if ((st.body_sections||[]).length && body.split("\n").filter(l=>l.trim()).length >= 2){
     const miss = st.body_sections.filter(s => body.toLowerCase().indexOf(s.toLowerCase()) < 0);
-    if (miss.length) out.push(Object.assign({id:lang+"-missing-sections",severity:"warn",weight:5,match:""}, label(st,"sections",{missing:miss.join(", "),lang:lang})));
+    if (miss.length) out.push(Object.assign({id:lang+"-missing-sections",severity:"warn",weight:5,match:""}, label(st,"sections",{missing:miss.join("、"),lang:lang})));
+  }
+  const sents = body.split(/[。\n]/).filter(s => s.trim());
+  if (st.sentence_max_chars){
+    const long = sents.find(s => s.length > st.sentence_max_chars);
+    if (long) out.push(Object.assign({id:lang+"-sentence-too-long",severity:"warn",weight:7,match:long.slice(0,40)}, label(st,"sentence_long",{n:long.length,max:st.sentence_max_chars})));
+  }
+  if (st.max_ten){
+    const many = sents.find(s => (s.match(/、/g)||[]).length > st.max_ten);
+    if (many) out.push(Object.assign({id:lang+"-max-ten",severity:"warn",weight:6,match:many.slice(0,40)}, label(st,"max_ten",{n:(many.match(/、/g)||[]).length,max:st.max_ten})));
+  }
+  if (st.kanji_run_max){
+    const m = body.match(new RegExp("[\\u4E00-\\u9FFF]{" + (st.kanji_run_max+1) + ",}"));
+    if (m) out.push(Object.assign({id:lang+"-kanji-run",severity:"warn",weight:5,match:m[0]}, label(st,"kanji_run",{n:m[0].length,max:st.kanji_run_max})));
+  }
+  if (st.heading_order){
+    const kinds = new Set();
+    body.split("\n").forEach(l => {
+      const s = l.trim();
+      if (/^[-*]\s/.test(s)) kinds.add("dash");
+      else if (/^[・]\s?/.test(s)) kinds.add("nakaten");
+      else if (/^\d+[.)．）]\s?/.test(s)) kinds.add("digit");
+      else if (/^[①-⑳]/.test(s)) kinds.add("circled");
+      else if (/^[ア-ン][.、)）]\s?/.test(s)) kinds.add("kana");
+    });
+    if (kinds.size > 1) out.push(Object.assign({id:lang+"-heading-order",severity:"warn",weight:6,match:[...kinds].join("/")}, label(st,"heading_order",{})));
   }
   const tone = st.tone;
   if (tone && body && rx(tone.a,"g").test(body+"\n") && rx(tone.b,"g").test(body+"\n"))
-    out.push({id:lang+"-tone-mix",severity:"warn",weight:8,title:tone.title,why:tone.why,fix:tone.fix,match:""});
+    out.push({id:lang+"-tone-mix",severity:"warn",weight:8,title:tone.title,why:tone.why,fix:tone.fix,source:tone.source||"",match:""});
   return out;
 }
-
+function cite(pack, src){
+  if (!src) return "";
+  const doc = (pack.sources || {})[src.doc] || {};
+  return ((doc.title || src.doc || "") + " " + (src.loc || "")).trim();
+}
 function lint(text, forced){
   const [subject, body] = splitMessage(text);
   const full = (subject + "\n" + body).trim();
@@ -198,7 +251,8 @@ function lint(text, forced){
       if (!m) continue;
       const loc = (r.i18n || {})[lang] || {};
       findings.push({id:r.id, severity:r.severity||"warn", weight:r.weight||5,
-        title:loc.title||r.title, why:loc.why||r.why, fix:loc.fix||r.fix, match:m[0].slice(0,60)});
+        title:loc.title||r.title, why:loc.why||r.why, fix:loc.fix||r.fix,
+        source:cite(pack, r.source), example:r.example, match:m[0].slice(0,60)});
     }
   }
   if (lang && PACKS[lang]) findings.push.apply(findings, structural(PACKS[lang], subject, body));
@@ -208,30 +262,52 @@ function lint(text, forced){
           score: Math.max(0, 100 - findings.reduce((s,f)=>s+f.weight,0)), passed: errors === 0};
 }
 
+// Deterministic signals, same definitions as natc/metrics.py
+function metrics(text){
+  const body = text.split("\n").slice(1).join("\n").trim() || text;
+  const s = body.split(/[。．\n]+/).map(x=>x.trim()).filter(Boolean);
+  const n = s.length || 1;
+  const rate = re => s.filter(x => re.test(x)).length / n;
+  return {
+    polite_rate: rate(/(?:です|ます|ました|ません)$/),
+    passive_rate: rate(/され(?:る|た|て|ます|ました|ている)/),
+    demonstrative_rate: s.reduce((a,x)=>a+(x.match(/これ|それ|この|その|そのため|これにより/g)||[]).length,0)/n,
+    suffix_abstract_rate: s.reduce((a,x)=>a+(x.match(/[一-鿿]的|[一-鿿]性|[一-鿿]化/g)||[]).length,0)/n,
+    mean_len: s.reduce((a,x)=>a+x.length,0)/n
+  };
+}
+
 function render(){
   const text = $("#src").value;
   const forced = $("#lang").value || null;
   const r = lint(text, forced);
   const pack = r.lang ? PACKS[r.lang] : null;
-  $("#detect").textContent = r.lang
-    ? ("detected: " + pack.name + " (" + r.lang + ", " + pack.maturity + " pack)")
-    : "language not detected. English is out of scope on purpose. Pick a language to force a pack.";
+  $("#detect").textContent = r.lang ? ("判定: " + pack.name + "（" + r.lang + " / " + pack.maturity + "）")
+    : "言語を判定できません。英語は対象外です。";
   $("#score").textContent = r.score;
   const col = r.errors ? "var(--err)" : r.warns ? "var(--warn)" : "var(--ok)";
   $("#score").style.color = col;
   $("#bar").style.width = r.score + "%";
   $("#bar").style.background = col;
-  $("#verdict").innerHTML = r.lang
-    ? (r.passed ? "<span style='color:var(--ok)'>hook would let this through</span>" : "<span style='color:var(--err)'>hook would reject this commit</span>")
-      + " &nbsp;<span class='note'>" + r.errors + " errors, " + r.warns + " warnings</span>"
-    : "";
-  $("#find").innerHTML = r.findings.length ? r.findings.map(f =>
+  $("#verdict").innerHTML = r.lang ? (r.passed
+      ? "<span style='color:var(--ok)'>フックを通過</span>" : "<span style='color:var(--err)'>コミットは止まる</span>")
+      + " &nbsp;<span class='note'>error " + r.errors + " / warning " + r.warns + "</span>" : "";
+  $("#next").innerHTML = r.findings.length ? ("<b>次にやること</b>: " + esc(r.findings[0].fix || r.findings[0].title)) : "";
+
+  const cap = SHOW_ALL ? r.findings.length : 5;
+  $("#find").innerHTML = r.findings.length ? r.findings.slice(0,cap).map((f,i) =>
       "<li><span class='tag " + f.severity + "'>" + (f.severity === "error" ? "ERROR" : "WARN") + "</span>"
       + "<span class='ftitle'>" + esc(f.title) + "</span><span class='fid'>" + f.id + "</span>"
-      + (f.match ? "<div class='fwhy'>found <span class='snip'>" + esc(f.match) + "</span></div>" : "")
-      + (f.why ? "<div class='fwhy'>" + esc(f.why) + "</div>" : "")
-      + (f.fix ? "<div class='ffix'>" + esc(f.fix) + "</div>" : "") + "</li>").join("")
-    : "<li class='note' style='border:0'>no findings</li>";
+      + (f.fix ? "<div class='ffix'>→ " + esc(f.fix) + "</div>" : "")
+      + (f.match ? "<div class='fsrc'>該当: <code>" + esc(f.match) + "</code></div>" : "")
+      + (f.source ? "<div class='fsrc'>出典: " + esc(f.source) + "</div>" : "")
+      + (f.example ? "<details><summary>AS-IS → TO-BE</summary><div class='ba'>"
+          + "<div class='k'>AS-IS</div><div class='v bad'>" + esc(f.example.before) + "</div>"
+          + "<div class='k'>TO-BE</div><div class='v good'>" + esc(f.example.after) + "</div></div></details>" : "")
+      + "</li>").join("")
+    : "<li class='note' style='border:0'>指摘なし</li>";
+  $("#more").style.display = (!SHOW_ALL && r.findings.length > cap) ? "" : "none";
+  $("#more").textContent = "残り " + (r.findings.length - cap) + " 件を表示";
 
   let html = esc(text);
   const seen = {};
@@ -241,13 +317,32 @@ function render(){
     const e = esc(f.match).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     html = html.replace(new RegExp(e, "g"), m => "<mark class='" + (f.severity === "error" ? "" : "w") + "'>" + m + "</mark>");
   }
-  $("#prev").innerHTML = html || "<span class='note'>paste a commit message above</span>";
+  $("#prev").innerHTML = html || "<span class='note'>コミットメッセージを貼り付けてください</span>";
+
+  const m = metrics(text);
+  $("#metrics tbody").innerHTML = Object.keys(CORPUS).map(k => {
+    const v = m[k], c = CORPUS[k];
+    const fmt = x => k === "mean_len" ? x.toFixed(1) : x.toFixed(3);
+    const near = Math.abs(v - c.human) <= Math.abs(v - c.llm);
+    return "<tr><td>" + c.label + "</td><td class='num' style='color:" + (near ? "var(--ok)" : "var(--err)") + "'>"
+      + fmt(v) + "</td><td class='num'>" + fmt(c.human) + "</td><td class='num'>" + fmt(c.llm) + "</td></tr>";
+  }).join("");
 }
 
-// The page is reachable as /nativecommit, /nativecommit/ and /nativecommit/index.html.
-// A bare relative fetch breaks on the first of those, so the base is computed.
-const RULES = location.pathname.replace(/\/index\.html$/, "").replace(/\/$/, "") + "/rules/";
+function renderRules(){
+  const p = PACKS.ja, srcs = p.sources || {};
+  $("#rules tbody").innerHTML = p.rules.map(r => {
+    const s = r.source || {}, doc = srcs[s.doc] || {};
+    const ex = r.example || {};
+    return "<tr><td><code>" + r.id + "</code></td><td>" + esc(r.title) + "</td>"
+      + "<td>" + (doc.url ? "<a href='" + doc.url + "' target='_blank' rel='noopener'>" + esc(doc.title || "") + "</a>" : esc(doc.title || ""))
+      + " <span class='note'>" + esc(s.loc || "") + "</span></td>"
+      + "<td><div class='ba'><div class='k'>AS-IS</div><div class='v bad'>" + esc(ex.before || "") + "</div>"
+      + "<div class='k'>TO-BE</div><div class='v good'>" + esc(ex.after || "") + "</div></div></td></tr>";
+  }).join("");
+}
 
+const RULES = location.pathname.replace(/\/index\.html$/, "").replace(/\/$/, "") + "/rules/";
 async function boot(){
   try {
     await Promise.all(LANGS.map(async l => {
@@ -256,30 +351,26 @@ async function boot(){
       PACKS[l] = await res.json();
     }));
   } catch (e) {
-    $("#detect").textContent = "rule packs failed to load: " + e.message;
+    $("#detect").textContent = "規則ファイルの読み込みに失敗しました: " + e.message;
     return;
   }
   const sel = $("#lang");
-  const tb = $("#packs tbody");
   for (const l of LANGS){
     if (l === "_common") continue;
-    sel.insertAdjacentHTML("beforeend", "<option value='" + l + "'>" + PACKS[l].name + " (" + l + ")</option>");
-    tb.insertAdjacentHTML("beforeend", "<tr><td>" + l + "</td><td>" + PACKS[l].name + "</td><td>" + PACKS[l].maturity + "</td><td class='num'>" + PACKS[l].rules.length + "</td></tr>");
+    sel.insertAdjacentHTML("beforeend", "<option value='" + l + "'>" + PACKS[l].name + "（" + l + "）</option>");
   }
-  tb.insertAdjacentHTML("beforeend", "<tr><td>_common</td><td>every language</td><td>curated</td><td class='num'>" + PACKS._common.rules.length + "</td></tr>");
-  tb.insertAdjacentHTML("beforeend", "<tr><td>en</td><td>English</td><td>out of scope</td><td class='num'>0</td></tr>");
-
   document.querySelectorAll("[data-sample]").forEach(b => b.onclick = () => {
     const lang = $("#lang").value || "ja";
-    $("#lang").value = lang;
     $("#src").value = SAMPLES[lang][b.dataset.sample];
-    render();
+    SHOW_ALL = false; render();
   });
-  $("#tpl").onclick = () => { $("#src").value = PACKS[$("#lang").value || "ko"].template.commit; render(); };
-  $("#src").addEventListener("input", render);
-  $("#lang").addEventListener("change", render);
+  $("#tpl").onclick = () => { $("#src").value = PACKS[$("#lang").value || "ja"].template.commit; render(); };
+  $("#more").onclick = () => { SHOW_ALL = true; render(); };
+  $("#src").addEventListener("input", () => { SHOW_ALL = false; render(); });
+  $("#lang").addEventListener("change", () => { SHOW_ALL = false; render(); });
   $("#lang").value = "ja";
   $("#src").value = SAMPLES.ja.ai;
+  renderRules();
   render();
 }
 boot();

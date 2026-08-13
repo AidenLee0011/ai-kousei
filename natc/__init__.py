@@ -95,6 +95,16 @@ def detect_lang(text: str, packs: dict) -> str | None:
     return best if scores[best] >= 2 else None
 
 
+def _cite(pack: dict, src) -> str:
+    """Render a rule's citation as 'document, section'. Empty when unsourced."""
+    if not src:
+        return ""
+    doc = (pack.get("sources") or {}).get(src.get("doc"), {})
+    title = doc.get("title", src.get("doc", ""))
+    loc = src.get("loc", "")
+    return ("%s %s" % (title, loc)).strip()
+
+
 def _scope_text(scope: str, subject: str, body: str) -> str:
     if scope == "subject":
         return subject
@@ -104,6 +114,26 @@ def _scope_text(scope: str, subject: str, body: str) -> str:
 
 
 EN_LABELS = {
+    "sentence_long": {
+        "title": "sentence of {n} characters > {max}",
+        "why": "Long sentences hide the subject-predicate relation.",
+        "fix": "Split the sentence.",
+    },
+    "max_ten": {
+        "title": "{n} commas in one sentence > {max}",
+        "why": "Too many commas means the sentence carries more than one point.",
+        "fix": "Split the sentence or use a list.",
+    },
+    "kanji_run": {
+        "title": "{n} ideographs in a row > {max}",
+        "why": "Long ideograph runs are hard to parse.",
+        "fix": "Break the compound or rephrase.",
+    },
+    "heading_order": {
+        "title": "mixed enumeration markers",
+        "why": "One document should use one hierarchy of markers.",
+        "fix": "Use a single official order.",
+    },
     "subject_long": {
         "title": "subject {w} > {max} columns",
         "why": "Long subjects get truncated in git log and in review lists.",
@@ -193,6 +223,51 @@ def _structural(pack: dict, subject: str, body: str) -> list:
                     **_label(st, "sections", missing=", ".join(missing), lang=lang)
                 )
             )
+    # Per sentence checks. Sentences are split on the Japanese full stop and on
+    # line breaks, which is what the cited rules operate on.
+    smax = st.get("sentence_max_chars")
+    tmax = st.get("max_ten")
+    kmax = st.get("kanji_run_max")
+    if smax or tmax or kmax:
+        for sent in [s for s in re.split(r"[。\n]", body) if s.strip()]:
+            if smax and len(sent) > smax:
+                out.append(dict(id="%s-sentence-too-long" % lang, severity="warn", weight=7,
+                                scope="body", match=sent[:40], line=None,
+                                **_label(st, "sentence_long", n=len(sent), max=smax)))
+                break
+        for sent in [s for s in re.split(r"[。\n]", body) if s.strip()]:
+            n = sent.count("、")
+            if tmax and n > tmax:
+                out.append(dict(id="%s-max-ten" % lang, severity="warn", weight=6,
+                                scope="body", match=sent[:40], line=None,
+                                **_label(st, "max_ten", n=n, max=tmax)))
+                break
+        if kmax:
+            m = re.search(r"[一-鿿]{%d,}" % (kmax + 1), body)
+            if m:
+                out.append(dict(id="%s-kanji-run" % lang, severity="warn", weight=5,
+                                scope="body", match=m.group(0)[:20], line=None,
+                                **_label(st, "kanji_run", n=len(m.group(0)), max=kmax)))
+
+    if st.get("heading_order"):
+        kinds = set()
+        for ln in body.split("\n"):
+            s = ln.strip()
+            if re.match(r"^[-*]\s", s):
+                kinds.add("dash")
+            elif re.match(r"^[・]\s?", s):
+                kinds.add("nakaten")
+            elif re.match(r"^\d+[.)．）]\s?", s):
+                kinds.add("digit")
+            elif re.match(r"^[①-⑳]", s):
+                kinds.add("circled")
+            elif re.match(r"^[ア-ン][.、)）]\s?", s):
+                kinds.add("kana")
+        if len(kinds) > 1:
+            out.append(dict(id="%s-heading-order" % lang, severity="warn", weight=6,
+                            scope="body", match="/".join(sorted(kinds)), line=None,
+                            **_label(st, "heading_order")))
+
     tone = st.get("tone")
     if tone and body:
         a = _compile(tone["a"]).findall(body + "\n")
@@ -207,6 +282,7 @@ def _structural(pack: dict, subject: str, body: str) -> list:
                     title=tone.get("title", "sentence ending mixed"),
                     why=tone.get("why", ""),
                     fix=tone.get("fix", ""),
+                    source=tone.get("source", ""),
                     match="",
                     line=None,
                 )
@@ -247,6 +323,7 @@ def lint(text: str, lang: str | None = None, packs: dict | None = None) -> dict:
                     fix=loc.get("fix", rule.get("fix", "")),
                     match=m.group(0)[:60],
                     line=line,
+                    source=_cite(pack, rule.get("source")),
                 )
             )
 

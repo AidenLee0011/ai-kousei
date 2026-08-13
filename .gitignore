@@ -4,3 +4,9 @@ build/
 dist/
 *.egg-info/
 web/rules/
+# Fetched source documents are not redistributed: the scripts fetch them, the
+# repository keeps only measurements and citations.
+sources/raw/
+sources/ref/
+sources/reports/*.txt
+sources/reports/_tmp.pdf

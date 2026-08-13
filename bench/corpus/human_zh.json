@@ -1,0 +1,252 @@
+[
+ {
+  "msg": "兼容 TDengine 3.0 (#10)\n\n* 尝试适配 tdengine 3.0\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* test\n\n* test\n\n* test\n\n* 修复 3.0 兼容\n\n* 修复\n\n* 支持更多字段类型\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复",
+  "repo": "Yurunsoft/php-tdengine",
+  "date": "2022-08-26"
+ },
+ {
+  "msg": "1. 修复 LoginLogServiceImplTest\n2. 修复 OperateLogServiceImplTest\n3. 修复 SmsLogServiceTest",
+  "repo": "kklgy/ruoyibase",
+  "date": "2022-11-11"
+ },
+ {
+  "msg": "集成组件到主仓库 (#86)\n\n* 集成组件到主仓库\n\n* 修复问题\n\n* 修复问题\n\n* 修复问题\n\n* 修复问题\n\n* 修复问题\n\n* 修复问题\n\n* 修复问题\n\n* 修复问题\n\n* 修复\n\n* 修复问题\n\n* test\n\n* test\n\n* 修复问题\n\n* 修复\n\n* 修复\n\n* 修复",
+  "repo": "T1anjiu/imi",
+  "date": "2021-05-11"
+ },
+ {
+  "msg": "优化日志分析器 (#1813)\n\n* 优化日志分析器\n\n* 修复翻译错误\n\n* 修复翻译错误\n\n* 修复翻译错误\n\n* Update CrashReportAnalyzer.java\n\n* Update I18N_zh_CN.properties\n\n* 逐步修复问题\n\n* 逐步修复问题\n\n* 尝试修复\n\n* 修复错误\n\n* 修复错误\n\n* 尝试\n\n* 尝试\n\n* 修复\n\n* 按照要求修改\n\n* 依据 Check Style 修复问题\n\n* 按提示修改\n\n* 修复错误\n\n* Update CrashReportAnalyzer.java\n\n* 删除\n\n* Update I18N_zh_CN.properties\n\n* Update CrashReportAnalyzer.java",
+  "repo": "diziqin/dream-launcher-pc",
+  "date": "2022-11-25"
+ },
+ {
+  "msg": "Macos test (#73)\n\n* 增加 macos 测试\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 增加服务启动失败日志输出\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复",
+  "repo": "T1anjiu/imi",
+  "date": "2020-11-30"
+ },
+ {
+  "msg": "Github actions 迁移，干掉狗日的 travis (#7)\n\n* Github actions 迁移\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复",
+  "repo": "Yurunsoft/ChineseUtil",
+  "date": "2020-12-25"
+ },
+ {
+  "msg": "retrofit+RxJava 下载文件\n\n热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复热修复",
+  "repo": "qiufg509/Qiufg",
+  "date": "2017-03-15"
+ },
+ {
+  "msg": "【修复-签名】修复签名功能\n\n修复签名bug",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-09-07"
+ },
+ {
+  "msg": "GitHub Actions 迁移；为部分不稳定的测试增加重试 (#72)\n\n* Github Actions 迁移改造\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复问题\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 同时支持 MySQL 5.7、8.0 测试\n\n* 修复\n\n* 清理 travis\n\n* 更新\n\n* 为部分不稳定的测试增加重试\n\n* 修复",
+  "repo": "T1anjiu/imi",
+  "date": "2020-11-30"
+ },
+ {
+  "msg": "兼容 TDengine 3.0 (#3)\n\n* 更新测试\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 修复\n\n* 版本要求提升至 PHP >= 7.1\n\n* 修复",
+  "repo": "Yurunsoft/tdengine-restful-connector",
+  "date": "2022-08-30"
+ },
+ {
+  "msg": "新增 imi-pgsql (#132)\n\n* 实现 PgSql 数据库连接和模型\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试\n\n* 修复\n\n* 修复测试\n\n* 更新 [skip ci]\n\n* 更新文档 [skip ci]",
+  "repo": "imiphp/imi",
+  "date": "2021-08-24"
+ },
+ {
+  "msg": "【修复-权限管理】权限批量分配BUG修复 【修复-同步数据】同步数据BUG修复",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-07-15"
+ },
+ {
+  "msg": "【修复-流程设计】修复流程设计表单样式修复",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-09-26"
+ },
+ {
+  "msg": "feat: 修复 slider 样式问题 (#1788)\n\n* feat: 修复 slider 样式问题\n\n* feat: 修复 slider 样式问题\n\n* feat: 修复 slider 样式问题\n\n* feat: 修复 slider 样式问题",
+  "repo": "vauei6266/hydra-sandbox-656b2e52f882",
+  "date": "2022-11-15"
+ },
+ {
+  "msg": "TDengine 3.0 (#5)\n\n* 修复测试\n\n* test\n\n* 修复测试\n\n* 修复测试\n\n* 修复测试",
+  "repo": "Yurunsoft/tdengine-orm",
+  "date": "2022-11-25"
+ },
+ {
+  "msg": "【优化-样式优化】样式优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-11-04"
+ },
+ {
+  "msg": "【优化-代码优化】代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-08-17"
+ },
+ {
+  "msg": "【优化-单词优化】单词优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-08-05"
+ },
+ {
+  "msg": "!419 【openHarmony】add samples eTSDrag\n* 适配横屏\n* 优化代码\n* 优化代码\n* 优化代码\n* 优化代码\n* 优化代码\n* 优化代码\n* 优化代码\n* 优化代码\n* add sample",
+  "repo": "patrykniedzwiecki/applications_app_samples",
+  "date": "2022-03-21"
+ },
+ {
+  "msg": "【优化-控件优化】数字范围组件优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-08-05"
+ },
+ {
+  "msg": "Perf: 优化RBAC权限树 (#7782)\n\n* fix: 优化权限树(1)\n\n* fix: 优化权限树(2)\n\n* fix: 优化权限树(3)\n\n* fix: 优化权限树(4)\n\n* fix: 优化权限树(5)\n\n* fix: 优化权限树(添加迁移文件)\n\n* fix: 优化权限树(6)\n\n* fix: 优化权限树(7)\n\n* fix: 优化权限树(8)\n\n* fix: 优化权限树(9)",
+  "repo": "Tuobayou/jumpserver",
+  "date": "2022-03-10"
+ },
+ {
+  "msg": "优化优化优化",
+  "repo": "nooneall/Ucaner",
+  "date": "2017-10-24"
+ },
+ {
+  "msg": "!307 【OpenHarmony】eTSPowerManager新sample合入\n* 代码优化\n* 代码优化\n* 优化代码\n* 代码优化\n* 代码优化\n* 代码优化\n* 新增sample",
+  "repo": "patrykniedzwiecki/applications_app_samples",
+  "date": "2022-01-30"
+ },
+ {
+  "msg": "优化表格 (#38)\n\n* 优化表格\n\n优化表格\n\n* 优化表格4\n\n优化表格4\n\n* 优化5\n\n优化5",
+  "repo": "TencentVideoCloud2/qcloud-documents",
+  "date": "2016-12-28"
+ },
+ {
+  "msg": "!414 【openHarmony】add samples eTSDistributeAccount\n* 修改readme\n* add samples\n* 优化代码\n* 优化readme规范\n* 优化代码\n* 优化代码\n* 优化代码\n* 优化代码\n* add samples",
+  "repo": "patrykniedzwiecki/applications_app_samples",
+  "date": "2022-03-16"
+ },
+ {
+  "msg": "【优化-应用切换】代码优化\n\n【应用切换代码优化】",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-08-25"
+ },
+ {
+  "msg": "chore: 优化deepdf接口,优化打印\n\n优化deepdf接口,优化打印\n\nLog: 优化deepdf接口,优化打印\nChange-Id: I44875dc2a91d461404f52b5e7e2798de7f5d7df6",
+  "repo": "linuxdeepin/deepin-reader",
+  "date": "2020-11-16"
+ },
+ {
+  "msg": "chore: 优化代码，优化打包步骤\n\n优化代码，优化打包步骤\n\nLog: 优化代码，优化打包步骤\n\nlink:",
+  "repo": "linuxdeepin/deepin-reader",
+  "date": "2020-10-13"
+ },
+ {
+  "msg": "[代码优化](v2.6)：序列化优化，Excel 导出优化",
+  "repo": "1655375785/demo-admin",
+  "date": "2020-12-13"
+ },
+ {
+  "msg": "优化Request\n优化Repository\n增加Str::stub\n优化Template\n优化Weight",
+  "repo": "zxy19/php-helper",
+  "date": "2022-03-24"
+ },
+ {
+  "msg": "【优化-全局】样式优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-11-21"
+ },
+ {
+  "msg": "【优化-组件】代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-11-21"
+ },
+ {
+  "msg": "【优化-全局】代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-11-11"
+ },
+ {
+  "msg": "优化Layer弹窗\n优化表格Loading\n优化个人日志搜索\n优化附件列表",
+  "repo": "Tom5188/fastadmin-update",
+  "date": "2021-07-21"
+ },
+ {
+  "msg": "优化购物车 优化menu",
+  "repo": "ColdRayBurn/Laravel-webstore",
+  "date": "2022-08-15"
+ },
+ {
+  "msg": "优化文件管理器出发条件、优化前台商品详情、优化pages",
+  "repo": "ColdRayBurn/Laravel-webstore",
+  "date": "2022-08-09"
+ },
+ {
+  "msg": "!1427 优化 优化举报提示、优化举报审核体验\n* 优化 优化举报提示、优化举报审核体验",
+  "repo": "codersclub/Discuz.ML",
+  "date": "2022-01-23"
+ },
+ {
+  "msg": "【优化-全局】WebSocket优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-08-25"
+ },
+ {
+  "msg": "!871 DeviceUsageStatistics ，适配64位系统，优化功能界面\n* 优化代码\n* 优化代码\n* 优化代码\n* 适配64位系统，优化功能界面",
+  "repo": "patrykniedzwiecki/applications_app_samples",
+  "date": "2022-06-21"
+ },
+ {
+  "msg": "chore: 优化代码可读性，性能优化\n\nDescription: 优化代码可读性，性能优化\n\nLog: 优化代码可读性，性能优化\n\nlink:",
+  "repo": "linuxdeepin/deepin-reader",
+  "date": "2020-07-30"
+ },
+ {
+  "msg": "优化 nacos注册\n优化 url地址规范\n修复 celery任务下发\n优化 apps/api下代码优化移动以及部分删除",
+  "repo": "iflytek/NetAxe",
+  "date": "2022-10-14"
+ },
+ {
+  "msg": "【优化】代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-06-10"
+ },
+ {
+  "msg": "移动端字体优化，swiper加载优化，swiper滑动优化",
+  "repo": "niathu/YourWeather",
+  "date": "2022-11-12"
+ },
+ {
+  "msg": "perf: 优化选择系统用户\n\nperf: 优化代码结构\n\nperf: 优化登录\n\nperf: 优化登录\n\nperf: 优化登录\n\nperf: 修改import\n\nperf: 优化这个bug\n\nperf: 优化登录\n\nperf: token登录\n\nperf: 优化登录\n\nperf: 优化登录\n\nperf: 优化莫泰窗",
+  "repo": "jumpserver/luna",
+  "date": "2021-05-25"
+ },
+ {
+  "msg": "【优化-签名】代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-09-07"
+ },
+ {
+  "msg": "【优化-签名】 代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-09-07"
+ },
+ {
+  "msg": "feat: 接口优化 逻辑优化",
+  "repo": "jackwaycn/interview-qa",
+  "date": "2022-11-05"
+ },
+ {
+  "msg": "【优化-全局】搜索代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-11-28"
+ },
+ {
+  "msg": "【优化-账号配置】代码优化",
+  "repo": "wuqingguang0816/Mnxhp",
+  "date": "2022-11-23"
+ },
+ {
+  "msg": "finish：优化优化\n\nplan：优化优化",
+  "repo": "lost0812/UnityGame",
+  "date": "2017-06-16"
+ }
+]

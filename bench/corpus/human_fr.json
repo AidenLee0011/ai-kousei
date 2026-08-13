@@ -1,0 +1,472 @@
+[
+ {
+  "msg": "Note dot alignment correction\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\nimprovement\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-09-16"
+ },
+ {
+  "msg": "New system justification algorithm\n\n\ncorrection\n\n\ncorrection\n\n\nEliminate current system justification\n\n\nSegment::pureDurationWidth\n\n\nBasic space redistribution implementation\n\n\nFirst implementation (imperfect)\n\n\nCorrection\n\n\nDifferent idea\n\n\nKind-of-WORKING point\n\n\ncorrection\n\n\nOffset correction\n\n\nInvisible seg correction\n\n\ncorrection\n\n\ncorrection\n\n\nReimplemented acceptance range\n\n\ncorrection\n\n\ncorrection\n\n\nRevert \"correction\"\n\nThis reverts commit aac8f064cbdb2f31129f6f6a6a2412e2748b697e.\n\nNON ITERATIVE IMPLEMENTATION\n\n\ncorrection\n\n\ncleanup\n\n\nFinal implementation\n\n\ncorrection\n\n\ncorrection\n\n\ncleanup\n\n\ncleanup\n\n\ncleanup\n\n\ncleanup\n\n\ncleanup\n\n\ncleanup\n\n\nReimplement minMeasureWidth\n\n\nGlitch correction\n\n\ncleanup\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-09-23"
+ },
+ {
+  "msg": "Don't kern over chords with articulation or which start/end slurs\n\n\n\n\ncorrection/rebase\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\nimprovement\n\n\nimprovement\n\n\ncorrection\n\n\nCorrection\n\n\nimprovement\n\n\ncleanup\n\n\nIntroducing startingSpanners and endingSpanners\n\n\nPrecomputeSlurUp update\n\n\ncorrection\n\n\ncorrection\n\n\nChord::computeKerningExceptions\n\n\nfinalized\n\n\ncleanup\n\n\ncleanup\n\n\ncorrection\n\n\nuse std::vector\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-11-18"
+ },
+ {
+  "msg": "1/11/2022  (#61)\n\n* lab01\n\n* lab01\n\n* Correction\n\n* correction\n\n* Correction\n\n* Correction\n\n* Correction",
+  "repo": "hogarrick2nd/202209_03cit4057",
+  "date": "2022-11-07"
+ },
+ {
+  "msg": "Slur::computeUp() correction\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-09-19"
+ },
+ {
+  "msg": "Resolved conflict (#31)\n\n* simple modification\n\n* delete user and users class\n\n* add new user class\n\n* this modifiy the User class\n\n* modification\n\n* rever\n\n* adjusted\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* modify jwtUserDetails\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* correction\n\n* second commit\n\n* third commit\n\n* third commit\n\n* This remove comments",
+  "repo": "Dear-Paul/safari_webstore",
+  "date": "2021-10-18"
+ },
+ {
+  "msg": "Feature/IO-571_refactor (#6)\n\n* feature/IO-514_details_page\n\n* refactoring\n\n* correction by comment\n\n* correction\n\n* correction by comments\n\n* correction by comments\n\n* correction\n\n* start feature/IO-571_refactor\n\n* correction by comments\n\n* test \"merge into current\"\n\n* feature/IO-571_refactor\n\n* correction by comments\n\n* refactoring\n\n* correction by comments\n\n* correction by comments\n\n* resolve conflicts\n\n* correction by comments",
+  "repo": "egor-slatvinskiy-idf/star_movie",
+  "date": "2022-09-28"
+ },
+ {
+  "msg": "lab03 kampo (#67)\n\n* lab01\n\n* lab01\n\n* Correction\n\n* correction\n\n* Correction\n\n* Correction\n\n* Correction\n\n* Correction\n\nCo-authored-by: edugarrick <106720230+edugarrick@users.noreply.github.com>",
+  "repo": "hogarrick2nd/202209_03cit4057",
+  "date": "2022-11-14"
+ },
+ {
+  "msg": "FireEye HX V2 (#17292)\n\n* first adding\n\n* fetch and tests\n\n* Additions and corrections\n\n* Additions and corrections\n\n* conflict resolution\n\n* add\n\n* testPlaybook and corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* ReleaseNotes\n\n* corrections\n\n* Modify of conf.json\n\n* missing HX\n\n* revert redundant file\n\n* corrections\n\n* add\n\n* Modifications\n\n* Update pack data\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* commit\n\n* corrections\n\n* corrections\n\n* Update FireEyeHXv2.yml\n\n* Update 1_0_5.md\n\n* Update FireEyeHXv2_description.md\n\n* Update 2_0_0.md\n\n* commit\n\n* commit\n\n* commit\n\n* commit\n\n* commit\n\nCo-authored-by: dschwartz <81086590+dorschw@users.noreply.github.com>\nCo-authored-by: Richard Bluestone <53567272+richardbluestone@users.noreply.github.com>",
+  "repo": "israelpoli/temp-repo",
+  "date": "2022-03-06"
+ },
+ {
+  "msg": "System begin bar line corrections\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-10-11"
+ },
+ {
+  "msg": "Feature/IO-653_share_plugin (#9)\n\n* start profile\n\n* feature/IO-669_login\n\n* correction by comments\n\n* correction\n\n* correction by comments\n\n* correction by comments\n\n* feature/IO-653_share_plugin\n\n* correction\n\n* resolve conflicts\n\n* correction by comments\n\n* correction by comments",
+  "repo": "egor-slatvinskiy-idf/star_movie",
+  "date": "2022-10-12"
+ },
+ {
+  "msg": "hi i am johnny  (#66)\n\n* Classwork-1.3.\n\n* lab01\n\n* upload\n\n* Correction\n\n* Correction\n\n* Correction\n\n* Correction\n\n* Correction\n\n* Reverted files.",
+  "repo": "hogarrick2nd/202209_03cit4057",
+  "date": "2022-11-08"
+ },
+ {
+  "msg": "[ES] Grammatical Corrections for Spanish Language (#1057)\n\n* Corrections Abilities\n\n* Corrections Attachment Names\n\n* Corrections Death Reasons\n\n* Corrections SCP330\n\n* Corrections Main Menu\n\n* Corrections Loading Hints\n\n* Corrections Inventory GUI\n\n* Correction Keybinds",
+  "repo": "svelout/scp-sl-translations-copy",
+  "date": "2022-06-12"
+ },
+ {
+  "msg": "feature/IO-514_details_page (#5)\n\n* feature/IO-514_details_page\n\n* refactoring\n\n* correction by comment\n\n* correction\n\n* correction by comments\n\n* correction by comments\n\n* correction\n\n* start feature/IO-571_refactor\n\n* correction by comments\n\n* test \"merge into current\"\n\n* correction by comments",
+  "repo": "egor-slatvinskiy-idf/star_movie",
+  "date": "2022-09-28"
+ },
+ {
+  "msg": "Optimization: don't layout closed scores\n\n\ncorrection\n\n\nCorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-10-13"
+ },
+ {
+  "msg": "Correction des stats, correction des appels, corrections des marchands, corrections globales",
+  "repo": "valentinlamine/projet_red",
+  "date": "2022-09-28"
+ },
+ {
+  "msg": "Fix stem slash glitch\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-09-12"
+ },
+ {
+  "msg": "Fix slur anti-collision glitch when cross-system\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-07-28"
+ },
+ {
+  "msg": "chore: Swedish translation corrections (#2755)\n\n* Minor corrections\n\n* Minor corrections",
+  "repo": "kobakirill/RU",
+  "date": "2022-11-18"
+ },
+ {
+  "msg": "LoginActivity correction\nLoginRequest correction\nRegisterActivity correction\nRegisterRequest correction\nShowWork Error / BuildFailed",
+  "repo": "CLYZEN/Youth_APP",
+  "date": "2022-09-26"
+ },
+ {
+  "msg": "2022/10/18- If Statement (#53)\n\n* lab01\n\n* lab01\n\n* Correction\n\n* correction\n\n* Correction\n\n* Correction",
+  "repo": "hogarrick2nd/202209_03cit4057",
+  "date": "2022-11-01"
+ },
+ {
+  "msg": "Feature/IO-850_check_version (#28)\n\n* feature/IO-751_CI/CD\n\n* bug fixes\n\n* feature/IO-790_desktop\n\n* correction by comments\n\n* correction by comments\n\n* feature/IO-850_check_version\n\n* resolve conflicts\n\n* Delete .gradle directory\n\n* Delete Podfile.lock\n\n* correction by comments\n\n* correction by comments\n\n* correction by comments\n\n* refactoring\n\n* correction by comments + refactoring\n\n* correction by comments",
+  "repo": "egor-slatvinskiy-idf/star_movie",
+  "date": "2022-11-11"
+ },
+ {
+  "msg": "Feature/IO-669_login (#8)\n\n* start profile\n\n* feature/IO-669_login\n\n* correction by comments\n\n* correction\n\n* correction by comments\n\n* correction by comments\n\n* correction by comments",
+  "repo": "egor-slatvinskiy-idf/star_movie",
+  "date": "2022-10-10"
+ },
+ {
+  "msg": "Slur direction improvements\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-07-21"
+ },
+ {
+  "msg": "positioning corrections\n\n\npositioning corrections\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-06-13"
+ },
+ {
+  "msg": "fix: small word corrections (#21)\n\n* fix: small word corrections\n\n* fix: small word correction\n\n* fix: small word correction\n\n* fix: small word correction\n\n* fix: small word correction\n\n* fix: small word correction\n\n* fix: small word correction\n\n* fix: small word corrections\n\n* fix: small word correction",
+  "repo": "smartcontracts/ethereum-book",
+  "date": "2022-03-16"
+ },
+ {
+  "msg": "Feature/IO-726_validation (#11)\n\n* feature/IO-720_crashlytics_analytics\n\n* correction by comment\n\n* feature/IO-726_validation\n\n* correction by comments\n\n* resolve conflicts + correction by comments\n\n* correction by comments\n\n* correction\n\n* refactoring",
+  "repo": "egor-slatvinskiy-idf/star_movie",
+  "date": "2022-10-19"
+ },
+ {
+  "msg": "Senkessar varia (#893)\n\n* corrections\n\n* correction\n\n* correction\n\n* corrections\n\n* corrections\n\n* corrections\n\n* additions\n\n* additions\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections\n\n* corrections",
+  "repo": "BetaMasaheft/Manuscripts",
+  "date": "2020-11-28"
+ },
+ {
+  "msg": "Correction to the MEA solvent property package and column (#914)\n\n* Correction to the MEA solvent property package\n\n* reformatted code\n\n* corrections\n\n* test corrections\n\n* solvent condenser test correction\n\n* reformatted code\n\n* test corrections\n\n* units correction\n\n* adding a note on model convergence\n\n* reformatted code\n\nCo-authored-by: Keith Beattie <ksbeattie@lbl.gov>",
+  "repo": "IDAES/idaes-pse",
+  "date": "2022-08-25"
+ },
+ {
+  "msg": "12577 update correction title to Register Correction (#331)\n\n* update correction header to Register Correction\n\n* Make correction name standard",
+  "repo": "bcgov/business-edit-ui",
+  "date": "2022-07-22"
+ },
+ {
+  "msg": "Add parentheses to arrow functions single parameters (part 7) (#18693)\n\n* Add parentheses to arrow functions single parameters\n\n* Fix indent\n\n* Fix over-correction\n\n* Fix over-correction\n\n* Fix over-correction\n\n* Fix inline correction\n\n* Fix over-correction\n\n* Fix over-correction\n\n* Fix over-correction\n\n* Typo\n\n* Fix unused param",
+  "repo": "stephensalas1213/dedminds210",
+  "date": "2022-07-23"
+ },
+ {
+  "msg": "Integrate salt concentration correction term into params\n\nStart Salt correction\n\nMove all salt correction to params\n\nAdjust Multiloop related parameters for salt correction\n\nSalt correction for multiloop and exp function",
+  "repo": "ViennaRNA/ViennaRNA",
+  "date": "2022-09-27"
+ },
+ {
+  "msg": "Correction on slur collision logic\n\nBetter specification of which items shouldn't be avoided\ncorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-09-19"
+ },
+ {
+  "msg": "Staging (#11)\n\n* Removal of background removal option\n\n* Correction of ridiculous error\n\n* News image\n\n* Shop update\n\n* Correction on shop\n\n* Delete player\n\n* Add click on tournaments\n\n* Corrections on delete\n\n* Correction of admin option\n\n* Correction to game addition",
+  "repo": "pedropacheco95/padelleague",
+  "date": "2022-10-19"
+ },
+ {
+  "msg": "Correction sur icon adresse et correction facet select en mobile (#1291)\n\n* Correction sur icon adresse et correction facet select en mobile",
+  "repo": "departement-loire-atlantique/jPlatformSocle",
+  "date": "2022-10-05"
+ },
+ {
+  "msg": "feat(service-portal): Correction for family data (#8132)\n\n* Add family correction\n\n* Update post user correction\n\n* Child registration comments modal\n\n* Update natreg correction api\n\n* Update child correction modal + service",
+  "repo": "island-is/island.is",
+  "date": "2022-08-17"
+ },
+ {
+  "msg": "Corrections on Czech language (#1269)\n\n* Czech Language\n\nAdded Czech language its 95% DONE, needs to further checked\n\n* Added cs-CZ\n\nAdded Czech language option\n\n* Update leo.json\n\nCorrections\n\n* Update leo.json\n\nMore corrections\n\n* Update leo.json\n\nmore correctionsssss\n\n* Update values.json\n\na lot of corrections today\n\n* ye\n\ncorrections\n\n* Update leo.json\n\ncorrections\n\n* Korekce\n\nCorrections\n\nCo-authored-by: Casper <53900565+Dev-CasperTheGhost@users.noreply.github.com>",
+  "repo": "YorkieInteractive/CAD",
+  "date": "2022-11-29"
+ },
+ {
+  "msg": "Login customizations (#16173)\n\n* Login customizations\n\n* Linter Corrections\n\n* Linting Corrections\n\n* Linting Corrections",
+  "repo": "kyma-project/kyma",
+  "date": "2022-11-24"
+ },
+ {
+  "msg": "Better bar rest centering\n\n\ncorrection\n\n\ncorrection\n\n\ncorrection",
+  "repo": "temptemptemptemptemp-temp/musescore2",
+  "date": "2022-09-16"
+ },
+ {
+  "msg": "Cherwell corrections (#19217)\n\n* Corrections\n\n* corrections\n\n* corrections\n\n* commit\n\n* Apdate Docker\n\n* commit\n\n* commit",
+  "repo": "Droid-HK47/content",
+  "date": "2022-05-29"
+ },
+ {
+  "msg": "Ajout des différentes pages nécessaire\n\nAjout index\nAjout contacts\nAjout legal\nAjout Maquette\nAjout Notice\nAjout présentation\nAjout produits\nAjout remboursement",
+  "repo": "AdrtH/Fred",
+  "date": "2022-10-28"
+ },
+ {
+  "msg": "Ajout du Cooldown\n\n+ Ajout de PlayerItemUseEvent\n+ Ajout du PlayerDropItemEvent\n+ Ajout du EntityDamageEvent\n+ Ajout du ItemsManager",
+  "repo": "LegacyPvP/ThePit-old",
+  "date": "2022-07-11"
+ },
+ {
+  "msg": "Ajout des preuves dans les markdown du référentiel climat-air-énergie (#1661)\n\n* Ajout preuves 1.1.1\n\n* Ajout preuves 1.1.2\n\n* Ajout preuves 1.1.3\n\n* Ajout preuves 1.2.1\n\n* Ajout preuves 1.2.2\n\n* Ajout preuves 1.2.3\n\n* Ajout preuves 1.2.4\n\n* Ajout preuves 1.3.1\n\n* Ajout preuve 1.31 - explicitation acronyme\n\n* Ajout preuves 1.3.2\n\n* Ajout preuves 1.3.2.5\n\n* Ajout preuves 2.1.1\n\n* Ajout preuves 2.1.2\n\n* Ajout preuves 2.1.3\n\n* Ajout preuves 2.2.3\n\n* Ajout preuves 2.2.4\n\n* Ajout preuves 2.3.1.4\n\n* Ajout preuves 2.3.2\n\n* Ajout preuves 3.1.1\n\n* Ajout preuves 3.1.2\n\n* Ajout preuves 3.3.1\n\n* Ajout preuves 3.3.2\n\n* Ajout preuves 3.3.3\n\n* Ajout preuves 3.3.3.5\n\n* Ajout preuves 3.3.4\n\n* Ajout preuves 3.3.5\n\n* Ajout preuves 4.1.1\n\n* Ajout preuves 4.1.2\n\n* Ajout preuves 4.2.1\n\n* Ajout preuves 4.2.2\n\n* Ajout preuves 4.3.1\n\n* Ajout preuves 4.3.2\n\n* Ajout preuves 4.3.3\n\n* Ajout preuves 4.3.4\n\n* Ajout preuves 5.1.1\n\n* Ajout preuves 5.1.2\n\n* Ajout preuves 5.1.3\n\n* Ajout preuves 5.2.1\n\n* Ajout preuves 5.2.2\n\n* Ajout preuves 6.1.1\n\n* Ajout preuves 6.1.3\n\n* Ajout preuves 6.2.1\n\n* Ajout preuves 6.2.3\n\n* Ajout preuves 6.3.1\n\n* Ajout preuves 6.3.3\n\n* Ajout preuves 6.4.1\n\n* Update 6.4.2.md\n\n* Ajout preuves 6.5.1\n\n* Ajout preuves 6.5.3\n\n* Correction coquille energieS",
+  "repo": "incubateur-ademe/territoires-en-transitions",
+  "date": "2022-03-23"
+ },
+ {
+  "msg": "Ajout du fichier ajout + fichier modif\n\nAjout du fichier ajout permettant l'ajout en bdd + ajout du fichier modif permettant la modification",
+  "repo": "theograve/GestionDeProjetsMW",
+  "date": "2022-10-16"
+ },
+ {
+  "msg": "Ajout du form Liste Livres\n-Ajout du bouton retour accueil\n-Ajout du bouton ajout livre\n-Ajout du bouton modifier livre (pas encore fonctionnel)\n-Ajout du bouton supprimer livre\n\nAjout du form Ajout Livre\n-Ajout du bouton ajouter\n-Ajout du bouton annuler\n-Ajout text box nom livre\n-Ajout text box publication\n-Ajout combobox genre\n-Ajout combobox editeur\n-Ajout combobox auteur\n-Ajout combobox format\n-Ajout combobox etat",
+  "repo": "Yann-Claudon/Bibliotheque",
+  "date": "2022-06-02"
+ },
+ {
+  "msg": "AM45 Ajout des différents logs possible pour flask\n\nAjout d'un point d'entrée /logs\nAjout du bluprint dans __init__.py\nAjout d'un log debug\nAjout d'un log info\nAjout d'un log warn\nAjout d'un log error",
+  "repo": "Nemuroscythe/anomeet",
+  "date": "2022-11-12"
+ },
+ {
+  "msg": "Modifications : Ajout SearchBar, Ajout tris par vivant, Ajout tris par area, Ajout bouton scrollToTop sur la main page, Ajout compteur total guitarists",
+  "repo": "FCHDev/guitarists-app",
+  "date": "2022-09-05"
+ },
+ {
+  "msg": "table utilisateur : ajout colonnes\n\najout colonne matricule\najout colonne codeSecteur\najout colonne codeMetier\najout colonne codeRole",
+  "repo": "MaillotCedric/quiz",
+  "date": "2022-11-07"
+ },
+ {
+  "msg": "ajout des fonction avance\n\n1/ajout de fonction addDepartementToUniversite\n2/ajout de fonction getDepartmentsByUniversite\n3/ajout de fonction\ngetChiffreAffaireEntreDeuxDate\n4/ajout de fonction\ngetEnseignantByNomUniversite",
+  "repo": "oussama-gadria/kademBack",
+  "date": "2022-11-27"
+ },
+ {
+  "msg": "Ajout : Ajout des différent moyens de connexion\nAjout : Ajout de connexion.js\nAjout : Ajout de la page d'accueil de chaque rôle",
+  "repo": "kyllianmgn/Notenote",
+  "date": "2022-03-15"
+ },
+ {
+  "msg": "Ajout fonctions suppression suspects\n\n- Ajout fonction `calculAgeMoyenHeros()`\n- Ajout fonction `supprimerHerosSelonAge()`\n- Ajout fonction `supprimerHerosSelonSexe()`\n- Ajout fonction `supprimerHerosSelonNationalite()`\n- Ajout fonction `supprimerHerosSelonEspece()`\n- Ajout fonction `supprimerHerosSelonEquipement()`\n- Ajout fonction `supprimerHerosSelonVolant()`\n- Ajout fonction `supprimerHerosSelonMasque()`\n- Ajout fonction `supprimerHerosSelonTaille()`\n- Ajout fonction `supprimerHerosSelonCouleur()`\n\n- Ajout fonction `afficherHeros()` qui affiche tous les attributs du héros passé en paramètre\n\n- Temps passé : Trop pas grand chose",
+  "repo": "Vilquid/Projet-Akinator",
+  "date": "2022-04-05"
+ },
+ {
+  "msg": "ODS-309 : ajout ws récupération de la liste des règles\n- Ajout Controller\n- Ajout méthode dans couche service\n- Ajout Webdto & mapper\n- Ajout TU mapper",
+  "repo": "abes-esr/qualimarc-api",
+  "date": "2022-11-10"
+ },
+ {
+  "msg": "Ajout : Ajout des bibliothèques dans vendor\nAjout : Ajout des formulaires d'ajout dans l'accueil Direction",
+  "repo": "kyllianmgn/Notenote",
+  "date": "2022-03-21"
+ },
+ {
+  "msg": "Ajout d'un test au parser, ajout d'un début de structure, ajout de l'initialisation du jeu, ajout de la loop mlx pour le jeu, ajout des binds pour quitter le jeu",
+  "repo": "l0wigh/cub3d",
+  "date": "2022-11-02"
+ },
+ {
+  "msg": "Initialisation du projet\n\n. Ajout index\n. Ajout assets\n. Ajout styles\n. Ajout scripts",
+  "repo": "MaillotCedric/sturdy-octo-spork",
+  "date": "2022-10-15"
+ },
+ {
+  "msg": "Update README.md\n\n* Ajout archive\n* Ajout issues\n* Ajout header",
+  "repo": "clessn/gabarit-fesp-ulaval",
+  "date": "2022-11-10"
+ },
+ {
+  "msg": "ajout data\n\najout des emotes des armes\najout de tous les festivals\najout des noms en anglais",
+  "repo": "cleeem/Bot",
+  "date": "2022-08-20"
+ },
+ {
+  "msg": "Pages pour \"Construire un Ordinateur\" et chaque page pour acheter un composant (#3)\n\n* Ajout de composants ActionButton et ItemCard\n\n* Ajout de page \"Construire un Ordi\"\n\n* Ajout de plusieurs images\n\n* Ajout de page principale pour voir chaque catégorie de composants\n\n* Ajout de pages de composants dynamiques partie 1\n\n* Ajout de page pour mémoire\n\n* Ajout de RAM\n\n* Ajout de page pour ventilateurs\n\n* Ajout de page pour voîtiers\n\n* Ajout de SE\n\n* Ajouté page pour accesoires",
+  "repo": "TishamIslam/seg3525-projet2",
+  "date": "2022-06-27"
+ },
+ {
+  "msg": "update-databe\n- Ajout bdd\n- Ajout Models\n- Ajout DAO\n- Ajout Service\n- Modif boutton login/logout\n- Ajout forms Login/Register",
+  "repo": "Taugry/Projet_POE_Jdr",
+  "date": "2021-12-14"
+ },
+ {
+  "msg": "Ajout de Tests\n\nModification de testSubirDegats\najout testGainNiveau\najout testEstEvanoui\najout de testSoigne\najout de testResetPP",
+  "repo": "IUT-DEPT-INFO-UCA/pokae-seinksansdoozebank",
+  "date": "2022-05-21"
+ },
+ {
+  "msg": "Maj marker + ajout d'icônes\n\nMaj des markers :\n- Ajout de nombreux coffres\n- Ajout de nombreux composants de Sumeru\n- Ajout de nombreuses illustrations / vidéos\n- Ajout d'icônes spécifiques à certains marqueurs\n\nAjout de nouvelle icônes.",
+  "repo": "TMKFrench/TMK-GI-Interactive-Map",
+  "date": "2022-11-19"
+ },
+ {
+  "msg": "Ajout de bouton sur Accueil\nAjout du theme\nAjout de l'audio",
+  "repo": "Sergekibala/Snippets1",
+  "date": "2022-10-19"
+ },
+ {
+  "msg": "Katarina Phase 1 + 2\n\nAjout Rig Katarina\nAjout ColliderBurn sur les murs\nAjout Hitbox sur Pulsate\nAjout DestroyCylinder en Phase 2\nAjout Dialogues (temporairement set false)",
+  "repo": "qbzjs/POLYGON-Dungeon-Realms---Low-Poly-3D-Art-by-Synty",
+  "date": "2022-08-08"
+ },
+ {
+  "msg": "Modification:\n-Création des cards recette:\n -Ajout des titres\n -Ajout du temps\n -Ajout liste d'ingredients\n -Ajout déscription",
+  "repo": "GuillaumeRossinot/Projet-7",
+  "date": "2022-08-22"
+ },
+ {
+  "msg": "Tout désavantage de race retirés\nAjout atout pour DemonRace\nAjout atout pour DwarfRace\nAjout atout pour HumanRace\nAjout cmd help\nAjout desc cmd",
+  "repo": "Erusel/Tensura-Game",
+  "date": "2022-11-29"
+ },
+ {
+  "msg": "Ajout gestion son + menu options\n\nCréation AudioManager (prefab dispo)\n\nModifiation MainMixer :\n- Ajout piste Music\n- Ajout piste Sound\n\nSettingsMenu (prefab dispo) :\n- Ajout choix de la résolution\n- Ajout choix fullscreen\n- Ajout modification volume musique\n- Ajout modification volume effets sonores",
+  "repo": "Norie1/the_night_owl",
+  "date": "2022-06-16"
+ },
+ {
+  "msg": "Ajout du maker-bundle\nAjout Orm\nAjout login basique\nAjout register basique\nAjout faq,chat,assistance, lien fb",
+  "repo": "Isandre47/fxd_sf",
+  "date": "2022-07-19"
+ },
+ {
+  "msg": "ODS-115 / FEAT :\nAjout entity NoticesBibio\nAjout DAO / Couche service\nAjout config Swagger\nAjout mapping noticesBibio / noticeXml\nAjout fichiers application.properties",
+  "repo": "abes-esr/qualimarc-api",
+  "date": "2022-07-04"
+ },
+ {
+  "msg": "Nouvelle branche (#2)\n\n* Ajout de la modification4\n\n* Ajout de la modification5\n\n* Réajout de la modification4\n\n* Suppression de la modification1\n\n* Ajout de la modification5\n\n* commit du réajout\n\n* Ajoutmain1\n\n* Ajoutbranch1\n\n* Ajoutbranch2\n\n* newb_Ajout\n\n* nouvelle_b_Ajout",
+  "repo": "madousang/projet_git",
+  "date": "2022-11-15"
+ },
+ {
+  "msg": "Feat : ajout export établissement Utilisateur / admin\n- ajout classe générique export\n- ajout classes spécifiques pour etablissement (user / admin)\n- ajout DTO + Mapper + TU\n- Ajout controller",
+  "repo": "abes-esr/licencesnationales-back",
+  "date": "2021-11-24"
+ },
+ {
+  "msg": "suppression d'ajout\n\nsuppression d'ajout pour éviter de généraliser l'ajout de client avec l'ajout du reste",
+  "repo": "theograve/GestionDeProjetsMW",
+  "date": "2022-11-06"
+ },
+ {
+  "msg": "ajout d'un projet\n\najout d'un projet ajout d'un projet",
+  "repo": "Omayou07/EXEMPLE",
+  "date": "2022-09-29"
+ },
+ {
+  "msg": "ajout router\najout store\najout tailwind\najout momentjs\najout CityCard.vue\najout Home",
+  "repo": "jaquinod/vue-openweatherEJ",
+  "date": "2020-09-11"
+ },
+ {
+  "msg": "Ajout bootstrap avec yarn, ajout du footer, ajout modal contact",
+  "repo": "junta9/projet-hmong-asso",
+  "date": "2022-09-28"
+ },
+ {
+  "msg": "ODS 167: Ajout PresenceSousZoneMemeZone\nAjout TU\nAjout SousZoneOperator",
+  "repo": "abes-esr/qualimarc-api",
+  "date": "2022-10-18"
+ },
+ {
+  "msg": "dossier ajout\n\najout du dossier ajout dans le fap apres avoir ajouter le bootstrap au fichier ajout",
+  "repo": "leonardmazenod/webweekFAP",
+  "date": "2022-10-25"
+ },
+ {
+  "msg": "ajout les bg\najout liste\najout link script",
+  "repo": "AlexisMettendorff/di22-1",
+  "date": "2022-10-24"
+ },
+ {
+  "msg": "Ajout de la table capteur. Ajout des vues pour l'ajout d'un capteur",
+  "repo": "aevivasabril/SiteGestionResaPFLCore",
+  "date": "2022-11-29"
+ },
+ {
+  "msg": "ajout action ajout en favoris + ajout formulaire pour ajouter en favoris",
+  "repo": "Pol0m/SAE_Appli_Web_Securisee",
+  "date": "2022-11-09"
+ },
+ {
+  "msg": "ODS-339 : Ajout WebDto règle réciprocité\n- Ajout de la Webdto\n- Ajout des beans dans le mapper\n- Ajout vérification dans controller pour empêcher la création de règle simple de type réciprocité\n- Ajout des TU du mapper",
+  "repo": "abes-esr/qualimarc-api",
+  "date": "2022-11-17"
+ },
+ {
+  "msg": "ajout fichier html\najout des image\najout fichier css\najout de contenu",
+  "repo": "jad-la/maquette-bootstrap",
+  "date": "2022-04-15"
+ },
+ {
+  "msg": "Ajout print (#5)\n\n* Ajout fct + ajout markdown\n\n* Ajout fct tata",
+  "repo": "github720114/repotest1",
+  "date": "2022-02-09"
+ },
+ {
+  "msg": "ajout du head\najout link\najout script pour font awesome\najout title\n ajout du body\n ajout du header\n ajout logo reservia\n ajout barre de recherche",
+  "repo": "seb95270/SebastienDonnadieu_2_09112021",
+  "date": "2021-09-13"
+ },
+ {
+  "msg": "ajout element touch design\n\najout char et ajout clavier midi",
+  "repo": "Chaos-Medias-equipe-F/projet",
+  "date": "2022-10-27"
+ },
+ {
+  "msg": "feat(admin): filtres volontaire / inscription (#1991)\n\n* Update index.js\n\nModifications filtres inscription:\n- ajout situation\n- ajout rural\n- ajout sexe\n- ajout parent allow snu\n- label pays de résidence\n\n* Update list.js\n\nModifications filtres volontaire:\n- ajout pays de residence\n- ajout academie\n- ajout rural\n- ajout sexe\n- ajout situation\n- remove droit image status\n- remove rules\n- remove auto test\n- remove autotest status\n- déplacement allergies\n\n* Update translation.js\n\n* suppression rural\n\n* Revert \"suppression rural\"\n\nThis reverts commit d7ba1c400260574c5b34cdd92062f7b020bf7b61.\n\n* suppression rural\n\n* Update list.js\n\n- remove sport filter\n-  change affectation dans son département label\n\n* remove rural filters\n\nCo-authored-by: Theret Guillaume <guillaume.theret@selego.co>\nCo-authored-by: hlecourt <hlecourt99@gmail.com>",
+  "repo": "Adam-s-tech/service-national-universel",
+  "date": "2022-11-03"
+ },
+ {
+  "msg": "Documentation (#15)\n\n* docs: ajout du CHANGELOG.md\n\n* docs: ajout du CODE_OF_CONDUCT.md\n\n* docs: ajout du CONTRIBUTING.md\n\n* docs: ajout du README.md\n\n* docs: ajout du LICENSE\n\n* build: mise à jour du composer.json",
+  "repo": "TBoileau/to-rename",
+  "date": "2022-09-09"
+ },
+ {
+  "msg": "MODIF ajout de la formation wordpress et ajout du permis B\n\nMODIF ajout de la formation wordpress et ajout du permis B",
+  "repo": "oumaro001/JScv",
+  "date": "2022-08-03"
+ },
+ {
+  "msg": "🚀 Ajout BlizzardNet\n\nAjout de BlizzardNet, ajout des tests",
+  "repo": "OpenCore-Emulator/Tools-Library",
+  "date": "2022-11-19"
+ },
+ {
+  "msg": "SetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation\n\nSetupLinter: ajout de la commande d installation",
+  "repo": "osscameroon/onacut",
+  "date": "2021-12-27"
+ },
+ {
+  "msg": "ajout de ajout et modif client/hebergeur\n\najout des fichiers permettant l'ajout et la modification des hébergeurs et des clients",
+  "repo": "theograve/GestionDeProjetsMW",
+  "date": "2022-11-06"
+ },
+ {
+  "msg": "Mise à jour de l'arborsecence générale:\n- ajout de fichiers html\n- ajout de fichiers dans /layout\n- ajout du fichier base dans /base\n- ajout du fichier buttons dans /components\n- nouveau nom pour les fichiers du dossier /utils",
+  "repo": "DjStrife7/P3_V1",
+  "date": "2022-11-12"
+ },
+ {
+  "msg": "Ajout des boutons ajout cellier et ajout bouteille",
+  "repo": "MounirBHK/vino",
+  "date": "2022-09-06"
+ },
+ {
+  "msg": "doc[*] ajout procédure\n\najout de la procédure d'installation\n\najout de la procédure de lancement\n\najout de la liste des jobs disponible",
+  "repo": "DNUM-SocialGouv/1j1s-etl",
+  "date": "2022-08-30"
+ },
+ {
+  "msg": "commit de la présentation de mardi 25 novembre 2022, ajout du saut/accroupie fonctionnel, ajout des obstacles aléatoires, ajout des collisions, ajout du score",
+  "repo": "ThomasQuadro/Projet-Purple",
+  "date": "2022-10-29"
+ }
+]

@@ -1,0 +1,102 @@
+[
+ {
+  "msg": "feat: 결제 재시도 횟수 제한 및 실패 항목",
+  "change": 0,
+  "style": 0
+ },
+ {
+  "msg": "Fix(payment): Limit retry attempts and use DLQ\n\n기존",
+  "change": 0,
+  "style": 1
+ },
+ {
+  "msg": "feat: 상품 상세 조회 API에 Redis 캐싱 적용 (TTL",
+  "change": 1,
+  "style": 0
+ },
+ {
+  "msg": "perf: Add Redis cache to product detail API\n\n상품 상세 API의 응",
+  "change": 1,
+  "style": 1
+ },
+ {
+  "msg": "feat: 로그인 세션 쿠키에 SameSite=Lax",
+  "change": 2,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Add SameSite=Lax to login session cookie\n\n로그",
+  "change": 2,
+  "style": 1
+ },
+ {
+  "msg": "refactor(export): 레거시 CSV 내보내기 엔",
+  "change": 3,
+  "style": 0
+ },
+ {
+  "msg": "Remove legacy CSV export endpoint\n\n이 커밋은 더 이상 사용되지 않는 레",
+  "change": 3,
+  "style": 1
+ },
+ {
+  "msg": "feat: 주문 목록 페이지 N+1 쿼리 최적화",
+  "change": 4,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Optimize N+1 query on order list page\n\n주문 목록",
+  "change": 4,
+  "style": 1
+ },
+ {
+  "msg": "feat: 소스 테이블이 비었을 때 배치 정상 종료 처리",
+  "change": 5,
+  "style": 0
+ },
+ {
+  "msg": "fix: 야간 배치, 소스 테이블이 비어있",
+  "change": 5,
+  "style": 1
+ },
+ {
+  "msg": "feat(config): API 타임아웃 설정 키 이름 변경",
+  "change": 6,
+  "style": 0
+ },
+ {
+  "msg": "refactor(config): Rename api_timeout to api_timeout_ms",
+  "change": 6,
+  "style": 1
+ },
+ {
+  "msg": "feat: 차트 라이브러리 v5 업그레이드 및",
+  "change": 7,
+  "style": 0
+ },
+ {
+  "msg": "feat: Upgrade chart library to v5 and rewrite custom tooltips\n\n차트",
+  "change": 7,
+  "style": 1
+ },
+ {
+  "msg": "검색 색인 재구축을 4개 샤드 병렬",
+  "change": 8,
+  "style": 0
+ },
+ {
+  "msg": "perf: Parallelize search index rebuild\n\n검색 색인 재구",
+  "change": 8,
+  "style": 1
+ },
+ {
+  "msg": "파일 업로드 핸들러와 바이러스 스캐너 간 경합",
+  "change": 9,
+  "style": 0
+ },
+ {
+  "msg": "Fix: 파일 업로드 및 바이러스 스캔 경쟁 상태 해결",
+  "change": 9,
+  "style": 1
+ }
+]

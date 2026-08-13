@@ -1,0 +1,102 @@
+[
+ {
+  "msg": "feat: Limitar reintentos de pago y redirigir a cola de",
+  "change": 0,
+  "style": 0
+ },
+ {
+  "msg": "fix(pago): Limitar bucle de reintentos",
+  "change": 0,
+  "style": 1
+ },
+ {
+  "msg": "feat: Implementar caché Redis para la API de detalle de producto\n\nSe añadió",
+  "change": 1,
+  "style": 0
+ },
+ {
+  "msg": "Feat: Add Redis cache to product detail API\n\nSe ha implementado una caché de Redis para la API de detalle de producto. Esta caché tiene un tiempo de vida (TTL) de 300 segundos, lo que ayudará a reducir la carga en la base de datos y mejorar los tiempos de respuesta al servir datos de productos.",
+  "change": 1,
+  "style": 1
+ },
+ {
+  "msg": "feat: Añadir SameSite=Lax a la cookie de",
+  "change": 2,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Add SameSite=Lax to login session cookie and bump session",
+  "change": 2,
+  "style": 1
+ },
+ {
+  "msg": "Eliminado el endpoint de exportación CSV legado por falta de uso en los últimos",
+  "change": 3,
+  "style": 0
+ },
+ {
+  "msg": "feat: Remove legacy CSV export endpoint\n\nSe ha eliminado el endpoint de exportación",
+  "change": 3,
+  "style": 1
+ },
+ {
+  "msg": "fix(pedidos): Elimina consulta N+1 en la",
+  "change": 4,
+  "style": 0
+ },
+ {
+  "msg": "Fix N+1 query on order list page\n\nSe ha abordado el problema",
+  "change": 4,
+  "style": 1
+ },
+ {
+  "msg": "Fix: El batch nocturno ahora maneja tablas origen vacías.",
+  "change": 5,
+  "style": 0
+ },
+ {
+  "msg": "Fix: El lote nocturno ya no falla con tabla de origen vacía",
+  "change": 5,
+  "style": 1
+ },
+ {
+  "msg": "refactor: Renombra `api_timeout` a `api_",
+  "change": 6,
+  "style": 0
+ },
+ {
+  "msg": "feat: Rename api_timeout config key to api_timeout_ms\n\nSe",
+  "change": 6,
+  "style": 1
+ },
+ {
+  "msg": "Actualizar biblioteca de gráficos a v5 y reescribir tooltips",
+  "change": 7,
+  "style": 0
+ },
+ {
+  "msg": "feat: Actualizar librería de gráficos a v5 y reescribir tooltips\n\nSe actualizó la librería de gráficos a la versión 5.",
+  "change": 7,
+  "style": 1
+ },
+ {
+  "msg": "feat: Reconstrucción del índice de búsqueda en paralelo (4 shards)",
+  "change": 8,
+  "style": 0
+ },
+ {
+  "msg": "feat: Paralelizar la reconstrucción del índice de búsqueda\n\nEste cambio introduce",
+  "change": 8,
+  "style": 1
+ },
+ {
+  "msg": "Resuelta condición de carrera entre el gestor de subida de archivos",
+  "change": 9,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Corregida condición de carrera en subida de archivos\n\nSe ha",
+  "change": 9,
+  "style": 1
+ }
+]

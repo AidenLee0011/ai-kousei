@@ -50,20 +50,34 @@ def cmd_lint(a) -> int:
         _out("natc: language not detected. English is out of scope on purpose "
              "(use blader/humanizer). Force with --lang ja|ko|zh|de|fr|es.")
         return 0
-    _out("%s  score %d/100  errors %d  warnings %d" % (r["lang_name"], r["score"], r["errors"], r["warns"]))
+    # Output shape: the first line is the one thing to do next, then at most five
+    # findings ranked by weight. A wall of twenty findings gets closed unread.
+    fs = r["findings"]
+    if fs:
+        _out("next: %s" % (fs[0].get("fix") or fs[0]["title"]))
+    _out("%s  score %d/100  errors %d  warnings %d  %s"
+         % (r["lang_name"], r["score"], r["errors"], r["warns"],
+            "[commit blocked]" if not r["passed"] else "[passes]"))
     if r["maturity"] == "starter":
         _out("  pack maturity: starter — rules are a first pass, contributions welcome")
-    for f in r["findings"]:
+    cap = len(fs) if (a.all or a.json) else 5
+    for i, f in enumerate(fs[:cap], 1):
         tag = "ERROR" if f["severity"] == "error" else "warn "
         loc = ("L%d " % f["line"]) if f.get("line") else ""
-        _out("  [%s] %s%s  (%s)" % (tag, loc, f["title"], f["id"]))
+        head = "%d. [%s] %s%s" % (i, tag, loc, f["title"])
+        if f.get("fix"):
+            head += "  → %s" % f["fix"]
+        _out(head)
         if f.get("match"):
-            _out("         found: %s" % f["match"])
-        if f.get("why") and not a.quiet:
-            _out("         why:   %s" % f["why"])
-        if f.get("fix") and not a.quiet:
-            _out("         fix:   %s" % f["fix"])
-    if not r["findings"]:
+            _out("     found: %s" % f["match"])
+        if not a.quiet and f.get("why"):
+            _out("     why:   %s" % f["why"])
+        if not a.quiet and f.get("source"):
+            _out("     src:   %s" % f["source"])
+        _out("     rule:  %s" % f["id"])
+    if len(fs) > cap:
+        _out("%d more, run with --all" % (len(fs) - cap))
+    if not fs:
         _out("  no findings")
     return 0 if r["passed"] else 1
 
@@ -76,6 +90,67 @@ def cmd_template(a) -> int:
         return 2
     tpl = (packs[lang].get("template") or {}).get("pr" if a.pr else "commit", "")
     _out(tpl)
+    return 0
+
+
+def cmd_rules(a) -> int:
+    """Every rule with its citation and its before/after example."""
+    packs = load_packs()
+    lang = a.lang or "ja"
+    if lang not in packs:
+        _out("unknown lang: %s" % lang)
+        return 2
+    p = packs[lang]
+    srcs = p.get("sources") or {}
+    if srcs:
+        _out("sources")
+        for k, s in srcs.items():
+            _out("  %-16s %s  %s" % (k, s.get("title", ""), s.get("url", "")))
+        _out("")
+    for r in p.get("rules", []):
+        if a.rule and a.rule not in r["id"]:
+            continue
+        src = r.get("source") or {}
+        doc = srcs.get(src.get("doc"), {})
+        _out("%s  [%s]" % (r["id"], r.get("severity", "warn")))
+        _out("  %s" % r.get("title", ""))
+        if src:
+            _out("  src:    %s %s" % (doc.get("title", src.get("doc", "")), src.get("loc", "")))
+            if src.get("quote"):
+                _out("  quote:  %s" % src["quote"])
+        exm = r.get("example") or {}
+        if exm:
+            for tag, key in (("AS-IS", "before"), ("TO-BE", "after")):
+                for i, ln in enumerate((exm.get(key) or "").split("\n")):
+                    _out("  %-7s %s" % (tag if i == 0 else "", ln))
+        _out("")
+    return 0
+
+
+def cmd_metrics(a) -> int:
+    """Deterministic signals, next to the two measured corpora."""
+    from .metrics import compute
+    if a.message is not None:
+        text = a.message
+    elif a.file and a.file != "-":
+        with open(a.file, encoding="utf-8") as f:
+            text = f.read()
+    else:
+        text = sys.stdin.read()
+    m = compute(text)
+    packs = load_packs()
+    base = ((packs.get("ja") or {}).get("sources") or {})
+    hum = (base.get("human_commits") or {}).get("measured", {})
+    _out("%-24s %8s   %s" % ("signal", "this text", "human commit corpus"))
+    pairs = (("polite_rate", "敬体率"), ("passive_rate", "受身率"),
+             ("demonstrative_rate", "指示語率"), ("suffix_abstract_rate", "抽象名詞化率"),
+             ("nominal_particle_rate", "助詞重ね率"), ("progressive_rate", "進行相率"),
+             ("mean_len", "一文平均字数"))
+    ref = {"polite_rate": hum.get("敬体率", 1.0) / 100.0, "demonstrative_rate": hum.get("指示語率", 0.021),
+           "passive_rate": hum.get("受身率", 0.0), "mean_len": 24.7}
+    for k, label in pairs:
+        r = ref.get(k)
+        _out("%-24s %8s   %s" % (label, m.get(k), ("%s" % r) if r is not None else "-"))
     return 0
 
 
@@ -151,16 +226,51 @@ def cmd_selftest(a) -> int:
         got = detect_lang(s, packs)
         assert got == want, "detect %s -> %s" % (want, got)
 
-    # Japanese: generated-looking message is caught
-    r = lint("feat: 各種修正\n\nまさに重要な変更ではないでしょうか。\nいかがでしょうか。\n", "ja")
+    # Japanese: a generated-looking message is caught, with citations attached
+    ng_ja = "\n".join([
+        "feat: 各種修正しました",
+        "",
+        "本変更は革命的な改善ではないでしょうか。",
+        "- **重要**: ログを整理しました",
+    ])
+    r = lint(ng_ja, "ja")
     got = {f["id"] for f in r["findings"]}
-    assert "ja-hedge-dewanai" in got and "ja-vague-verb" in got and "ja-ikaga" in got, got
+    assert {"ja-koyo-vague-heading", "ja-ai-hype", "ja-tech-weak-phrase", "ja-ai-bold-list-label"} <= got, got
     assert not r["passed"] and r["score"] < 70, r["score"]
+    for f in r["findings"]:
+        if f["id"].startswith("ja-") and not f["id"].endswith(("-tone-mix", "-heading-order")):
+            assert f.get("source"), "ja rule without citation: %s" % f["id"]
 
-    # Korean: blog tone + guess ending + vague subject
-    r = lint("fix: 개선\n\n다음과 같습니다. 문제가 해결된 것 같습니다.\n함께 살펴보겠습니다.\n", "ko")
-    got = {f["id"] for f in r["findings"]}
-    assert {"ko-vague-subject", "ko-geot-gatda", "ko-blog-tone", "ko-daeum-gwa-gatseumnida"} <= got, got
+    # Japanese: a report-shaped human message passes
+    ok_ja = "\n".join([
+        "fix: 決済リトライの上限を3回に変更",
+        "",
+        "なぜ: リトライが無限に繰り返され、キューが滞留した",
+        "なにを: retry_max を3で固定し、超過分は dead-letter へ送る",
+        "確認: 負荷試験1時間、キュー滞留 0",
+    ])
+    r = lint(ok_ja)
+    assert r["lang"] == "ja" and r["passed"], (r["lang"], [f["id"] for f in r["findings"]])
+    assert r["score"] >= 85, (r["score"], [f["id"] for f in r["findings"]])
+
+    # Japanese: every rule carries a resolvable source and a before/after example
+    ja = packs["ja"]
+    for rule in ja["rules"]:
+        src = rule.get("source")
+        assert src and src.get("doc") in ja["sources"], rule["id"]
+        assert src.get("loc") and src.get("quote"), rule["id"]
+        exm = rule.get("example") or {}
+        assert exm.get("before") and exm.get("after"), "no example: %s" % rule["id"]
+        # the AS-IS example must actually trip its own rule, and TO-BE must not
+        sub_before = "x: y\n\n" + exm["before"] if rule.get("scope") == "body" else exm["before"]
+        hit = {f["id"] for f in lint(sub_before, "ja")["findings"]}
+        assert rule["id"] in hit, "example does not trip %s" % rule["id"]
+
+    # deterministic metrics separate the two measured corpora in the right direction
+    from .metrics import compute
+    llm_like = compute("feat: キャッシュ追加\n\n商品APIの応答速度向上のため、キャッシュを導入しました。TTL は 300 秒に設定されています。")
+    human_like = compute("fix: キャッシュ追加\n\nなぜ: 応答が遅い\nなにを: Redis を前段に追加。TTL 300 秒\n確認: p95 820ms → 210ms")
+    assert llm_like["polite_rate"] > human_like["polite_rate"], (llm_like, human_like)
 
     # Korean: template-shaped human report passes
     ok = ("fix: 결제 재시도 상한 3회로 변경\n\n"
@@ -203,7 +313,8 @@ def main(argv=None) -> int:
     q.add_argument("-m", "--message")
     q.add_argument("--lang")
     q.add_argument("--json", action="store_true")
-    q.add_argument("--quiet", action="store_true", help="findings only, no why/fix")
+    q.add_argument("--quiet", action="store_true", help="findings only, no why/source")
+    q.add_argument("--all", action="store_true", help="show every finding (default caps at 5)")
     q.set_defaults(fn=cmd_lint)
 
     q = sub.add_parser("template", help="print the report template")
@@ -216,6 +327,16 @@ def main(argv=None) -> int:
     q.add_argument("--lang")
     q.add_argument("--cmd", help="command used inside the hook (default: python -m natc)")
     q.set_defaults(fn=cmd_hook)
+
+    q = sub.add_parser("rules", help="print every rule with its citation and before/after example")
+    q.add_argument("--lang")
+    q.add_argument("--rule", help="filter by rule id substring")
+    q.set_defaults(fn=cmd_rules)
+
+    q = sub.add_parser("metrics", help="deterministic signals for one message")
+    q.add_argument("file", nargs="?", default="-")
+    q.add_argument("-m", "--message")
+    q.set_defaults(fn=cmd_metrics)
 
     q = sub.add_parser("langs", help="list rule packs")
     q.set_defaults(fn=cmd_langs)

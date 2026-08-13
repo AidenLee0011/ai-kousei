@@ -1,0 +1,102 @@
+[
+ {
+  "msg": "Fix: Begrenze Zahlungs-Retries auf 3",
+  "change": 0,
+  "style": 0
+ },
+ {
+  "msg": "fix: Begrenze Anzahl der Zahlungs-Wiederholungsvers",
+  "change": 0,
+  "style": 1
+ },
+ {
+  "msg": "feat: Redis-Cache für Produktdetail-API hinzugefügt\n\nImplement",
+  "change": 1,
+  "style": 0
+ },
+ {
+  "msg": "feat: Redis-Cache für Produktdetails hinzugefügt\n\nEin Redis-Cache wurde",
+  "change": 1,
+  "style": 1
+ },
+ {
+  "msg": "feat: Login-Sitzungscookie mit SameSite=L",
+  "change": 2,
+  "style": 0
+ },
+ {
+  "msg": "feat: SameSite=Lax für Login-Sitzungscookie hinzuge",
+  "change": 2,
+  "style": 1
+ },
+ {
+  "msg": "Entferne veralteten CSV-Export-Endpunkt.",
+  "change": 3,
+  "style": 0
+ },
+ {
+  "msg": "chore: Remove legacy CSV export endpoint\n\nDer veraltete CSV-Export-Endpunkt wurde entfernt. Dieser",
+  "change": 3,
+  "style": 1
+ },
+ {
+  "msg": "Behebe N+1-Abfrage auf der Bestellübersichtsseite",
+  "change": 4,
+  "style": 0
+ },
+ {
+  "msg": "Fix(order-list): Resolve N+1 query\n\nBehebt eine",
+  "change": 4,
+  "style": 1
+ },
+ {
+  "msg": "Fix: Nächtlicher Batch stürzt bei leerer Quelltabelle nicht mehr",
+  "change": 5,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Nightly batch handles empty source table gracefully\n\nDer nächtliche",
+  "change": 5,
+  "style": 1
+ },
+ {
+  "msg": "Konfig: `api_timeout` in `api_timeout",
+  "change": 6,
+  "style": 0
+ },
+ {
+  "msg": "feat: Rename api_timeout to api_timeout_ms, add",
+  "change": 6,
+  "style": 1
+ },
+ {
+  "msg": "feat: Diagrammbibliothek auf v5 aktualisiert und zwei benutzer",
+  "change": 7,
+  "style": 0
+ },
+ {
+  "msg": "feat: Upgrade Chart-Bibliothek auf v5\n\nDie Chart-Bibliothek",
+  "change": 7,
+  "style": 1
+ },
+ {
+  "msg": "Optimierung: Suchindex-Neuerstellung läuft nun parallel auf 4",
+  "change": 8,
+  "style": 0
+ },
+ {
+  "msg": "feat: Paralleler Suchindex-Neuaufbau\n\nBisher erfolgte der Neuaufbau des Suchindex",
+  "change": 8,
+  "style": 1
+ },
+ {
+  "msg": "Behebe Wettlaufbedingung zwischen Dateiupload-Handler und V",
+  "change": 9,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Race condition between file upload and virus scanner\n\nEs gab einen",
+  "change": 9,
+  "style": 1
+ }
+]

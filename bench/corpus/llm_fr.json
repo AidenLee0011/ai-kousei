@@ -1,0 +1,102 @@
+[
+ {
+  "msg": "Fixer la limite des réessais de paiement et gérer les é",
+  "change": 0,
+  "style": 0
+ },
+ {
+  "msg": "fix(paiement): Borner les réessais et utiliser une",
+  "change": 0,
+  "style": 1
+ },
+ {
+  "msg": "feat: Ajoute un cache Redis pour l'API de détail produit",
+  "change": 1,
+  "style": 0
+ },
+ {
+  "msg": "feat: Ajout d'un cache Redis pour l'API de",
+  "change": 1,
+  "style": 1
+ },
+ {
+  "msg": "fix(security): Ajoute SameSite=Lax au cookie de session",
+  "change": 2,
+  "style": 0
+ },
+ {
+  "msg": "fix: Ajouter SameSite=Lax au cookie de session de connexion",
+  "change": 2,
+  "style": 1
+ },
+ {
+  "msg": "Nettoyage: Suppression de l'endpoint d'export CSV obsolète",
+  "change": 3,
+  "style": 0
+ },
+ {
+  "msg": "refactor(api): Retrait de l'endpoint d'export CSV obsol",
+  "change": 3,
+  "style": 1
+ },
+ {
+  "msg": "Perf(commande): Évite les requêtes N+1 sur la liste",
+  "change": 4,
+  "style": 0
+ },
+ {
+  "msg": "Fix(orders): Optimisation de la requête N+",
+  "change": 4,
+  "style": 1
+ },
+ {
+  "msg": "fix(batch): Gérer l'absence de données dans la",
+  "change": 5,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Nightly batch exits 0 for empty source table\n\nAuparavant",
+  "change": 5,
+  "style": 1
+ },
+ {
+  "msg": "Renommage: `api_timeout` en `api_timeout_",
+  "change": 6,
+  "style": 0
+ },
+ {
+  "msg": "Refactor: Rename `api_timeout` to `api_timeout_",
+  "change": 6,
+  "style": 1
+ },
+ {
+  "msg": "feat: Mise à jour de la bibliothèque graphique vers la v5",
+  "change": 7,
+  "style": 0
+ },
+ {
+  "msg": "feat: Mise à jour de la bibliothèque de graphiques vers la",
+  "change": 7,
+  "style": 1
+ },
+ {
+  "msg": "Perf: Parallélisation de la reconstruction de l'index de recherche sur",
+  "change": 8,
+  "style": 0
+ },
+ {
+  "msg": "feat: Parallelize search index rebuild\n\nLa reconstruction de l'index de recherche",
+  "change": 8,
+  "style": 1
+ },
+ {
+  "msg": "Fix: Résolution d'une condition de concurrence entre le gestion",
+  "change": 9,
+  "style": 0
+ },
+ {
+  "msg": "Corrige une condition de concurrence entre l'upload et l'antivirus",
+  "change": 9,
+  "style": 1
+ }
+]

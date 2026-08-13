@@ -1,0 +1,732 @@
+[
+ {
+  "msg": "ansible set一覧 (#7)\n\n* ansible処理の追加\n\n* ansible/circleci、config修正\n\n* hosts修正\n\n* playbook、config修正\n\n* config修正\n\n* config修正2\n\n* playbook修正\n\n* ansiblefolderadd\n\n* ansiblecfg修正\n\n* playbook修正\n\n* ansible.cfg元に戻す\n\n* ansible.cfg修正\n\n* ansible.cfg修正2\n\n* ansible.cfg修正3\n\n* mysql add\n\nCo-authored-by: EC2 Default User <ec2-user@ip-10-0-1-241.ap-northeast-1.compute.internal>",
+  "repo": "marubeg/cloud-cyicle",
+  "date": "2022-11-29"
+ },
+ {
+  "msg": ".lintstagedrc.jsの削除、lintの挙動修正\n\nlefthook 修正\n\nlefthook 修正\n\nlefthook 修正\n\nlefthook 修正\n\nlefthook修正",
+  "repo": "LeeDDHH/next_js_template",
+  "date": "2022-10-30"
+ },
+ {
+  "msg": "Feature/add ros cicd (#1)\n\n* init: github actionsの設定\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* fix: syntaxの修正\n\n* update: 出力行数の修正",
+  "repo": "YutaNaito/sample_ros_cicd",
+  "date": "2022-06-04"
+ },
+ {
+  "msg": "PostgRESTのドキュメントのスタイル修正 (#93)\n\n* PostgRESTのドキュメント追加\n\n* 修正\n\n* 修正\n\n* 修正\n\n* Update vantiq-PostgREST.md\n\n* Update readme.md\n\n* Update README.md\n\n* Update README.md\n\n* 修正\n\n* 追記\n\n* 修正\n\n* PostgreSQLの構成を追加\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* イメージの修正",
+  "repo": "fujitake/vantiq-related",
+  "date": "2022-07-12"
+ },
+ {
+  "msg": "PF: works/for_deliveryman ページの作成 (#16)\n\n* [create]works-fordeliveryman 下準備, MV\n\n* [create]works-fordeliveryman processまで\n\n* [fix]works-fordeliveryman sp時の対応\n\n* [fix]urlの修正\n\n* [fix]urlの修正\n\n* [fix] ESLintエラー修正\n\n* [wip] ファイル名修正\n\n* [fix] ファイル名修正\n\n* [wip] ファイル名修正\n\n* [fix] ファイル名修正\n\n* [wip] ファイル名修正\n\n* [fix] ファイル名修正\n\n* [wip]ファイル名の修正\n\n* [fix] ファイル名修正\n\n* [wip] ファイル名修正\n\n* [fix] ファイル名修正\n\n* [wip] ファイル名修正\n\n* [fix] ファイル名修正\n\n* [fix] インポートファイル名誤字の修正\n\n* [wip] ファイル名修正\n\n* [fix] ファイル名修正\n\n* [wip] ファイル名修正\n\n* [fix] ファイル名修正",
+  "repo": "junna-oikawa/jun7a.com-portfolio",
+  "date": "2022-09-23"
+ },
+ {
+  "msg": "fix: FilterDropDownのボタンにReactNodeを渡せるように修正 (#2755)\n\n* fix: ボタンにReactNodeを渡せるように修正\n\n* fix: props名を修正\n\n* fix: props順を修正\n\n* fix: typo修正\n\n* fix: ボタンにReactNodeを渡せるように修正\n\n* fix: statusTextDecoratorを追加\n\n* fix: filteredIconを修正\n\n* fix: statusTextDecoratorの型を修正\n\n* fix: react-innerTextを追加して修正\n\n* fix: 可読性を考えてstatusTextDecoratorを修正\n\n* fix: atsushimさんのPRを取り込み\n\n* fix: atsushimさんのPRを取り込み\n\n* fix: decorator修正\n\n* fix: stories修正\n\n* fix: レビュー箇所修正\n\n* fix: レビュー箇所修正",
+  "repo": "zexot-com/zexot-ui",
+  "date": "2022-10-03"
+ },
+ {
+  "msg": "NewsCard レスポンシブ修正 (#24)\n\n* NewsCard レスポンシブ修正\n\n* cssを修正\n\n* mixin修正",
+  "repo": "geckou/stewp",
+  "date": "2022-11-10"
+ },
+ {
+  "msg": "Feature/user service (#1)\n\n* 修正\n\n* first commit\n\n* gitignore修正\n\n* format\n\n* github-actions修正\n\n* docker起動追加\n\n* スペルミス\n\n* 修正\n\n* 更新\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正",
+  "repo": "JY8752/grpc-spring-app",
+  "date": "2022-03-30"
+ },
+ {
+  "msg": "リンク修正・タイムテーブル高さ修正・GA4修正",
+  "repo": "YurugenEvent2022/yurugengo2022",
+  "date": "2022-11-04"
+ },
+ {
+  "msg": "コメント修正、マジックナンバー修正",
+  "repo": "HAYATOIMAI/Glass-Heart",
+  "date": "2022-10-27"
+ },
+ {
+  "msg": "ステージセレクトシーン修正\n　・StageHelp修正\n　・HelpImage修正\n　・StageSelect.cs修正\n・BuildSetting修正",
+  "repo": "nishishimamoto/charlie-klein",
+  "date": "2021-04-28"
+ },
+ {
+  "msg": "修正忘れを修正",
+  "repo": "kajitowa0301/TO_TSM_1",
+  "date": "2022-11-11"
+ },
+ {
+  "msg": "シナリオの修正と追加、サイエンススクリプトの修正、シナリオマネージャーを修正、CSVを修正",
+  "repo": "kanaya0730/sinarioGame",
+  "date": "2022-09-06"
+ },
+ {
+  "msg": "スタイル修正 (#80)\n\n* スタイル修正\n\n* スタイル修正\n\n* スタイル修正\n\n* 再修正",
+  "repo": "scombz-utilities/scombz-utilities-legacy",
+  "date": "2022-06-04"
+ },
+ {
+  "msg": "Circleci project setup (#2)\n\n* Add .circleci/config.yml\n\n* Add .circleci/config.yml\n\n* config 修正\n\n* config 修正\n\n* config修正\n\n* config修正\n\n* 修正 circle ci\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* Add .circleci/config.yml\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* config修正\n\n* データとmain.goの修正\n\n* config修正",
+  "repo": "SND1231/user-service",
+  "date": "2020-06-21"
+ },
+ {
+  "msg": "修正 - findManyをfindUniqueに修正",
+  "repo": "OKAUEND/ZennContent",
+  "date": "2022-10-20"
+ },
+ {
+  "msg": "コメント修正、マジックナンバーを修正中",
+  "repo": "HAYATOIMAI/Glass-Heart",
+  "date": "2022-10-20"
+ },
+ {
+  "msg": "rangetype.sgmlの変更漏れを修正\n\n翻訳抜けを修正。\nindextermの修正漏れを修正。\nハイフンの修正。",
+  "repo": "pgsql-jp/jpug-doc",
+  "date": "2022-09-24"
+ },
+ {
+  "msg": "Update fukuda (#128)\n\n* デザイン修正\n\n* デザイン修正\n\n* デザイン修正\n\n* ログイン、ユーザー追加バグ修正\n\n* ログインバグ修正",
+  "repo": "dwnkakami/staff-report",
+  "date": "2021-01-04"
+ },
+ {
+  "msg": "Component (#6)\n\n* ArticleAuthor コンポーネント化\n\n* component作成\n\n* componentレビュー修正\n\n* component レビュー修正\n\n* プレビュー修正\n\n* レビュー 修正",
+  "repo": "geckou/stewp",
+  "date": "2022-09-29"
+ },
+ {
+  "msg": "修正修正修正修正修正：アソシエーションとER図",
+  "repo": "same-jima/furima-36128",
+  "date": "2021-07-23"
+ },
+ {
+  "msg": "eno1220 (#6)\n\n* first commit\n\n* 自己紹介を書く\n\n* インストール-コンパイラまで\n\n* typo修正\n\n* 脚注の修正とCPUアーキテクチヤの説明の変更\n\n* ひとまず完成\n\n* typoなど修正\n\n* レビューを受けての修正1\n\n* レビューを受けての修正2\n\n* if文のsampleの修正\n\n* zigハイライト,全角スペース,太字への修正\n\n* 変数解説の修正\n\n* typoの修正\n\n* インデントの修正\n\n* 出力結果の修正",
+  "repo": "kss-pc-club/book-2022",
+  "date": "2022-05-18"
+ },
+ {
+  "msg": "feat: setup github actions.🐥 (#19)\n\n* feat: setup github actions.🐥\n\n* feat: update actions.\n\n* feat: add `npm install`\n\n* feat: add firebase token.\n\n* feat: add build command in deploy job.\n\n* fix: yml.\n\n* debug追加\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* yml分離\n\n* deployチェック\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* package.json修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正\n\n* 修正",
+  "repo": "Tetsuya-Minase/Tetsuya-Minase.github.io",
+  "date": "2020-01-28"
+ },
+ {
+  "msg": "[2022.11.10]マイページデザイン修正\n\n1.マイページデザイン修正\n2.レッスンページ修正",
+  "repo": "xian3967/uni_language",
+  "date": "2022-11-10"
+ },
+ {
+  "msg": "conceptのinviewを修正\n\n\n修正\n\n\n修正",
+  "repo": "marscode48/corp_mars_design",
+  "date": "2022-11-11"
+ },
+ {
+  "msg": "バリデージョンの修正、ステータスの修正、マイグレーションファイルの修正",
+  "repo": "kantatakata/movie-introduction",
+  "date": "2022-11-22"
+ },
+ {
+  "msg": "複数エンジン対応：INITIALIZE_ENGINE_SPEAKERの修正漏れを修正 (#928)\n\nFix: INITIALIZE_ENGINE_SPEAKERの修正漏れを修正",
+  "repo": "Cor-Incorporated/voicevox-editor-extended",
+  "date": "2022-09-09"
+ },
+ {
+  "msg": "RowCard修正 (#20)\n\n* RowCard修正\n\n* columnNumberの値を修正",
+  "repo": "geckou/stewp",
+  "date": "2022-11-09"
+ },
+ {
+  "msg": "方針項目 文章の修正 (#85)\n\n* 文章の修正\n* 文章の修正\n* 文章の修正\n* 文章の修正\n* 修正の修正",
+  "repo": "jaoafa/jaoweb-docs",
+  "date": "2021-09-28"
+ },
+ {
+  "msg": "slack workflowを追加 (#1)\n\n* slack workflowを追加\n\n* Workflowを追加\n\n* Workflowを修正\n\n* Workflowを修正\n\n* Workflowを修正\n\n* Workflowを修正：ymlの構文にあっていなかったので修正\n\n* Workflowを修正：不完全なJSON\n\n* Workflowを修正：secretsの渡し方を修正\n\n* Workflowを修正：slack-apiのバージョンを変更\n\n* Workflowを修正：テスト用にecho文を追加\n\n* Workflowを修正：テスト用にecho文を追加\n\n* Workflowを修正：入力の受け取り方を修正\n\n* Workflowを修正：レポジトリ名を表示\n\n* Workflowを修正：レポジトリ名を表示\n\n* Workflowを修正：レポジトリのリンクを取得\n\n* Workflowを修正：リンク部分を修正\n\n* Workflowを修正：リンク部分を修正\n\n* Workflowを修正\n\n* Workflowを修正\n\n* Workflowの順番を修正\n\n* Workflowを修正\n\n* Workflowにタグを追加\n\n* Workflowにタグを追加\n\n* Tagを表示\n\n* Workflowを修正：タグを修正\n\n* IDとタグの表示\n\n* Workflow：タイポ\n\n* Workflow:sectionブロックは一つしかおけないらしい\n\n* Workflow：タイポ\n\n* Workflow:環境変数の使用方法を変更\n\n* Workflowを修正：環境変数の呼び出し方\n\n* Workflow：表示の順番を変更\n\n* Workflow：表示の形式を変更\n\n* Workflow:行間など調整\n\n* Workflow:微修正\n\nCo-authored-by: zeebra-1122 <>",
+  "repo": "Lacicu/.github",
+  "date": "2022-04-06"
+ },
+ {
+  "msg": "tablesorterのcss修正/margin修正",
+  "repo": "Akiruiko/IsaacWikiJp",
+  "date": "2022-08-08"
+ },
+ {
+  "msg": "装備ボーナス修正、マップ補正修正、熟練度補正修正",
+  "repo": "Nishisonic/UnexpectedDamage",
+  "date": "2022-09-04"
+ },
+ {
+  "msg": "Feature/add db update (#5)\n\n* text if 追加\n\n* データベス、Create Delete 追加\n\n* Revert \"データベス、Create Delete 追加\"\n\nThis reverts commit baab2693ea87500c475c61ef889c524992846580.\n\n* データベース Create Delete 追加\n\n* データベース Create Delete 追加\n\n* Update追加",
+  "repo": "tmkshy1908/LINE-bot",
+  "date": "2022-10-04"
+ },
+ {
+  "msg": "DestroyTownProject2022_10_31\n\n追加したこと\n　ゲームモードの追加\n　コントローラの追加\n　ゲームインスタンスの追加\n　市長を追加\n　市長の移動・攻撃（仮）視点移動を追加\n　各種ウィジェット（HP・攻撃アイコン・ポーズメニュー）を追加",
+  "repo": "as20010910/DestroyTown",
+  "date": "2022-10-31"
+ },
+ {
+  "msg": "dx0753～dx0757 をををををを追加追加追加追加追加追加",
+  "repo": "azisaba/resourcepacks",
+  "date": "2022-07-22"
+ },
+ {
+  "msg": "WIP (#3)\n\n* text if 追加\n\n* データベス、Create Delete 追加\n\n* Revert \"データベス、Create Delete 追加\"\n\nThis reverts commit baab2693ea87500c475c61ef889c524992846580.\n\n* データベース Create Delete 追加\n\n* データベース Create Delete 追加",
+  "repo": "tmkshy1908/LINE-bot",
+  "date": "2022-10-02"
+ },
+ {
+  "msg": "center_table1,2修正 center_table3追加 ソファー3種追加 フロアライト２種追加 人力車追加 鳥居追加 stone_hoe追記+修正",
+  "repo": "takatronix/Man10ResourcePack",
+  "date": "2022-05-15"
+ },
+ {
+  "msg": "コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224コメント追加1224",
+  "repo": "okd-hkd/ImageRecognition_animalai",
+  "date": "2018-12-24"
+ },
+ {
+  "msg": "issue100 追加追加追加行\n\n追加追加追加行の追加",
+  "repo": "dragonsystem/lab3",
+  "date": "2018-10-18"
+ },
+ {
+  "msg": "セッションコントローラー追加に伴うファイルの追加追加に伴うファイルの追加",
+  "repo": "tomona-0311/loging_hireout_app",
+  "date": "2022-10-31"
+ },
+ {
+  "msg": "usersコントローラー追加に伴うファイルの追加追加に伴うファイルの追加",
+  "repo": "tomona-0311/loging_hireout_app",
+  "date": "2022-10-31"
+ },
+ {
+  "msg": "キーパッド追加用Lambda追加",
+  "repo": "azarasys/mujin_yoyaku",
+  "date": "2022-11-20"
+ },
+ {
+  "msg": "カート画面実装\n- `カートWidget` 追加\n- `メニューClass` 追加\n- `assets/images/` 追加\n- `curry.json` 追加\n- `カート画面用画像` 追加",
+  "repo": "kahomorita/menu_gacha",
+  "date": "2022-08-27"
+ },
+ {
+  "msg": "Modify: インデックスページの変更\n\nHeader追加\nFooter追加\nSidebar追加\nArticles追加\nTheme Color追加",
+  "repo": "ar4499/stop-human-wave-tactics",
+  "date": "2022-05-22"
+ },
+ {
+  "msg": "second.htmlを追加\n\ngitを追加\n\nthirl.htmlを追加",
+  "repo": "takahashi1998/git_tutorial",
+  "date": "2022-08-07"
+ },
+ {
+  "msg": ".envファイル追加\n　・APIのURLを追加\n　・APIのベースパスを追加",
+  "repo": "Shu-Matsumoto/next-gihyo-book-sample",
+  "date": "2022-08-24"
+ },
+ {
+  "msg": "readmeの追加\n\nreadmeの追加\n\nREADMEの追加",
+  "repo": "masahiro04/go-graphql",
+  "date": "2022-06-01"
+ },
+ {
+  "msg": "建物アウトラインマテリアルを追加\n\n建物アウトラインマテリアル MT_Outlineを追加\n\nBuildingBaseにアウトラインメッシュを追加",
+  "repo": "as20010910/DestroyTown",
+  "date": "2022-11-17"
+ },
+ {
+  "msg": "追加・削除・更新追加",
+  "repo": "azarasys/mujin_yoyaku",
+  "date": "2022-11-07"
+ },
+ {
+  "msg": "HiltでDI (#13)\n\n* repositoryを追加\n\n* hiltを追加\n\n* kapt追加\n\n* flavorとrepositoryImplを追加\n\n* topicViewModelを追加\n\n* PagerTopAppBar -> TopicPagerAppBarに命名変更",
+  "repo": "taratara10/Topicker",
+  "date": "2022-08-21"
+ },
+ {
+  "msg": ".gitignore ファイルを追.gitignore ファイルを追加加\n.gitignore ファイルを追.gitignore ファイルを追.gitignore ファイルを追.gitignore ファイルを追.gitignore ファイルを追.gitignore ファイルを追.gitignore ファイルを追.gitignore ファイルを追.gitignore ファイルを追加加加加加加加加加.gitignore ファイルを追加# Please enter the commit message for your changes. Lines starting",
+  "repo": "jz5qhn/git_tutorial",
+  "date": "2021-10-15"
+ },
+ {
+  "msg": "Create Statistics.py\n\nアップデート内容\n・インスタンス変数dataを追加\n・インスタンス変数lengthを追加\n・インスタンス変数meanを追加\n・インスタンス変数var_pを追加\n・インスタンス変数var_sを追加\n・インスタンス変数std_pを追加\n・インスタンス変数std_sを追加\n・インスタンス変数std_eを追加\n・インスタンス変数minを追加\n・インスタンス変数per1を追加\n・インスタンス変数medianを追加\n・インスタンス変数per3を追加\n・インスタンス変数maxを追加\n・インスタンス変数quartile_rangeを追加\n\n・インスタンスメソッドsort_ascを追加\n・インスタンスメソッドsort_descを追加\n・インスタンスメソッドcov_pを追加\n・インスタンスメソッドcov_sを追加",
+  "repo": "ARAN1218/Statistics_learning",
+  "date": "2022-01-31"
+ },
+ {
+  "msg": "テーブル追加，リレーション追加",
+  "repo": "nex-finger/MoneyManage",
+  "date": "2022-10-12"
+ },
+ {
+  "msg": "math Matrix機能追加\n\nMat34の逆変換追加.\nView Matrix追加.\nPerspective Matrix の 標準とReverseZ InfiniteFar追加.\nOrthographic Matrix の 標準とReverseZ 追加.",
+  "repo": "nagakagachi/sample_project",
+  "date": "2022-11-27"
+ },
+ {
+  "msg": "Home画面上部ボタン追加とそれに伴うMaterialComponent追加 (#2)\n\n* add VideoTableViewCell\n\n* VideoTableViewのIBoutlet紐付け\n\n* IBOutlet追加修正\n\n* Short.storyboard追加\n\n* ショート画面遷移の追加\n\n* VideoTableViewのCellreuseIdentifier変更\n\n* Localizable.strings定義\n\n* SampleAssets追加\n\n* VideoModel追加\n\n* HomeViewController追加実装\n\n* VideoCell調整\n\n* VideoModel追加\n\n* HomeViewController実装、TableViewからCollectionViewへ変更\n\n* VideoCollectionViewCell追加\n\n* VideoCollectionViewCell追加\n\n* HomeViewController追加実装\n\n* DefaultViewController新規追加\n\n* SearchViewController新規追加\n\n* SceneDelegate追加実装\n\n* CommonButton新規実装\n\n* Podfile・target周りの追加に伴うファイル追加",
+  "repo": "Markun1975/SampleYoutube",
+  "date": "2022-09-03"
+ },
+ {
+  "msg": "背景追加(skyBox)/ラップタイム追加\n\n背景追加(skyBox)/ラップタイム追加",
+  "repo": "YAKOURIKU/04ZenkiGame",
+  "date": "2022-07-25"
+ },
+ {
+  "msg": "[update]在庫追加ボタンを追加\n\n売切れ時に在庫が追加できるようボタンを追加した",
+  "repo": "Kataoka-PHP/docker-vending-machine",
+  "date": "2022-06-28"
+ },
+ {
+  "msg": ".gitignoreファイルを追加.gitignoreファイルを追加.gitignoreファイルを追加.gitignoreファイルを追加.gitignoreファイルを追加.gitignoreファイルを追加.gitignoreファイルを追加.gitignoreファイルを追加.gitignoreファイルを追加",
+  "repo": "fuji0315/git_tutorial",
+  "date": "2022-04-17"
+ },
+ {
+  "msg": "token処理追加\n\ntokenを追加してjwtを追加",
+  "repo": "kazumasa-torii/twitter_go",
+  "date": "2022-10-29"
+ },
+ {
+  "msg": "[add] #6 タスク簡易追加フィールド追加、ツールチップ追加\n\n・タスク簡易追加フィールド追加\n - プロジェクト毎にタスク簡易追加のフィールド追加\n\n・ツールチップ追加\n - タスク追加に使うボタン類にホバーしたらツールチップ表示するようにした",
+  "repo": "kazukitamaribuchi/offbal",
+  "date": "2020-09-07"
+ },
+ {
+  "msg": "Feature #1 fp3 (#1)\n\n* fpの目次追加\n\n* 目次の追加\n\n* リスクマネージメントの追加とindex.html作成\n\n* リスクマネージメントの追加\n\n* リスクマネージメントの追加\n\n* 不動産の追加\n\n* indexの修正\n\n* 不動産の追加\n\n* 相続税追加\n\n* 相続税追加\n\n* 相続税完了\n\n* タックスの追加\n\n* タックスプランニングの編集\n\n* ライフプランニングと資金計画追加\n\n* ライフプランニングと資金計画の追加\n\n* 金融追加\n\n* 金融追加\n\n* 外貨など追加\n\n* 金融追加\n\n* リンク修正\n\n* 誤字修正\n\n* タイトルに番号追加\n\n* 分割\n\n* csplit経由でのmd分割追加\n\n* 誤字の修正\n\n* 不足部分の追加\n\n* ローカルでの開発環境整備\n\n* 追加\n\n* fix\n\nCo-authored-by: uemoto akira <a_uemoto@interspace.ne.jp>",
+  "repo": "a1008u/fp-study",
+  "date": "2022-05-23"
+ },
+ {
+  "msg": "[MERGE] [追加] Organization 用の Profile へのシンボリックリンクを追加 (#10)\n\n[追加] Organization 用の Profile へのシンボリックリンクを追加",
+  "repo": "fingerpay/.github",
+  "date": "2022-10-19"
+ },
+ {
+  "msg": "モバイルメニューを作成\n\n\n追加\n\n\n追加\n\n\n追加",
+  "repo": "marscode48/corp_mars_design",
+  "date": "2022-09-22"
+ },
+ {
+  "msg": "移動床ブロックの追加\nMovingBlock.csの追加\nスイッチの追加\nSwitchAction.csの追加\n固定砲台の追加\nCannonController.csの追加\n砲弾の追加\nShellController.csの追加\n敵キャラ追加\nEnemy/EnemyController.csの追加\nサウンド追加\nGameManager.cs更新",
+  "repo": "marondopari/SideView",
+  "date": "2022-05-02"
+ },
+ {
+  "msg": "force追加\nデシリアライズにposを追加\npos変換の為の関数を追加\nThrust追加",
+  "repo": "kdMhinata/3dProd",
+  "date": "2021-11-18"
+ },
+ {
+  "msg": "adminのコントローラーの追加/ルートの追加/Viewの追加",
+  "repo": "kuma-1234/Manyo_exam",
+  "date": "2022-11-01"
+ },
+ {
+  "msg": "いろいろ追加。 ScalaMock追加。jmh追加。\n\n- 加工文字リテラル追加\n- コレクションまわりちょっと追加\n- コンストラクタの継承\n- ScalaMock追加\n- jmh追加",
+  "repo": "entosen/cheatsheet",
+  "date": "2016-02-19"
+ },
+ {
+  "msg": "演奏オプション画像2 (#191)\n\n* ドロンとか追加\n\n* 追加\n\n* 画像追加",
+  "repo": "0auBSQ/OpenTaiko",
+  "date": "2022-05-01"
+ },
+ {
+  "msg": "Update: 色々追加\n\n* getFortuneOreDropItemAmounts(Player)の追加\n* isMineableOre(Material, Material) の追加\n* getOreMinedResult(Material)の追加",
+  "repo": "TeamNekozouneko/NANNI",
+  "date": "2022-11-27"
+ },
+ {
+  "msg": "refactor/addon (#515)\n\n* [変更]ビルドスクリプトを修正\n\n* [追加]アドオン機能の要件の定義を追加\n\n* [追加]新しいアドオンシステムを定義\n\n* [追加]ファイルを追加\n\n* [追加]エンジン機能を実装\n\n* [追加]アドオン関係機能をリファクタリング(中途)\n\n* [追加]アンインストールのロジックを実装\n\n* [変更]アップデート確認機能を追加\n\n* [変更]リロード機能を実装\n\n* [変更]ネットワークからのアップデートのロジックを実装\n\n* [変更]亜人ストールのロジックを実装\n\n* [変更]不要なusingを削除\n\n* [追加]ライブラリを追加\n\n* [変更]usingを修正\n\n* [追加]アドオンページにBlazorを導入\n\n* [変更]DIコンテナに実装を追加\n\n* [変更]アドオンシステムの基盤を移行\n\n* [追加]アドオンのメインページを作成\n\n* [追加]インストール機能を実装\n\n* [追加]アップデート機能を追加\n\n* [変更]リモート更新機能を実装\n\n* [追加]読み込み失敗情報表示を追加\n\n* [変更]アンインストール機能を追加\n\n* [追加]アドオン情報ビューを追加\n\n* [追加]開発者モードを実装\n\n* [変更]APIバージョンを変更",
+  "repo": "Hayao-H/Niconicome",
+  "date": "2022-10-26"
+ },
+ {
+  "msg": "追加 : 料理\n\n・スープを追加\n・水田を追加\n・米を追加\n・海苔を追加\n・チェストボートを追加",
+  "repo": "shift02/SextiarySector2",
+  "date": "2014-12-27"
+ },
+ {
+  "msg": "10.25[追加]体温、スキャンの仮を追加UIの追加",
+  "repo": "YuSaitoST/DA_CandleGame",
+  "date": "2022-10-25"
+ },
+ {
+  "msg": "タイトル画像の追加、チュートリアルを閉じるボタンにバツの画像を追加、背景の追加、BGMの追加、MP3音源を３つ追加",
+  "repo": "SatoTaku7/KaitVR_Project1",
+  "date": "2022-07-21"
+ },
+ {
+  "msg": "第4回のサンプル追加。 (#2)\n\n* サンプル1追加。\n\n* サンプル2追加。\n\n* サンプル3追加。\n\n* サンプル4追加。\n\n* サンプル4追加。",
+  "repo": "architshin/CodeZineLaravel",
+  "date": "2019-06-14"
+ },
+ {
+  "msg": "タスク追加フォームの追加 (#155)\n\n* feat: 空コミット\n\n* feat: TaskページにTaskListの追加\n\n* feat: AddTaskアイコンの追加\n\n* fix: body領域にマージンを追加\n\n* feat: AddTaskFormのTextFieldを追加\n\n* feat: FilledTonalButtonの追加\n\n* feat: AddTaskFormの追加\n\n* fix: 不要なファイルの削除",
+  "repo": "minguu42/tomeit-canary",
+  "date": "2022-08-19"
+ },
+ {
+  "msg": "追加 : 漏斗\n\n・漏斗を追加\n・銅パイプを追加\n・タンクを追加\n・タンクボートを追加\n・銅ツールを追加",
+  "repo": "shift02/SextiarySector2",
+  "date": "2015-03-03"
+ },
+ {
+  "msg": "リファクタリング #240 (#241)\n\n* tweet_analyser.tsの各種関数をゲッターに置き換え\n\n* src/main.tsのリファクタリング\n\n* src/selector.tsのリファクタリング\n\n* src/advanced_setting_view.tsのリファクタリング\n\n* src/advanced_setting.tsのリファクタリング\n\n* src/advanced_spam_detection.tsのリファクタリング\n\n* src/browser_action_view.tsのリファクタリング\n\n* src/detect_spamの.tsリファクタリング\n\n* src/normalize.tsのリファクタリング\n\n* src/parse_regexp.tsのリファクタリング\n\n* src/setting.tsのリファクタリング\n\n* src/tweet_analyser.tsのリファクタリング",
+  "repo": "Robot-Inventor/spam-tweets-compressor",
+  "date": "2021-08-22"
+ },
+ {
+  "msg": "ソースコードのコメント追加とリファクタリング (#15)\n\n* ProfileRepositoryのコメントを追記\n\n* ProfileServiceのコメントを追記\n\n* ProfileRepositoryImplのコメントを追記\n\n* BlogComponentのリファクタリング\n\n* BlogsComponentのリファクタリング\n\n* BlogsModuleのリファクタリング\n\n* HeaderComponentのコメントの追記\n\n* SharedModuleのコメントの追記\n\n* Topページのリファクタリング\n\n* AppComponentsのリファクタリング\n\n* AppModuleのリファクタリング",
+  "repo": "takuminish/takuminishBlogJamstack",
+  "date": "2022-07-23"
+ },
+ {
+  "msg": "TOP画面リファクタリング\n* その他リファクタリング",
+  "repo": "ksaplabo-org/books",
+  "date": "2022-11-05"
+ },
+ {
+  "msg": "リファクタリング\n\nリファクタリング",
+  "repo": "SkLE3B/-_DayDream",
+  "date": "2022-05-24"
+ },
+ {
+  "msg": "・リファクタリング（インポート順）\n・リファクタリング（ディレクトリ名変更）",
+  "repo": "teru-0529/megami2210_backend",
+  "date": "2022-11-15"
+ },
+ {
+  "msg": "refactor(todo): Todoアプリのリファクタリング (#951)\n\n* refactor(todo): エントリポイントのリファクタリング\n\n* refactor(todoapp): アプリの構造をリファクタリング\n\n* refactor(todoapp): form-eventのリファクタリング\n\n* refactor(todoapp): event-modelのリファクタリング\n\n* chore(todoapp): titleを追加\n\n* refactor(todoapp): update-deleteのリファクタリング\n\n* refactor(todoapp): finalのリファクタリング\n\n* fix typo\n\n* fix empty line\n\n* fix\n\n* fix\n\n* fix\n\n* fic\n\n* fix",
+  "repo": "js-primer/js-primer",
+  "date": "2019-09-05"
+ },
+ {
+  "msg": "Thymeleafリファクタリング\n\nフラグメントを使ったリファクタリング",
+  "repo": "east-forest/its",
+  "date": "2022-09-24"
+ },
+ {
+  "msg": "・リファクタリング（migration移動）\n・リファクタリング（segment_values.py移動）",
+  "repo": "teru-0529/megami2210_backend",
+  "date": "2022-11-16"
+ },
+ {
+  "msg": "ユーザー追加画面のリファクタリング\n* ユーザー更新画面のリファクタリング",
+  "repo": "ksaplabo-org/books",
+  "date": "2022-11-26"
+ },
+ {
+  "msg": "Develop (#33)\n\n* ♻️ refa/リファクタリング\n\n* ♻️ リファクタリング\n\n* ⚡️ レンダリング抑える\n\n* ♻️ refa\n\n* 🚧 リファクタ中\n\n* 最優先　リファクタリング #24  ♻️\n\n* 最優先　リファクタリング #24 HTML\n\n* ログイン周りの挙動 #27 アカウント\n\n* 🔥 本番用にリファクタ\n\n* 🐛 vercelのエラーを解消",
+  "repo": "katayama8000/memory-with-music",
+  "date": "2022-10-08"
+ },
+ {
+  "msg": "[ref #53] リファクタリング作業\n\n-GraphicsDeviceのリファクタリング\n-TextureManagerクラスのリファクタリング\n-WindowsCreatorクラスのリファクタリング",
+  "repo": "human-osaka-game-2016/T-SEN",
+  "date": "2017-02-15"
+ },
+ {
+  "msg": "* ユーザー情報追加画面のリファクタリング\n* ユーザー情報更新画面のリファクタリング",
+  "repo": "ksaplabo-org/books",
+  "date": "2022-10-29"
+ },
+ {
+  "msg": "リファクタリング (#50)\n\nリファクタリング",
+  "repo": "igapyon/simple-odata4",
+  "date": "2021-03-16"
+ },
+ {
+  "msg": "リファクタリング。 (#48)\n\nリファクタリング",
+  "repo": "igapyon/simple-odata4",
+  "date": "2021-03-15"
+ },
+ {
+  "msg": "リファクタリング (#46)\n\nリファクタリング",
+  "repo": "igapyon/simple-odata4",
+  "date": "2021-03-15"
+ },
+ {
+  "msg": "[ リファクタリング ] タイトル書き換えの PHPUnit テストのリファクタリング",
+  "repo": "vektor-inc/vk-all-in-one-expansion-unit",
+  "date": "2022-10-12"
+ },
+ {
+  "msg": "リファクタリング起点（このコードからオブジェクト指向的にリファクタリングする）",
+  "repo": "Kitano-Ayana/blackjack_php",
+  "date": "2022-10-29"
+ },
+ {
+  "msg": "modelとserializerのリファクタリング と クライアント周りを少しリファクタリング",
+  "repo": "SakiyaPro/AnimeSearcher3",
+  "date": "2022-08-02"
+ },
+ {
+  "msg": "fix:スペースを修正。トップページ見出しタグテストを追加 (#6)\n\n* fix:スペースを修正。トップページ見出しタグテストを追加\n\n* style:リファクタリング\n\n* style:リファクタリング\n\n* style:リファクタリング",
+  "repo": "sambatriste/try-playwright",
+  "date": "2022-11-15"
+ },
+ {
+  "msg": "refactoring (#4)\n\n* リファクタリング\n\n* リファクタリング\n\n* リファクタリング\n\nCo-authored-by: fujita <fujita@nulab.com>",
+  "repo": "tockri/not-scary-fp",
+  "date": "2022-07-03"
+ },
+ {
+  "msg": "リファクタリング. (#247)\n\n* リファクタリング。",
+  "repo": "igapyon/oiyokan",
+  "date": "2021-04-18"
+ },
+ {
+  "msg": "リファクタリング (#237)\n\nリファクタリング",
+  "repo": "igapyon/oiyokan",
+  "date": "2021-04-17"
+ },
+ {
+  "msg": "test:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:tests/Unitフォルダを作成\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:APP_KEYを変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更\n\ntest:config.ymlの変更",
+  "repo": "Satoh-K37/spoily",
+  "date": "2021-12-29"
+ },
+ {
+  "msg": "Add GitHub actions (#11)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "Add GitHub actions (#10)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "Add GitHub actions (#12)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-05"
+ },
+ {
+  "msg": "Add GitHub actions (#9)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "Add GitHub actions (#8)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "Add GitHub actions (#13)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-05"
+ },
+ {
+  "msg": "Add GitHub actions (#14)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正\n\n* deploy.ymlの修正",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-05"
+ },
+ {
+  "msg": "てすとのために変更したよ\n\n変変更変更\n変更変更\n変更変更\n更変更",
+  "repo": "F1logistics/test001",
+  "date": "2018-06-25"
+ },
+ {
+  "msg": "Add GitHub actions (#7)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "refactor: コードを改善\n\ndocstring、コメント、ログを変更\n  - Twitterユーザ を ユーザ に変更\n  - Twitterリスト を リスト に変更\n変数名を変更\n  - twitter_user を user に変更\n  - twitter_list を list_ に変更\n  - path を file_path に変更\n  - 列挙型クラスの変数名をクラス名に併せて変更\nクラス名を変更\n  - 列挙型クラスのクラス名を EnumOfXxx 形式に変更",
+  "repo": "silverag-corgi/twitter-app",
+  "date": "2022-03-26"
+ },
+ {
+  "msg": "ファイルURLの変更 (#33)\n\n* 100周年ロゴ変更\n\n* パンフレット変更\n\n* コミュニケーションロゴ変更\n\n* かるた変更\n\n* おうちスカウティング変更\n\n* ポスター変更\n\n* ムービー変更\n\n* 注釈削除\n\n* typoの修正",
+  "repo": "Scout-Association-of-Japan/SAJ-DownloadCenter",
+  "date": "2021-10-03"
+ },
+ {
+  "msg": "main.jsの変更\n\nswitchとpointerの仕様の変更(規定に沿うように変更)\n変数名の一部変更",
+  "repo": "kinumiya-norihito/web-piet-draw",
+  "date": "2022-06-06"
+ },
+ {
+  "msg": "Add GitHub actions (#6)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "Api/tab message (#8)\n\n* [追加]メッセージ関連のAPIを追加\n\n* [追加]同期プロパティーを追加\n\n* [変更]型定義等を変更\n\n* [追加]共有関数パラメーターを追加\n\n* [追加]SyncedFunctionを追加\n\n* [変更]パス変更\n\n* [修正]パスを修正\n\n* [変更]プロパティー非存在時の処理を変更\n\n* [変更]購読処理を変更\n\n* [変更]初期化処理を改善\n\n* [変更]型を修正\n\n* [変更]JSON解析の問題を修正\n\n* [変更]型情報を修正\n\n* [変更]書式を統一\n\n* [変更]JSON解析方法を変更\n\n* [変更]購読処理を修正\n\n* [変更]関数呼び出しロジックを修正",
+  "repo": "Hayao-H/NiconicomeAddonCoreLib",
+  "date": "2021-12-25"
+ },
+ {
+  "msg": "コントローラー名変更\n\n・productsに変更\n・ルーティング変更\n・コントローラー名変更\n・viewフォルダ変更",
+  "repo": "mk-67/furima-35722",
+  "date": "2021-05-30"
+ },
+ {
+  "msg": "タイトルの変更\n\nタイトルカーソル変更\n文字のフォント変更\nカーソルの動き変更",
+  "repo": "yusaku-uema/team-K",
+  "date": "2022-07-25"
+ },
+ {
+  "msg": "変更 - タイトルを変更",
+  "repo": "OKAUEND/ZennContent",
+  "date": "2022-10-04"
+ },
+ {
+  "msg": "feature/comment server (#12)\n\n* [変更]ライブラリを更新\n\n* [変更]ライブラリを更新\n\n* [変更]更新\n\n* [変更]バージョンを変更",
+  "repo": "Hayao-H/PageAnalyzePlugin",
+  "date": "2022-04-09"
+ },
+ {
+  "msg": "Add GitHub actions (#5)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "Feature/#1 create frontend environment (#3)\n\n* next.jsの導入\n\n* フォルダ名をfrontendに変更\n\n* フォーマッターの実行\n\n* TimeZoneの変更\n\n* コンテナ名の変更\n\n* コンテナ名の変更\n\n* 実行コマンドの変更\n\n* 各種コンテナ名の変更と、フロントエンドの環境追加",
+  "repo": "fumiakikobayashi/customer-management-sample",
+  "date": "2022-09-13"
+ },
+ {
+  "msg": "変更 - タイトル名を変更",
+  "repo": "OKAUEND/ZennContent",
+  "date": "2022-10-31"
+ },
+ {
+  "msg": "変更 - 文言を変更",
+  "repo": "OKAUEND/ZennContent",
+  "date": "2022-10-28"
+ },
+ {
+  "msg": "section-titleを変更\n\n\n変更\n\n\n変更",
+  "repo": "marscode48/corp_mars_cafe",
+  "date": "2022-04-05"
+ },
+ {
+  "msg": "一覧表示変更\n\n背景色変更\nスクロースサイズ変更",
+  "repo": "tatsuya720/AndroidTodoList",
+  "date": "2022-07-22"
+ },
+ {
+  "msg": "update:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更\n\nupdate:github actionの設定の変更",
+  "repo": "adenohitu/hisui",
+  "date": "2022-09-10"
+ },
+ {
+  "msg": "urlをケバブケースに変更、ディレクトリを小文字に変更\n\n命名の変更\n1.urlをケバブケースに変更\n2.ディレクトリを小文字に変更",
+  "repo": "aya030/SpringPractice",
+  "date": "2022-04-03"
+ },
+ {
+  "msg": "[update] ファイル名の変更に伴う変更\n\niconsをQRYomi_iconsに変更したため、パスを変更しました。",
+  "repo": "MizuYaYa/QRYomi",
+  "date": "2022-11-26"
+ },
+ {
+  "msg": "name year link変更\n\n名前を変更、経歴を変更",
+  "repo": "KUAD-XtechDesign/simple_page-Mikoto0624",
+  "date": "2022-06-15"
+ },
+ {
+  "msg": "色変更、文字サイズ変更、文言変更",
+  "repo": "vdslab/TikTokBuzzSongVis",
+  "date": "2022-08-02"
+ },
+ {
+  "msg": "SE変更TITLE変更BOSS死んだとき演出変更",
+  "repo": "RunaFox9356/shooting",
+  "date": "2022-09-24"
+ },
+ {
+  "msg": "refactor/comment (#477)\n\n* [追加]子のコメントリストを追加\n\n* [変更]型の安全性を向上\n\n* [追加]親コメントリストを実装\n\n* [変更]仕様変更に追従\n\n* [変更]名前空間を変更\n\n* [変更]NicoHttpStabのコンテンツを変更可能にした\n\n* [追加]WaybackKeyの取得機能を実装\n\n* [変更]クラス名を修正\n\n* [追加]リクエストビルダーを実装\n\n* [追加]コメントの取得昨日を実装\n\n* [追加]コメントのレスポンスを定義\n\n* [変更]最初のコメントを取得する機能を実装\n\n* [変更]指定したコメントの取得機能を実装\n\n* [追加]コメントのダウンロード処理を実装\n\n* [追加]コメントクラスを更新\n\n* [追加]コメントの読み込み機能を実装\n\n* [追加]コメントの書き込み機能を実装\n\n* [変更]スレッド情報を取得するようにした\n\n* [変更]クラス構成を変更\n\n* [変更]引数を修正\n\n* [追加]データ相互変換機能を実装\n\n* [変更]コメントサーバーのURL情報を読み込むようにした\n\n* [変更]キャンセル処理等を実装\n\n* [変更]アクセス修飾子を\n\n* [変更]アクセス修飾子を変更\n\n* [追加]コメントダウンローダーを実装\n\n* [変更]DIにクラスを追加\n\n* [変更]ログ機能を統合\n\n* [変更]メッセージング処理を追加\n\n* [変更]アクセス修飾子を変更\n\n* [変更]ダウンロード設定を追加\n\n* [変更]設定値を追加\n\n* [変更]設定UIを追加\n\n* [変更]BOON SUTAZIOコメとの連携機能を追加\n\n* [変更]新しいコメントDL方式を利用するようにした\n\n* [変更]アクセス修飾子を変更\n\n* [変更]DIに登録\n\n* [変更]プロパティー名を修正\n\n* [変更]メッセージング処理を追加\n\n* [変更]コメントDLの不具合を修正\n\n* [変更]DL設定の保存機能を修正\n\n* [変更]コメント読み込み時の拡張子を修正\n\n* [変更]コメント追記機能の不具合を修正",
+  "repo": "Hayao-H/Niconicome",
+  "date": "2022-04-02"
+ },
+ {
+  "msg": "[Add]migrate変更、start path変更、_form インスタンス変数へ変更",
+  "repo": "laemdfk/Rails6-bookers1-debug",
+  "date": "2022-04-25"
+ },
+ {
+  "msg": "chore: プロジェクト名変更時にURLを変更する名変更時にURLを変更する処理を変更する処理を追加",
+  "repo": "violet-ts/violet",
+  "date": "2022-01-10"
+ },
+ {
+  "msg": "indexでmenuを作成\n\n\n変更\n\n\n変更\n\n\n変更",
+  "repo": "marscode48/corp_mars_cafe",
+  "date": "2022-04-12"
+ },
+ {
+  "msg": "feature/v2 (#15)\n\n* [変更]開発環境を移行\n\n* [変更]リモート更新に対応\n\n* [変更]APIバージョンを変更",
+  "repo": "Hayao-H/PageAnalyzePlugin",
+  "date": "2022-10-28"
+ },
+ {
+  "msg": "変数の名前変更\n障害物の位置変更\nステージ変更\n減速エリアの位置変更",
+  "repo": "HachimineDaiki/KBC4U-22-",
+  "date": "2021-08-05"
+ },
+ {
+  "msg": "♻️ パーティクルライブラリを削除 (#369)\n\n* レーザーアイを変更\n\n* バーンソーサリーを変更\n\n* ウォーターマジックを変更\n\n* ルナフレアを変更\n\n* コールフィッシュを変更\n\n* censoredを変更\n\n* particleライブラリを削除",
+  "repo": "ProjectTSB/TheSkyBlessing",
+  "date": "2021-08-04"
+ },
+ {
+  "msg": "Study/#36 (#37)\n\n* #36 GitHub actionsの変更\n\n* #36 GitHub actionsの変更2\n\n* #36 GitHub actionsの変更2\n\n* #36 GitHub actionsの変更3\n\n* #36 GitHub actionsの変更4\n\n* #36 GitHub actionsの変更5\n\n* #36 GitHub actionsの変更6\n\n* #36 GitHub actionsの変更7",
+  "repo": "a1008u/PythonTraining",
+  "date": "2020-11-23"
+ },
+ {
+  "msg": "* editアイコン変更\n* ポイント変更モーダルのアイコン、ボタン色変更",
+  "repo": "double-ace/wins-sns-manage",
+  "date": "2022-05-11"
+ },
+ {
+  "msg": "プレイヤー、影、敵移動速度変更\nヒットストップ変更\nBossHP変更",
+  "repo": "DxBillGates/2022_10DaysTeamProject",
+  "date": "2022-09-14"
+ },
+ {
+  "msg": "release/v0.11.1 (#500)\n\n* [変更]バージョンを変更\n\n* [変更]アプリケーションのバージョンを変更",
+  "repo": "Hayao-H/Niconicome",
+  "date": "2022-05-03"
+ },
+ {
+  "msg": "CONTENT:シーン変更、名前変更\n\nTYPE:変更",
+  "repo": "kaho-miyamoto/OpendataPlayer2",
+  "date": "2022-08-18"
+ },
+ {
+  "msg": "[ch] アドバタイスパケットの種類変更\nキャラクタリスティックの長さ変更\ntx power の変更",
+  "repo": "bols-blue/DroneIDJP",
+  "date": "2022-09-19"
+ },
+ {
+  "msg": "■ノードサイズの変更対応\nルートノード、ノードのサイズも変更可能に変更\n\n■マップピンチスケール最小値の変更\n0.5→0.2 に変更",
+  "repo": "pmyohei/FileMapping",
+  "date": "2022-08-17"
+ },
+ {
+  "msg": "コメントを変更\n\n♦コメントを変更 (+1 squashed commits)\n\nSquashed commits:\n\n[b25af0bf] ♦コメントを変更",
+  "repo": "TownOfNext/TONX-Dev",
+  "date": "2022-10-18"
+ },
+ {
+  "msg": "Add GitHub actions (#4)\n\n* deploy.ymlの追加\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更\n\n* deploy.ymlの変更",
+  "repo": "ttogane/github-actions-practice",
+  "date": "2021-04-02"
+ },
+ {
+  "msg": "Buffer を Enumerator に変更。\n\nAnyCharElement: Buffer を Enumerator に変更。\nBufferState: EnumeratorState に名前を変更。\nEnumeratorState: BufferState から名前を変更。\nCharClassElement: notContained を notContains に変更。Buffer を Enumerator に変更。\nCharClassParser: Buffer を Enumerator に変更。notContained を notContains に変更。\nClosureElement: Buffer を Enumerator に変更。strBufferCandidateStates を strEnumCandidateStateStack に変更。pushCandidateState() を削除し、candidateStateStack.push() を直接呼ぶように変更。\nElementBuffer: ElementEnumerator に名前を変更。\nElementEnumerator: ElementBuffer から名前を変更。BufferState の EnumeratorState への変更に対応。\nEndOfStringElement: Buffer を Enumerator に変更。\nOneCharElement: Buffer を Enumerator に変更。_expectedChar を _specifiedCh に変更、actualChar を actualCh に変更。\nRegexElement: Buffer を Enumerator に変更。\nRegexMatcher: Buffer を Enumerator に変更。\nRegexParser: Buffer を Enumerator に変更。\nStartOfStringElement: Buffer を Enumerator に変更。\nStringBuffer: StringEnumerator に名前を変更。\nStringEnumerator: StringBuffer から名前を変更。\nCharClassParserTest: '[' の直後でない '^' のテストを追加。Buffer を Enumerator に変更。\nElementBufferTest: ElementEnumerator に名前を変更。\nElementEnumerator: ElementBuffer から名前を変更。Buffer を Enumerator に変更。\nRegexParserTest: Buffer を Enumerator に変更。\nStringBufferTest: StringEnumeratorTest に名前を変更。\nStringEnumeratorTest: StringBufferTest から名前を変更。Buffer を Enumerator に変更。",
+  "repo": "tt195361/RegexMatcher",
+  "date": "2018-09-17"
+ }
+]

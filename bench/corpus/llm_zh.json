@@ -1,0 +1,102 @@
+[
+ {
+  "msg": "feat(payment): 限制支付重试次数并引入死信",
+  "change": 0,
+  "style": 0
+ },
+ {
+  "msg": "fix: 限制支付重试循环并引入死信队列",
+  "change": 0,
+  "style": 1
+ },
+ {
+  "msg": "feat: 为商品详情 API 引入 Redis 缓存\n\n在商品详情 API",
+  "change": 1,
+  "style": 0
+ },
+ {
+  "msg": "feat: Add Redis cache to product detail API\n\n为产品详情页",
+  "change": 1,
+  "style": 1
+ },
+ {
+  "msg": "feat(session): 为登录会话 cookie 添加 SameSite=",
+  "change": 2,
+  "style": 0
+ },
+ {
+  "msg": "feat: 为登录会话 cookie 添加 SameSite=Lax",
+  "change": 2,
+  "style": 1
+ },
+ {
+  "msg": "移除：旧版 CSV 导出接口\n\n此旧版 CSV",
+  "change": 3,
+  "style": 0
+ },
+ {
+  "msg": "Remove: 移除旧版 CSV 导出接口\n\n移除了旧",
+  "change": 3,
+  "style": 1
+ },
+ {
+  "msg": "feat: 优化订单列表页 N+1 查询问题\n\n修复订单",
+  "change": 4,
+  "style": 0
+ },
+ {
+  "msg": "fix(order): 优化订单列表页N+",
+  "change": 4,
+  "style": 1
+ },
+ {
+  "msg": "fix: 修复夜间批处理源表为空时异常",
+  "change": 5,
+  "style": 0
+ },
+ {
+  "msg": "Fix: 夜间批处理在源表为空时不再失败",
+  "change": 5,
+  "style": 1
+ },
+ {
+  "msg": "feat: 重命名配置键 api_timeout 为 api_timeout_",
+  "change": 6,
+  "style": 0
+ },
+ {
+  "msg": "feat(config): 重命名 api_timeout 为 api_timeout_ms 并",
+  "change": 6,
+  "style": 1
+ },
+ {
+  "msg": "升级图表库至 v5，并重写了两个自定义",
+  "change": 7,
+  "style": 0
+ },
+ {
+  "msg": "feat: Upgrade chart library to v5 and rewrite custom tooltips\n\n将",
+  "change": 7,
+  "style": 1
+ },
+ {
+  "msg": "feat: 搜索索引重建支持四分片并行执行",
+  "change": 8,
+  "style": 0
+ },
+ {
+  "msg": "优化：搜索索引重建支持四分片并行\n\n优化搜索索引的重建过程，使其能够并行执行。\n现在，索引重建将同时在四个分片上进行，取代了之前的串行模式。\n这项改进将大幅缩短索引重建",
+  "change": 8,
+  "style": 1
+ },
+ {
+  "msg": "修复文件上传与病毒扫描之间的竞态条件。",
+  "change": 9,
+  "style": 0
+ },
+ {
+  "msg": "Fix: Race between file upload handler and virus scanner\n\n修复了文件上传处理程序和病毒扫描器之间的竞态",
+  "change": 9,
+  "style": 1
+ }
+]
