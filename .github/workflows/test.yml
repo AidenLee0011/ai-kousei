@@ -16,8 +16,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-      - run: python -m buntai selftest
-      - run: python -m buntai lint -m "fix: キャッシュ追加" --lang ja
+      - name: selftest
+        run: |
+          python -m buntai selftest
+      - name: lint a sample message
+        run: |
+          python -m buntai lint -m "fix: キャッシュ追加" --lang ja
 
   citations:
     # Every rule quotes a clause. This job downloads the cited documents and
@@ -28,6 +32,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install requests beautifulsoup4 pdfminer.six
-      - run: python sources/fetch_ja_sources.py
-      - run: python sources/verify_quotes.py --lang ja
+      - name: install fetch dependencies
+        run: |
+          pip install requests beautifulsoup4 pdfminer.six
+      - name: fetch the cited documents
+        run: |
+          python sources/fetch_ja_sources.py
+      - name: verify every quotation verbatim
+        run: |
+          python sources/verify_quotes.py --lang ja
