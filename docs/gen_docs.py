@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 """Generate the README figures. Plain SVG, no dependencies.
 
-Data: GitHub / npm registry, measured 2026-08-13. See README for the queries.
+    python docs/gen_docs.py        # writes docs/*.svg
+
+Rasterise to PNG with any headless browser; GitHub renders the SVG directly.
 """
 import io
 import os
@@ -10,110 +13,149 @@ BG = "#ffffff"
 INK = "#1f2328"
 DIM = "#6e7781"
 LINE = "#d0d7de"
-HOLE = "#e5534b"
-FILL = "#3fb950"
-PART = "#d29922"
-BAR = "#4c8dff"
+BAD = "#e5534b"
+GOOD = "#3fb950"
+BLUE = "#4c8dff"
+JP = "-apple-system,Segoe UI,Hiragino Sans,Noto Sans JP,sans-serif"
 
 
 def esc(s):
     return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-def market_svg():
-    langs = [
-        ("English", "humanizer 35,301 / slopless 319", "covered", "commit + PR: none", "hole"),
-        ("Japanese", "textlint-ja ai-writing 1,095", "partial", "commit + PR: none", "hole"),
-        ("Korean", "none above 1 star", "hole", "commit + PR: none", "hole"),
-        ("Chinese", "none above 1 star", "hole", "commit + PR: none", "hole"),
-        ("German", "none above 1 star", "hole", "commit + PR: none", "hole"),
-        ("French", "none above 1 star", "hole", "commit + PR: none", "hole"),
-        ("Spanish", "none above 1 star", "hole", "commit + PR: none", "hole"),
-    ]
-    bars = [
-        ("blader/humanizer", "EN prose, agent skill", 35301, "35,301 stars"),
-        ("textlint-ja ai-writing", "JA prose, textlint", 1095, "1,095 stars / 48,603 npm dl per month"),
-        ("berelevant/slopless", "EN prose, deterministic", 319, "319 stars"),
-        ("commit or PR, any language", "the gap this fills", 0, "0"),
-    ]
-    W, H = 1180, 378
+def hero():
+    """AS-IS vs TO-BE, the three second version."""
+    W, H = 1200, 430
     o = io.StringIO()
-    o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="-apple-system,Segoe UI,Roboto,sans-serif">' % (W, H, W, H))
+    o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">' % (W, H, W, H, JP))
     o.write('<rect width="%d" height="%d" fill="%s"/>' % (W, H, BG))
-    o.write('<text x="28" y="34" font-size="17" font-weight="700" fill="%s">Where the tooling already exists, and where it does not</text>' % INK)
-    o.write('<text x="28" y="56" font-size="12.5" fill="%s">GitHub and npm, measured 2026-08-13. De-AI writing tools cluster in English prose. No language has one for commit messages or pull request bodies.</text>' % DIM)
+    o.write('<text x="30" y="38" font-size="19" font-weight="700" fill="%s">AI が書いた日本語コミットは、日本語話者が書くコミットと形が違う</text>' % INK)
+    o.write('<text x="30" y="62" font-size="13" fill="%s">nativecommit はその差を、公的文書の条文を根拠に指摘して直す。</text>' % DIM)
 
-    # left: coverage matrix
-    x0, y0, rw, rh = 28, 92, 168, 34
-    o.write('<text x="%d" y="%d" font-size="11.5" font-weight="700" fill="%s">COVERAGE</text>' % (x0, y0 - 14, DIM))
-    o.write('<text x="%d" y="%d" font-size="11.5" fill="%s">prose de-AI tool</text>' % (x0 + rw + 10, y0 - 14, DIM))
-    o.write('<text x="%d" y="%d" font-size="11.5" fill="%s">commit / PR tool</text>' % (x0 + rw + 250, y0 - 14, DIM))
-    for i, (lang, prose, pstate, commit, cstate) in enumerate(langs):
-        y = y0 + i * rh
-        o.write('<text x="%d" y="%d" font-size="13" fill="%s">%s</text>' % (x0, y + 17, INK, lang))
-        for j, (label, state) in enumerate(((prose, pstate), (commit, cstate))):
-            bx = x0 + rw + 10 + j * 240
-            col = {"covered": FILL, "partial": PART, "hole": HOLE}[state]
-            o.write('<rect x="%d" y="%d" width="232" height="26" rx="4" fill="%s" fill-opacity="0.10" stroke="%s" stroke-opacity="0.45"/>' % (bx, y, col, col))
-            o.write('<text x="%d" y="%d" font-size="11.5" fill="%s">%s</text>' % (bx + 9, y + 17, INK, esc(label)))
+    def card(x, y, w, h, tag, color, lines, foot):
+        o.write('<rect x="%d" y="%d" width="%d" height="%d" rx="9" fill="%s" fill-opacity="0.05" stroke="%s" stroke-opacity="0.5"/>' % (x, y, w, h, color, color))
+        o.write('<rect x="%d" y="%d" width="86" height="24" rx="5" fill="%s" fill-opacity="0.14"/>' % (x + 16, y + 16, color))
+        o.write('<text x="%d" y="%d" font-size="12.5" font-weight="700" fill="%s">%s</text>' % (x + 30, y + 33, color, tag))
+        for i, ln in enumerate(lines):
+            o.write('<text x="%d" y="%d" font-size="13.5" fill="%s" font-family="Consolas,Noto Sans Mono CJK JP,monospace">%s</text>'
+                    % (x + 18, y + 66 + i * 24, INK, esc(ln)))
+        o.write('<text x="%d" y="%d" font-size="12" fill="%s">%s</text>' % (x + 18, y + h - 18, DIM, esc(foot)))
 
-    # right: demand bars (log-ish scale by sqrt for readability)
-    bx0, by0 = 700, 92
-    o.write('<text x="%d" y="%d" font-size="11.5" font-weight="700" fill="%s">DEMAND, MEASURED</text>' % (bx0, by0 - 14, DIM))
-    maxv = 35301 ** 0.5
-    for i, (name, sub, v, label) in enumerate(bars):
-        y = by0 + i * 62
-        w = int((v ** 0.5) / maxv * 400) if v else 3
-        col = BAR if v else HOLE
-        o.write('<text x="%d" y="%d" font-size="12.5" font-weight="600" fill="%s">%s</text>' % (bx0, y + 12, INK, esc(name)))
-        o.write('<text x="%d" y="%d" font-size="11" fill="%s">%s</text>' % (bx0 + 260, y + 12, DIM, esc(sub)))
-        o.write('<rect x="%d" y="%d" width="%d" height="14" rx="3" fill="%s"/>' % (bx0, y + 20, w, col))
-        o.write('<text x="%d" y="%d" font-size="11.5" fill="%s">%s</text>' % (bx0 + w + 8, y + 31, DIM, esc(label)))
-    o.write('<text x="%d" y="%d" font-size="11" fill="%s">bar length is square-root scaled</text>' % (bx0, by0 + 4 * 62 + 4, DIM))
+    card(30, 86, 540, 300, "AS-IS", BAD, [
+        "feat: 商品詳細APIにRedisキャッシュを追加",
+        "",
+        "商品詳細APIの応答速度向上とデータベース負荷軽減の",
+        "ため、Redisキャッシュを導入しました。",
+        "キャッシュの有効期限（TTL）は300秒に設定されて",
+        "います。",
+        "- **重要**: 監視対象に追加しました",
+    ], "敬体の説明文・太字ラベル・数値なし  →  score 54 / commit blocked")
+
+    o.write('<path d="M596 236 L634 236" stroke="%s" stroke-width="2"/>' % DIM)
+    o.write('<path d="M628 230 L636 236 L628 242 z" fill="%s"/>' % DIM)
+
+    card(650, 86, 520, 300, "TO-BE", GOOD, [
+        "fix: 商品詳細APIにRedisキャッシュを追加",
+        "",
+        "なぜ: 商品詳細APIの応答が遅く、DB負荷も高い",
+        "なにを: Redis を前段に追加。TTL 300秒",
+        "確認: p95 820ms → 210ms",
+    ], "体言止め・報告3項目・実測値  →  score 100 / passes")
     o.write('</svg>')
     return o.getvalue()
 
 
-def pipeline_svg():
-    W, H = 1180, 340
+def architecture():
+    W, H = 1200, 460
     o = io.StringIO()
-    o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="-apple-system,Segoe UI,Roboto,sans-serif">' % (W, H, W, H))
+    o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">' % (W, H, W, H, JP))
     o.write('<rect width="%d" height="%d" fill="%s"/>' % (W, H, BG))
     o.write('<defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 z" fill="%s"/></marker></defs>' % DIM)
-    o.write('<text x="28" y="34" font-size="17" font-weight="700" fill="%s">One rule file, two runtimes, no network</text>' % INK)
-    o.write('<text x="28" y="56" font-size="12.5" fill="%s">The hook and the browser demo read the same JSON, so what you try on the page is what blocks your commit.</text>' % DIM)
+    o.write('<text x="30" y="36" font-size="18" font-weight="700" fill="%s">出典 → 規則 → フック。規則の根拠と閾値の出どころが全部たどれる</text>' % INK)
 
-    def box(x, y, w, h, title, sub, strong=False):
-        o.write('<rect x="%d" y="%d" width="%d" height="%d" rx="7" fill="%s" fill-opacity="%s" stroke="%s"/>'
-                % (x, y, w, h, BAR if strong else "#f6f8fa", "0.08" if strong else "1", BAR if strong else LINE))
-        o.write('<text x="%d" y="%d" font-size="13" font-weight="600" fill="%s">%s</text>' % (x + 12, y + 24, INK, esc(title)))
-        for k, line in enumerate(sub):
-            o.write('<text x="%d" y="%d" font-size="11.5" fill="%s">%s</text>' % (x + 12, y + 44 + k * 16, DIM, esc(line)))
+    def box(x, y, w, h, title, sub, color=LINE, strong=False):
+        o.write('<rect x="%d" y="%d" width="%d" height="%d" rx="8" fill="%s" fill-opacity="%s" stroke="%s"/>'
+                % (x, y, w, h, color if strong else "#f6f8fa", "0.08" if strong else "1", color))
+        o.write('<text x="%d" y="%d" font-size="13" font-weight="700" fill="%s">%s</text>' % (x + 12, y + 23, INK, esc(title)))
+        for i, ln in enumerate(sub):
+            o.write('<text x="%d" y="%d" font-size="11.5" fill="%s">%s</text>' % (x + 12, y + 43 + i * 16, DIM, esc(ln)))
 
     def arrow(x1, y1, x2, y2):
         o.write('<line x1="%d" y1="%d" x2="%d" y2="%d" stroke="%s" stroke-width="1.4" marker-end="url(#a)"/>' % (x1, y1, x2, y2, DIM))
 
-    box(28, 96, 190, 78, "git commit", ["message written by you", "or by an agent"])
-    arrow(222, 135, 258, 135)
-    box(262, 96, 190, 78, "commit-msg hook", ["merge / squash / fixup", "are skipped"])
-    arrow(456, 135, 492, 135)
-    box(496, 96, 200, 78, "language detection", ["script for ja / ko / zh", "stopwords for de / fr / es"])
-    arrow(700, 135, 736, 135)
-    box(740, 96, 200, 78, "rules/_common.json", ["emoji, attribution footer,", "invisible characters"], True)
-    box(740, 190, 200, 78, "rules/<lang>.json", ["language tells, structure,", "report template"], True)
-    arrow(840, 178, 840, 188)
-    arrow(944, 135, 980, 135)
-    box(984, 96, 168, 78, "findings + score", ["error blocks the commit", "warning is printed"])
-    box(496, 214, 200, 62, "browser demo", ["same JSON, same result"])
-    arrow(736, 240, 700, 240)
-    o.write('<text x="28" y="300" font-size="12" fill="%s">No model call. No telemetry. Rules load in 4 ms, a message lints in 0.24 ms (measured). Every finding carries the reason and the rewrite in the language being linted.</text>' % DIM)
+    o.write('<text x="30" y="72" font-size="11.5" font-weight="700" fill="%s">1. 根拠</text>' % DIM)
+    box(30, 82, 250, 92, "公用文作成の考え方", ["文化審議会建議 2022-01-07", "文体・一文長・受身・階層"], BLUE, True)
+    box(30, 182, 250, 78, "JTF日本語標準スタイルガイド", ["日本翻訳連盟", "見出し・句読点・カタカナ"], BLUE, True)
+    box(30, 268, 250, 78, "textlint-ja プリセット", ["技術文書 / AI ライティング", "読点数・漢字連続・誇張"], BLUE, True)
+    box(30, 354, 250, 78, "実測コーパス", ["人手コミット 96 / LLM 30", "公開報告書 8 件 8,181 文"], GOOD, True)
+
+    o.write('<text x="330" y="72" font-size="11.5" font-weight="700" fill="%s">2. 規則ファイル</text>' % DIM)
+    box(330, 82, 300, 350, "natc/rules/ja.json", [
+        "1 規則 = pattern + severity + weight",
+        "        + source{doc, loc, quote}",
+        "        + example{before, after}",
+        "",
+        "出典のない規則は入れない。",
+        "selftest が出典解決と、",
+        "AS-IS 例が実際に発火することを検査。",
+        "",
+        "閾値は実測から決める:",
+        "  一文 60 字（公用文 Ⅲ-3-ア）",
+        "  読点 3 個（textlint max-ten）",
+        "  敬体（人手 1.0% / LLM 83.3%）",
+    ])
+    arrow(284, 128, 326, 200)
+    arrow(284, 220, 326, 220)
+    arrow(284, 306, 326, 250)
+    arrow(284, 392, 326, 280)
+
+    o.write('<text x="680" y="72" font-size="11.5" font-weight="700" fill="%s">3. 実行</text>' % DIM)
+    box(680, 82, 230, 84, "commit-msg フック", ["merge/squash/fixup は除外", "error があれば exit 1"])
+    box(680, 178, 230, 84, "natc lint / rules", ["次にやること 1 行 → 5 件", "各指摘に条番号と引用"])
+    box(680, 274, 230, 84, "ブラウザデモ", ["同じ JSON を読む", "判定がずれない"])
+    box(680, 370, 230, 62, "bench/", ["閾値の再測定"])
+    arrow(634, 200, 676, 124)
+    arrow(634, 220, 676, 220)
+    arrow(634, 240, 676, 316)
+    arrow(634, 300, 676, 400)
+
+    box(950, 82, 220, 84, "git commit", ["生成文らしければ止まる"], BAD, True)
+    box(950, 178, 220, 84, "書き手", ["AS-IS → TO-BE を見て直す"])
+    box(950, 274, 220, 84, "指摘 0 でコミット", ["公的基準に沿った記録"], GOOD, True)
+    arrow(914, 124, 946, 124)
+    arrow(914, 220, 946, 220)
+    arrow(1060, 166, 1060, 176)
+    arrow(1060, 262, 1060, 272)
+    o.write('</svg>')
+    return o.getvalue()
+
+
+def bench():
+    W, H = 1200, 300
+    rows = [
+        ("LLM が書いたコミット (n=30)", 86.7, BAD),
+        ("人手・手書き 2022-11 以前 (n=96)", 2.1, GOOD),
+        ("人手・squash マージ (n=50)", 6.0, DIM),
+    ]
+    o = io.StringIO()
+    o.write('<svg xmlns="http://www.w3.org/2000/svg" width="%d" height="%d" viewBox="0 0 %d %d" font-family="%s">' % (W, H, W, H, JP))
+    o.write('<rect width="%d" height="%d" fill="%s"/>' % (W, H, BG))
+    o.write('<text x="30" y="36" font-size="18" font-weight="700" fill="%s">コミットが止まる割合（error 発火率）</text>' % INK)
+    o.write('<text x="30" y="58" font-size="12.5" fill="%s">人手側は LLM 普及前のコミットのみ。ここでの発火は誤検出として数える。python bench/run.py --lang ja</text>' % DIM)
+    for i, (label, v, col) in enumerate(rows):
+        y = 92 + i * 58
+        o.write('<text x="30" y="%d" font-size="13" fill="%s">%s</text>' % (y + 16, INK, esc(label)))
+        o.write('<rect x="380" y="%d" width="700" height="22" rx="4" fill="#f0f3f6"/>' % y)
+        o.write('<rect x="380" y="%d" width="%d" height="22" rx="4" fill="%s"/>' % (y, int(700 * v / 100.0), col))
+        o.write('<text x="%d" y="%d" font-size="13" font-weight="700" fill="%s">%.1f%%</text>' % (390 + int(700 * v / 100.0), y + 16, col, v))
+    o.write('<text x="30" y="276" font-size="12" fill="%s">判別に効いた規則（人手 → LLM）: 本文敬体 1.0%% → 83.3%% ・ 文体混在 1.0%% → 80.0%% ・ 一文60字超 2.1%% → 33.3%% ・ 受身多用 0.0%% → 13.3%%</text>' % DIM)
     o.write('</svg>')
     return o.getvalue()
 
 
 if __name__ == "__main__":
-    for name, fn in (("market.svg", market_svg), ("pipeline.svg", pipeline_svg)):
+    for name, fn in (("hero.svg", hero), ("architecture.svg", architecture), ("bench.svg", bench)):
         path = os.path.join(HERE, name)
-        with open(path, "w", encoding="utf-8") as f:
+        with io.open(path, "w", encoding="utf-8") as f:
             f.write(fn())
         print("wrote", path)
