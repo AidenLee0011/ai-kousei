@@ -1,0 +1,138 @@
+{
+  "lang": "_common",
+  "name": "common",
+  "version": "0.1.0",
+  "maturity": "curated",
+  "note": "Applies to every language. why/fix are English by default; add an i18n block for your language.",
+  "rules": [
+    {
+      "id": "common-emoji-subject",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "[\\u2190-\\u21FF\\u2600-\\u27BF\\u2B00-\\u2BFF\\uFE0F\\u2705\\u274C\\u2728\\u2B50]|[\\uD83C-\\uDBFF][\\uDC00-\\uDFFF]",
+      "title": "emoji in subject",
+      "why": "AI generated commits open with an emoji far more often than human ones.",
+      "fix": "Remove the emoji. Use the type prefix instead.",
+      "i18n": {
+        "ja": { "title": "件名の絵文字", "why": "生成されたコミットは件名を絵文字で始めがちである。", "fix": "絵文字を消し、type 接頭辞だけ残す。" },
+        "ko": { "title": "제목의 이모지", "why": "생성된 커밋은 제목을 이모지로 시작하는 비율이 사람보다 훨씬 높다.", "fix": "이모지를 지우고 타입 접두사만 남긴다." }
+      }
+    },
+    {
+      "id": "common-emoji-body",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "body",
+      "pattern": "[\\u2600-\\u27BF\\u2B00-\\u2BFF\\uFE0F\\u2705\\u274C\\u2728\\u2B50]|[\\uD83C-\\uDBFF][\\uDC00-\\uDFFF]",
+      "title": "emoji in body",
+      "why": "Decorative emoji are a machine signature in engineering logs.",
+      "fix": "Delete. Emphasis belongs in the words.",
+      "i18n": {
+        "ja": { "title": "本文の絵文字", "why": "装飾の絵文字は開発ログでは機械の署名になる。", "fix": "削除する。強調は言葉で行う。" },
+        "ko": { "title": "본문의 이모지", "why": "장식용 이모지는 개발 로그에서 기계가 쓴 표시가 된다.", "fix": "지운다. 강조는 문장으로 한다." }
+      }
+    },
+    {
+      "id": "common-ai-attribution",
+      "severity": "error",
+      "weight": 20,
+      "scope": "any",
+      "pattern": "(?:Generated with|Co-[Aa]uthored-[Bb]y:\\s*(?:Claude|GPT|Copilot|Gemini)|Created by (?:Claude|ChatGPT)|noreply@anthropic|openai\\.com>)",
+      "flags": "i",
+      "title": "AI attribution footer",
+      "why": "The tool signature is the loudest tell of all.",
+      "fix": "Remove the footer. Author the message yourself.",
+      "i18n": {
+        "ja": { "title": "AI の署名フッター", "why": "ツール署名は最も分かりやすい痕跡である。", "fix": "フッターを削除する。" },
+        "ko": { "title": "AI 서명 푸터", "why": "도구 서명은 가장 뚜렷한 흔적이다.", "fix": "푸터를 지운다." }
+      }
+    },
+    {
+      "id": "common-invisible-char",
+      "severity": "error",
+      "weight": 20,
+      "scope": "any",
+      "pattern": "[\\u200B\\u200C\\u200D\\u2060\\uFEFF\\u00AD]",
+      "title": "invisible / watermark characters",
+      "why": "Zero-width characters survive copy-paste and mark the text as machine output.",
+      "fix": "Strip zero-width characters.",
+      "i18n": {
+        "ja": { "title": "不可視文字・透かし", "why": "ゼロ幅文字はコピーしても残り、機械出力の印になる。", "fix": "ゼロ幅文字を除去する。" },
+        "ko": { "title": "보이지 않는 문자·워터마크", "why": "폭 0 문자는 복사해도 남아 기계 출력 표식이 된다.", "fix": "폭 0 문자를 제거한다." }
+      }
+    },
+    {
+      "id": "common-em-dash",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "\\u2014|\\s\\u2013\\s",
+      "title": "em dash",
+      "why": "Rare in native non-English engineering writing, common in LLM output.",
+      "fix": "Use a colon, a comma, or split the sentence.",
+      "i18n": {
+        "ja": { "title": "ダッシュ", "why": "日本語の技術文では稀だが、生成文では多用される。", "fix": "読点か句点に置き換える。" },
+        "ko": { "title": "긴 대시", "why": "한국어 기술 문서에서는 드물지만 생성문에서는 흔하다.", "fix": "쉼표나 콜론으로 바꾸거나 문장을 나눈다." }
+      }
+    },
+    {
+      "id": "common-markdown-heading",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "body",
+      "pattern": "^#{1,6}\\s",
+      "flags": "m",
+      "title": "markdown heading in commit body",
+      "why": "Humans do not put headings in a commit message. Models do.",
+      "fix": "Use the plain report template instead.",
+      "i18n": {
+        "ja": { "title": "コミット本文の見出し記法", "why": "人はコミット本文に見出しを付けない。", "fix": "報告テンプレートを使う。" },
+        "ko": { "title": "커밋 본문의 마크다운 제목", "why": "사람은 커밋 본문에 제목 기호를 넣지 않는다.", "fix": "보고 템플릿을 쓴다." }
+      }
+    },
+    {
+      "id": "common-markdown-bold",
+      "severity": "warn",
+      "weight": 4,
+      "scope": "body",
+      "pattern": "\\*\\*[^*\\n]+\\*\\*",
+      "title": "bold markup in commit body",
+      "why": "git log renders it literally. It is a chat-window habit.",
+      "fix": "Remove the asterisks.",
+      "i18n": {
+        "ja": { "title": "太字記法", "why": "git log ではそのまま表示される。チャット画面の癖である。", "fix": "アスタリスクを消す。" },
+        "ko": { "title": "굵게 표시 기호", "why": "git log 에는 기호가 그대로 보인다. 채팅창 습관이다.", "fix": "별표를 지운다." }
+      }
+    },
+    {
+      "id": "common-hr",
+      "severity": "warn",
+      "weight": 4,
+      "scope": "body",
+      "pattern": "^\\s*(?:-{3,}|={3,}|\\*{3,})\\s*$",
+      "flags": "m",
+      "title": "horizontal rule in commit body",
+      "why": "Section dividers are a report-generator habit, not a commit habit.",
+      "fix": "Delete the divider line.",
+      "i18n": {
+        "ja": { "title": "区切り線", "why": "区切り線は生成レポートの癖で、コミットの習慣ではない。", "fix": "行を削除する。" },
+        "ko": { "title": "구분선", "why": "구분선은 생성 보고서의 습관이지 커밋의 습관이 아니다.", "fix": "그 줄을 지운다." }
+      }
+    },
+    {
+      "id": "common-multi-bang",
+      "severity": "warn",
+      "weight": 4,
+      "scope": "any",
+      "pattern": "!{2,}|[\\uFF01]{1,}",
+      "title": "exclamation marks",
+      "why": "Excitement markers do not belong in a change log.",
+      "fix": "Use a period.",
+      "i18n": {
+        "ja": { "title": "感嘆符", "why": "変更履歴に感情表現は要らない。", "fix": "句点に置き換える。" },
+        "ko": { "title": "느낌표", "why": "변경 기록에 감정 표시는 필요 없다.", "fix": "마침표로 바꾼다." }
+      }
+    }
+  ]
+}

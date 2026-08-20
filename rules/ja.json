@@ -1,0 +1,629 @@
+{
+  "lang": "ja",
+  "name": "日本語",
+  "version": "0.4.0",
+  "maturity": "sourced",
+  "policy": "すべての規則は下記 sources のいずれかに根拠を持つ。根拠のない規則は ja-extra.json に隔離する。",
+  "sources": {
+    "koyobun": {
+      "title": "公用文作成の考え方（文化審議会建議）",
+      "issuer": "文化審議会 / 文化庁",
+      "date": "2022-01-07",
+      "url": "https://www.bunka.go.jp/seisaku/bunkashingikai/kokugo/hokoku/pdf/93651301_01.pdf",
+      "version": "2022-01-07 建議（解説付き）",
+      "license": "文化庁公開資料"
+    },
+    "jtf": {
+      "title": "JTF日本語標準スタイルガイド（翻訳用）",
+      "issuer": "一般社団法人 日本翻訳連盟",
+      "url": "https://www.jtf.jp/pdf/jtf_style_guide.pdf",
+      "version": "第4.0版 2026-07-25",
+      "license": "CC BY 4.0",
+      "note": "textlint-rule-preset-JTF-style は 2.1/2.2 版ベース。本パックは 4.0 版を引用する。"
+    },
+    "ja_tech": {
+      "title": "textlint-rule-preset-ja-technical-writing",
+      "issuer": "textlint-ja",
+      "url": "https://github.com/textlint-ja/textlint-rule-preset-ja-technical-writing",
+      "license": "MIT"
+    },
+    "ai_writing": {
+      "title": "textlint-rule-preset-ai-writing",
+      "issuer": "textlint-ja",
+      "url": "https://github.com/textlint-ja/textlint-rule-preset-ai-writing",
+      "license": "MIT"
+    },
+    "jpcert_reports": {
+      "title": "公開報告書コーパス（JPCERT/CC 活動報告 8 件・8,181 文）",
+      "issuer": "JPCERT/CC（実測: sources/fetch_ja_reports.py）",
+      "url": "https://www.jpcert.or.jp/pr/",
+      "measured": {
+        "体言止め": 44.7,
+        "敬体": 20.6,
+        "常体": 1.6,
+        "mean_sentence_len": 38.0
+      }
+    },
+    "human_commits": {
+      "title": "人手コミットコーパス（2022-11 以前・96 件）",
+      "issuer": "GitHub commits search（実測: bench/collect.py）",
+      "url": "https://github.com/search",
+      "measured": {
+        "敬体率": 1.0,
+        "指示語率": 0.021,
+        "受身率": 0.0
+      }
+    }
+  },
+  "detect": {
+    "script": "[\\u3040-\\u309F\\u30A0-\\u30FF]",
+    "weight": 3
+  },
+  "template": {
+    "commit": "{type}: {要約（体言止め・30字以内）}\n\nなぜ: {背景・問題を1行}\nなにを: {変更点を1〜3行}\n確認: {検証方法と結果を1行}",
+    "pr": "## 概要\n{1行}\n\n## なぜ\n{背景・問題}\n\n## なにを\n{変更点}\n\n## 確認\n{検証手順と結果}\n\n## 影響範囲\n{影響を受ける箇所・戻し方}",
+    "report": "件名: {内容}について（報告）\n\n1 概要\n {結論を1文・体言止め}\n\n2 背景\n {なぜ着手したか}\n\n3 対応\n (1) {実施事項}\n (2) {実施事項}\n\n4 結果\n {実測値。数値を必ず入れる}\n\n5 今後の対応\n {次の一手を1件}\n\n以上"
+  },
+  "structural": {
+    "subject_max_width": 60,
+    "subject_no_period": "[。．\\.]$",
+    "body_sections": [
+      "なぜ",
+      "なにを",
+      "確認"
+    ],
+    "bullet_max": 7,
+    "sentence_max_chars": 60,
+    "max_ten": 3,
+    "kanji_run_max": 6,
+    "heading_order": [
+      "第1",
+      "1",
+      "(1)",
+      "ア",
+      "(ア)"
+    ],
+    "tone": {
+      "title": "常体と敬体の混在",
+      "a": "(?:です|ます|ました|ません)[。\\n]",
+      "b": "(?:である|だった|した|ない)[。\\n]",
+      "why": "一つの文・文書内では、常体と敬体のどちらかで統一する（公用文 Ⅲ-1-イ / JTF 1.1.1）。",
+      "fix": "記録文書は常体（である体）または体言止めに揃える。",
+      "source": "公用文作成の考え方 Ⅲ-1-イ / JTF日本語標準スタイルガイド 1.1.1"
+    },
+    "labels": {
+      "subject_long": {
+        "title": "件名 {w} 桁 > {max} 桁",
+        "why": "長い件名は git log や一覧で切れる。",
+        "fix": "詳細は本文へ移す。",
+        "source": "公用文作成の考え方 Ⅲ-2-エ（見出し）"
+      },
+      "subject_period": {
+        "title": "件名の句点",
+        "why": "見出しは常体または体言止めとする。句点で終わる文にしない。",
+        "fix": "末尾の句点を消す。",
+        "source": "JTF日本語標準スタイルガイド 1.1.2 見出し（p.10）"
+      },
+      "bullets": {
+        "title": "本文の箇条書き {n} 件",
+        "why": "論点が多すぎる。一文の論点は一つにする。",
+        "fix": "重要な {max} 件に絞るか、コミットを分ける。",
+        "source": "公用文作成の考え方 Ⅲ-3-イ"
+      },
+      "sections": {
+        "title": "報告項目の欠落: {missing}",
+        "why": "見出しを追えば全体の内容がつかめるようにする。",
+        "fix": "`ai-kousei template --lang {lang}` の型に沿って書く。",
+        "source": "公用文作成の考え方 Ⅲ-2-エ"
+      },
+      "sentence_long": {
+        "title": "一文 {n} 字 > {max} 字",
+        "why": "50〜60字ほどになってきたら読みにくなっていないか意識する。",
+        "fix": "句点で切るか、修飾節を別の文に移す。",
+        "source": "公用文作成の考え方 Ⅲ-3-ア（解説）"
+      },
+      "max_ten": {
+        "title": "一文に読点 {n} 個 > {max} 個",
+        "why": "三つ以上の情報を並べるときには箇条書を利用する。",
+        "fix": "文を分けるか箇条書にする。",
+        "source": "公用文作成の考え方 Ⅲ-3-ウ / textlint max-ten"
+      },
+      "kanji_run": {
+        "title": "漢字 {n} 字連続 > {max} 字",
+        "why": "漢字同士が連続していると読みにくさにつながる。",
+        "fix": "送り仮名や助詞を入れるか、平易な語に言い換える。",
+        "source": "textlint-rule-preset-ja-technical-writing max-kanji-continuous-len（既定6字）"
+      },
+      "heading_order": {
+        "title": "項目の階層記号が混在",
+        "why": "項目の細別と階層は 第1 → 1 → （1） → ア → （ア） の順序を用いる。",
+        "fix": "記号をこの順序に置き換える。",
+        "source": "公用文作成の考え方 Ⅱ-6-ウ"
+      }
+    }
+  },
+  "rules": [
+    {
+      "id": "ja-jtf-heading-desumasu",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "(?:です|ます|ました|ません|でした)[。\\s]*$",
+      "title": "件名が敬体で終わっている",
+      "why": "見出しは常体または体言止めとする。",
+      "fix": "体言止めにする。「決済リトライの上限を3回に変更しました」→「決済リトライの上限を3回に変更」",
+      "source": {
+        "doc": "jtf",
+        "loc": "1.1.2 見出し（p.10）",
+        "quote": "常体または体言止め。"
+      },
+      "example": {
+        "before": "feat: 決済リトライの上限を3回に変更しました",
+        "after": "feat: 決済リトライの上限を3回に変更"
+      }
+    },
+    {
+      "id": "ja-koyo-vague-heading",
+      "severity": "error",
+      "weight": 12,
+      "scope": "subject",
+      "pattern": "^(?:\\w+(?:\\([^)]*\\))?:\\s*)?(?:各種|軽微な|細かい)?(?:修正|更新|改善|調整|対応|変更|リファクタリング)(?:しました|した|完了)?[。\\s]*$",
+      "title": "件名だけでは内容がつかめない",
+      "why": "見出しを追えば全体の内容がつかめるようにする。「各種修正」は差分を読まないと分からない。",
+      "fix": "対象と結果を書く。「決済リトライの上限を3回に変更」",
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-2-エ 文書の構成",
+        "quote": "見出しを追えば全体の内容がつかめるようにする。"
+      },
+      "example": {
+        "before": "fix: 各種修正",
+        "after": "fix: 決済リトライの上限を3回に変更"
+      }
+    },
+    {
+      "id": "ja-koyo-body-polite",
+      "severity": "error",
+      "weight": 12,
+      "scope": "body",
+      "pattern": "(?:しました|します|です|ます|でした|ません)[。\n]",
+      "title": "本文が敬体（です・ます体）",
+      "why": "コミットログや報告本文は特定の相手への通知ではなく記録である。文書の目的に合わせて常体または体言止めを用いる。実測でも人手コミット本文の敬体率は 1.0%、公開報告書の文末は体言止め 44.7% に対し敬体 20.6%。（実測: 人手コミット 0.7% / LLM 生成 83.3% で発火）",
+      "fix": "常体か体言止めに直す。「導入しました」→「導入した」または「導入」",
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-1-ア 文体の選択",
+        "quote": "文書の目的や相手に合わせ、常体と敬体を適切に選択する。"
+      },
+      "example": {
+        "before": "Redis キャッシュを導入しました。TTL は 300 秒に設定されています。",
+        "after": "なぜ: 商品詳細 API の応答が遅い\nなにを: Redis キャッシュを前段に追加。TTL 300 秒\n確認: p95 820ms → 210ms"
+      }
+    },
+    {
+      "id": "ja-koyo-double-negative",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "な(?:く|い)(?:こと|わけ)?(?:も|は)?な(?:い|く)|ないとは言えない|なくはない",
+      "title": "二重否定",
+      "why": "二重否定はどうしても必要なとき以外には使わない。",
+      "fix": "肯定形に直す。「…しないわけではない」→「…することもある」",
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-コ 文の書き方",
+        "quote": "二重否定はどうしても必要なとき以外には使わない。"
+      },
+      "example": {
+        "before": "この対応で問題が起きないとは言えない。",
+        "after": "この対応では 2 件の再現ケースが残る。"
+      }
+    },
+    {
+      "id": "ja-koyo-passive-overuse",
+      "severity": "warn",
+      "weight": 8,
+      "scope": "body",
+      "pattern": "され[^。\n]{0,60}?され|され[^。\n]{0,60}?られて",
+      "title": "受身形の多用",
+      "why": "受身形は文の構造を難しくしたり責任の所在を曖昧にしたりする。",
+      "fix": "誰が何をしたかを主語にして能動形で書く。「修正されました」→「決済処理を修正した」",
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-ケ 文の書き方",
+        "quote": "受身形をむやみに使わない。"
+      },
+      "example": {
+        "before": "キャッシュが導入され、TTL が設定されている。",
+        "after": "キャッシュを前段に追加し、TTL を 300 秒に設定した。"
+      }
+    },
+    {
+      "id": "ja-koyo-conjunctive-ga",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "any",
+      "pattern": "が、.{1,60}?が、",
+      "title": "接続助詞「が」の連続",
+      "why": "接続助詞の「が」を多用する書き方は避ける。文を切れば結果的に短くなる。",
+      "fix": "句点で文を切る。",
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-カ 文の書き方",
+        "quote": "接続助詞や中止法を多用しない。"
+      },
+      "example": {
+        "before": "再試行を追加したが、上限がなく、負荷が増えたが、暫定対応とした。",
+        "after": "再試行を追加した。上限がなく負荷が増えたため、暫定対応とした。"
+      }
+    },
+    {
+      "id": "ja-koyo-doubled-joshi",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "[^、。\\n]{1,12}(で|に|を|は|へ)[^、。\\n]{1,12}\\1[^、。\\n]{0,20}[。\\n]",
+      "title": "同じ助詞の連続",
+      "why": "同じ助詞を連続して使わない。文が読みにくくなる。",
+      "fix": "語順を入れ替えるか文を分ける。",
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-キ 文の書き方",
+        "quote": "同じ助詞を連続して使わない。"
+      },
+      "example": {
+        "before": "管理画面での設定での不整合を修正。",
+        "after": "管理画面の設定に生じた不整合を修正。"
+      }
+    },
+    {
+      "id": "ja-tech-weak-phrase",
+      "severity": "error",
+      "weight": 9,
+      "scope": "any",
+      "pattern": "かもしれ(?:ない|ません)|と思(?:う|います)|では(?:ない|ありません)でしょうか|ではないだろうか|可能性(?:が|を)(?:あり|示唆)",
+      "title": "弱い表現",
+      "why": "主張を言い切る表現を使う。実行済みの変更に推量は矛盾する。",
+      "fix": "言い切るか、未確認であることを明示する。",
+      "source": {
+        "doc": "ja_tech",
+        "loc": "ja-no-weak-phrase",
+        "quote": "弱い日本語表現の利用を禁止する"
+      },
+      "example": {
+        "before": "これで解決したと思います。",
+        "after": "再現手順 3 件で再現しないことを確認。"
+      }
+    },
+    {
+      "id": "ja-tech-redundant",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "することが(?:可能|できま|でき)|であると(?:言えます|考えて)|を行(?:う|った|います|いました)|を実行し(?:た|ます|ました)",
+      "title": "冗長な表現",
+      "why": "省いても意味が通じる表現。「することができます」→「できます」、「[サ変名詞]を行う」→「[サ変名詞]する」。",
+      "fix": "短い形に直す。「更新を行った」→「更新した」",
+      "source": {
+        "doc": "ja_tech",
+        "loc": "ja-no-redundant-expression dict2",
+        "quote": "\"すること[助詞]できる\"は冗長な表現です。"
+      },
+      "example": {
+        "before": "再実行することができます。設定の更新を行いました。",
+        "after": "再実行できる。設定を更新した。"
+      }
+    },
+    {
+      "id": "ja-tech-exclamation",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "[!！?？]",
+      "title": "感嘆符・疑問符",
+      "why": "解説・広報等では必要に応じて用いてよいが、記録文書では用いない。",
+      "fix": "句点に置き換える。",
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅱ-5-(2)-ア 符号の使い方",
+        "quote": "解説・広報等においては、必要に応じて「？」「！」を用いてよい。"
+      },
+      "example": {
+        "before": "キャッシュ導入で爆速になりました！",
+        "after": "キャッシュ導入で p95 820ms → 210ms。"
+      }
+    },
+    {
+      "id": "ja-jtf-hankaku-kana",
+      "severity": "warn",
+      "weight": 6,
+      "scope": "any",
+      "pattern": "[\\uFF61-\\uFF9F]",
+      "title": "半角カタカナ",
+      "why": "カタカナは全角。半角カタカナは特殊用途を除いて使わない。",
+      "fix": "全角カタカナに直す。",
+      "source": {
+        "doc": "jtf",
+        "loc": "2.1.5 カタカナ（p.14）",
+        "quote": "全角。半角カタカナは特殊用途を除いて使わない。"
+      },
+      "example": {
+        "before": "ｷｬｯｼｭを追加",
+        "after": "キャッシュを追加"
+      }
+    },
+    {
+      "id": "ja-jtf-ascii-punct",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "[ぁ-んァ-ヶ一-鿿][,\\.](?:\\s|$)",
+      "title": "和文の句読点に半角ピリオド・カンマ",
+      "why": "ピリオド（.）とカンマ（,）は和文の句読点として使用しない。",
+      "fix": "「、」「。」に直す。",
+      "source": {
+        "doc": "jtf",
+        "loc": "1.2.2 ピリオドとカンマ（p.11）",
+        "quote": "和文の句読点として使用しない。"
+      },
+      "example": {
+        "before": "キャッシュを追加, TTL は 300 秒.",
+        "after": "キャッシュを追加し、TTL は 300 秒とした。"
+      }
+    },
+    {
+      "id": "ja-ai-bold-list-label",
+      "severity": "error",
+      "weight": 10,
+      "scope": "body",
+      "pattern": "^\\s*[-*]\\s*\\*\\*[^*\\n]+\\*\\*\\s*(?:[:：]|-|—)",
+      "flags": "m",
+      "title": "リスト項目の太字ラベル",
+      "why": "「- **重要**: …」の形はAIが生成した文章に多い、機械的な印象を与える記述パターン。",
+      "fix": "「- 重要な項目: …」のように太字と区切り記号を外す。",
+      "source": {
+        "doc": "ai_writing",
+        "loc": "no-ai-list-formatting",
+        "quote": "リストアイテムで機械的な印象を与える可能性のある記述パターンを検出します。"
+      },
+      "example": {
+        "before": "- **重要**: TTL を 300 秒に設定\n- **注意**: 監視対象に追加",
+        "after": "- TTL: 300 秒\n- 監視対象に追加"
+      }
+    },
+    {
+      "id": "ja-ai-emoji-list",
+      "severity": "error",
+      "weight": 10,
+      "scope": "body",
+      "pattern": "^\\s*[-*]\\s*(?:[\\u2705\\u274C\\u2B50\\u2728]|[\\uD83C-\\uDBFF][\\uDC00-\\uDFFF])",
+      "flags": "m",
+      "title": "リスト項目の絵文字",
+      "why": "絵文字を項目頭に置く形はAI生成文の典型パターン。",
+      "fix": "絵文字を外して語で書く。",
+      "source": {
+        "doc": "ai_writing",
+        "loc": "no-ai-list-formatting",
+        "quote": "リストアイテムで機械的な印象を与える可能性のある記述パターンを検出します。"
+      },
+      "example": {
+        "before": "- ✅ キャッシュ追加\n- 🚀 速度改善",
+        "after": "- キャッシュ追加\n- p95 820ms → 210ms"
+      }
+    },
+    {
+      "id": "ja-ai-hype",
+      "severity": "error",
+      "weight": 10,
+      "scope": "any",
+      "pattern": "革命的|ゲームチェンジャー|世界初|究極の|完全に(?:解決|対応)|すべての(?:課題|問題)を解決|魔法のように|奇跡的|可能性を(?:解き放|秘め)|パラダイムシフト|次世代の|業界を(?:変え|再定義)",
+      "title": "誇張表現",
+      "why": "AIライティングで過度に使用されがちなハイプ表現。",
+      "fix": "実測値に置き換える。「大幅に高速化」→「応答 820ms から 210ms」",
+      "source": {
+        "doc": "ai_writing",
+        "loc": "no-ai-hype-expressions",
+        "quote": "AIライティングで過度に使用されがちな誇張表現やハイプ的な表現を検出します。"
+      },
+      "example": {
+        "before": "革命的なキャッシュ導入により、すべての課題を解決します。",
+        "after": "キャッシュ導入により p95 応答が 820ms から 210ms に短縮。"
+      }
+    },
+    {
+      "id": "ja-ai-emphasis",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "body",
+      "pattern": "\\*\\*(?:非常に|重要|注意|ポイント|必須)\\*\\*|^#{1,6}\\s*\\*\\*",
+      "flags": "m",
+      "title": "機械的な強調パターン",
+      "why": "「**非常に**重要」「見出し内の太字」はAIが機械的に生成しがちな強調。",
+      "fix": "強調記号を外す。",
+      "source": {
+        "doc": "ai_writing",
+        "loc": "no-ai-emphasis-patterns",
+        "quote": "AIが機械的に生成しがちな強調パターンを検出します。"
+      },
+      "example": {
+        "before": "これは**非常に**重要な変更です。",
+        "after": "この変更で決済失敗率が 3.1% から 0.4% に低下。"
+      }
+    },
+    {
+      "id": "ja-ai-colon-continuation",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "body",
+      "pattern": "(?:します|ます|です)[:：]\\s*\\n",
+      "title": "述語＋コロンで箇条書きに続ける",
+      "why": "コロンの直後にブロックが続くのは英語的なパターン。「実行します:」は日本語として不自然。",
+      "fix": "「実行方法は次のとおり。」のように文で閉じる。名詞で終わる「使用方法:」は可。",
+      "source": {
+        "doc": "ai_writing",
+        "loc": "no-ai-colon-continuation",
+        "quote": "コロンの直後にブロック要素が続く英語的なパターンを検出します。"
+      },
+      "example": {
+        "before": "次の作業を実行します:\n- 設定変更",
+        "after": "作業は次の 2 点。\n- 設定変更"
+      }
+    },
+    {
+      "id": "ja-ai-redundant-opening",
+      "severity": "warn",
+      "weight": 5,
+      "scope": "any",
+      "pattern": "まず最初に|あらかじめ事前に|各種様々な|今回の変更では、",
+      "title": "冗長な書き出し",
+      "why": "「まず最初に」は重複。冗長表現を排除する。",
+      "fix": "「まず」に直す。書き出しの前置きは削る。",
+      "source": {
+        "doc": "ai_writing",
+        "loc": "ai-tech-writing-guideline 簡潔性",
+        "quote": "まず最初に → まず"
+      },
+      "example": {
+        "before": "まず最初に設定を確認した。",
+        "after": "まず設定を確認した。"
+      }
+    },
+    {
+      "id": "ja-ai-vague-quantity",
+      "severity": "warn",
+      "weight": 7,
+      "scope": "any",
+      "pattern": "(?:大幅に|劇的に|大きく|飛躍的に)(?:改善|向上|短縮|削減|高速化)|(?:高速|軽量|効率的)(?:な|に)(?:なりました|なった|動作)",
+      "title": "数値のない効果表現",
+      "why": "抽象的表現は具体化する（「高速な」→「50ms未満の」）。",
+      "fix": "測定値を書く。「応答時間 820ms → 210ms」",
+      "source": {
+        "doc": "ai_writing",
+        "loc": "ai-tech-writing-guideline 具体性",
+        "quote": "具体性: 抽象的表現の具体化（「高速な」→「50ms未満の」など）"
+      },
+      "example": {
+        "before": "大幅に高速化しました。",
+        "after": "p95 応答 820ms → 210ms（-74%）。"
+      }
+    },
+    {
+      "id": "ja-customer-plain-form",
+      "severity": "error",
+      "weight": 12,
+      "scope": "body",
+      "profiles": [
+        "customer"
+      ],
+      "pattern": "(?:である|だ|した|する|ない)。",
+      "title": "対顧客の文面が常体",
+      "why": "通知・依頼・照会・回答など、特定の相手を対象とした文書では敬体（です・ます体）を用いる。",
+      "fix": "敬体に直す。「変更した。」→「変更しました。」",
+      "example": {
+        "before": "メンテナンスのため、9月1日にサービスを停止する。",
+        "after": "メンテナンスのため、9月1日にサービスを停止します。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-1-ア 文体の選択",
+        "quote": "通知、依頼、照会、回答など、特定の相手を対象とした文書では敬体（です・ます体）を用いる。"
+      }
+    },
+    {
+      "id": "ja-customer-jargon",
+      "severity": "warn",
+      "weight": 8,
+      "scope": "any",
+      "profiles": [
+        "customer"
+      ],
+      "pattern": "デプロイ|リファクタリング|マージ|ロールバック|インシデント|バッチ|エンドポイント|キャッシュ削除|コミット",
+      "title": "社内用語がそのまま出ている",
+      "why": "専門用語は、相手に通じるかどうかを見極めて使う。通じない場合は言い換える。",
+      "fix": "日常語に言い換える。「デプロイしました」→「新しい機能を公開しました」",
+      "example": {
+        "before": "本日デプロイを実施し、キャッシュ削除を行いました。",
+        "after": "本日、新機能を公開しました。表示が古い場合は再読み込みをお願いします。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅱ-2 専門用語の扱い",
+        "quote": "専門用語や外来語をむやみに用いないようにし、読み手に通じる言葉を選ぶ。"
+      }
+    },
+    {
+      "id": "ja-agent-vague-term",
+      "severity": "error",
+      "weight": 12,
+      "scope": "any",
+      "profiles": [
+        "agent"
+      ],
+      "pattern": "適宜|随時|可能な限り|なるべく|必要に応じて|いくつか|多少|そのあたり",
+      "title": "機械が解釈できない曖昧語",
+      "why": "言葉の係り方によって複数の意味に取れることがないようにする。受け手が機械の場合、曖昧語は実行不能を意味する。",
+      "fix": "数値・条件・対象を明示する。「適宜再試行」→「最大3回、10秒間隔で再試行」",
+      "example": {
+        "before": "エラー時は適宜リトライし、必要に応じて通知する。",
+        "after": "エラー時は最大3回・10秒間隔でリトライする。3回失敗したら Slack #ops へ通知する。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-シ 文の書き方",
+        "quote": "言葉の係り方によって複数の意味に取れることがないようにする。"
+      }
+    },
+    {
+      "id": "ja-agent-unstated-subject",
+      "severity": "warn",
+      "weight": 8,
+      "scope": "body",
+      "profiles": [
+        "agent"
+      ],
+      "pattern": "(?:実施|対応|確認|処理)(?:した|します|済み)。",
+      "title": "誰が何をしたのかが書かれていない",
+      "why": "主語と述語の関係が分かるようにする。受け手が機械の場合、動作主が欠けると追跡できない。",
+      "fix": "動作主と対象を書く。「対応済み。」→「決済APIのリトライ上限を3回に変更した。」",
+      "example": {
+        "before": "確認しました。対応済み。",
+        "after": "決済APIのリトライ上限を3回に変更した。再現手順3件で再現しないことを確認した。"
+      },
+      "source": {
+        "doc": "koyobun",
+        "loc": "Ⅲ-3-オ 文の書き方",
+        "quote": "主語と述語の関係が分かるようにする。"
+      }
+    }
+  ],
+  "profiles": {
+    "commit": {
+      "label": "コミット・PR（記録）",
+      "off": []
+    },
+    "report": {
+      "label": "社内報告書",
+      "off": [
+        "ja-koyo-body-polite",
+        "ja-missing-sections"
+      ],
+      "note": "報告書は敬体も実測 20.6% で使われるため、敬体そのものは咎めない。文体の統一と見出し階層は検査する。"
+    },
+    "agent": {
+      "label": "エージェント間の受け渡し",
+      "off": [
+        "ja-koyo-body-polite"
+      ],
+      "note": "機械が読む前提。曖昧語と装飾を強く禁じ、構造を固定する。"
+    },
+    "customer": {
+      "label": "対顧客の文面",
+      "off": [
+        "ja-koyo-body-polite",
+        "ja-jtf-heading-desumasu",
+        "ja-missing-sections"
+      ],
+      "note": "通知・依頼など特定の相手を対象とした文書は敬体を用いる（公用文 Ⅲ-1-ア）。記録文書とは規則が反転する。"
+    }
+  }
+}
