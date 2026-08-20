@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - "docs/demo/**"
-      - "buntai/rules/**"
+      - "ai_kousei/rules/**"
       - "web/**"
   workflow_dispatch:
 

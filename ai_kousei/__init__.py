@@ -1,6 +1,6 @@
-"""buntai — deterministic linter for non-English commit messages and PR bodies.
+"""ai-kousei — deterministic linter for non-English commit messages and PR bodies.
 
-No network, no LLM, no dependencies. Rules live in buntai/rules/*.json and are the
+No network, no LLM, no dependencies. Rules live in ai_kousei/rules/*.json and are the
 single source of truth shared with the browser demo.
 """
 from __future__ import annotations
@@ -152,7 +152,7 @@ EN_LABELS = {
     "sections": {
         "title": "report sections missing: {missing}",
         "why": "The standard report shape is what makes a human-written log scannable.",
-        "fix": "Run `buntai template --lang {lang}`.",
+        "fix": "Run `ai-kousei template --lang {lang}`.",
     },
 }
 

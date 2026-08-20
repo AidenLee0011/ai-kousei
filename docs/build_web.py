@@ -21,9 +21,9 @@ for name in ("index.html", "lint.js"):
     if os.path.abspath(src) != os.path.abspath(dst):
         shutil.copy2(src, dst)
 n = 0
-for fn in os.listdir(os.path.join(ROOT, "buntai", "rules")):
+for fn in os.listdir(os.path.join(ROOT, "ai_kousei", "rules")):
     if fn.endswith(".json"):
-        shutil.copy2(os.path.join(ROOT, "buntai", "rules", fn), os.path.join(a.out, "rules", fn))
+        shutil.copy2(os.path.join(ROOT, "ai_kousei", "rules", fn), os.path.join(a.out, "rules", fn))
         n += 1
 # GitHub Pages runs Jekyll, which skips files beginning with an underscore.
 # _common.json is exactly that, so the marker file has to ship with the demo.
@@ -33,7 +33,7 @@ npm = os.path.join(ROOT, "npm")
 if os.path.isdir(npm):
     shutil.copy2(os.path.join(ROOT, "web", "lint.js"), os.path.join(npm, "lint.js"))
     os.makedirs(os.path.join(npm, "rules"), exist_ok=True)
-    for fn in os.listdir(os.path.join(ROOT, "buntai", "rules")):
+    for fn in os.listdir(os.path.join(ROOT, "ai_kousei", "rules")):
         if fn.endswith(".json"):
-            shutil.copy2(os.path.join(ROOT, "buntai", "rules", fn), os.path.join(npm, "rules", fn))
+            shutil.copy2(os.path.join(ROOT, "ai_kousei", "rules", fn), os.path.join(npm, "rules", fn))
 print("built %s (%d rule packs)" % (a.out, n))

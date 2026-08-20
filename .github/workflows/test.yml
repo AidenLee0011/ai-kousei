@@ -18,10 +18,10 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: selftest
         run: |
-          python -m buntai selftest
+          python -m ai_kousei selftest
       - name: lint a sample message
         run: |
-          python -m buntai lint -m "fix: キャッシュ追加" --lang ja
+          python -m ai_kousei lint -m "fix: キャッシュ追加" --lang ja
 
   citations:
     # Every rule quotes a clause. This job downloads the cited documents and

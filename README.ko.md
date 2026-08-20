@@ -1,19 +1,19 @@
-# buntai 文体
+# ai-kousei ─ AI校正
 
 ![MIT](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Node](https://img.shields.io/badge/node-14%2B-blue) ![deps](https://img.shields.io/badge/dependencies-0-brightgreen) ![no api](https://img.shields.io/badge/API%20calls-none-brightgreen) ![rules](https://img.shields.io/badge/ja%20rules-23%20cited-orange)
 
 **LLM 에게 일본어 커밋·보고를 시키면 본문 경체(です・ます) 비율이 1.0% 에서 83.3% 로 튑니다.**
-buntai 는 그 차이를 일본 공적문서의 조문을 근거로, 로컬 정규식만으로 잡습니다.
+ai-kousei 는 그 차이를 일본 공적문서의 조문을 근거로, 로컬 정규식만으로 잡습니다.
 
 [日本語](README.md) ・ [English](README.en.md) ・ **한국어**
 
-[데모 열기](https://aidenlee0011.github.io/buntai/) ・ 일본어 교정 / 일본어 린터 / AI 문체 판별 / 커밋 메시지 검사 / Node 불필요
+[데모 열기](https://aidenlee0011.github.io/ai-kousei/) ・ 일본어 교정 / 일본어 린터 / AI 문체 판별 / 커밋 메시지 검사 / Node 불필요
 
 ![AS-IS to TO-BE](docs/hero.png)
 
 ```bash
-pip install buntai-lint && buntai hook install --lang ja     # Python
-npx buntai-lint lint report.md --profile report              # Node
+npx ai-kousei lint report.md --profile report      # Node
+npx ai-kousei hook install --lang ja               # git hook
 ```
 
 ---
@@ -53,10 +53,10 @@ CI 는 매 푸시마다 인용 원문 18건을 내려받아 대조하고, 불일
 
 | 도구 | 대상 | 차이 |
 |---|---|---|
-| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) 1,095★ | 산문의 AI 패턴 | buntai 는 조번호를 제시하고 CI 가 원문 대조 |
-| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) 218★ | JTF 표기 규칙 | 해당 프리셋은 JTF 2.1/2.2 기반, buntai 는 **4.0(2026-07-25)** 인용 |
-| [patina](https://github.com/devswha/patina) 316★ | KO/EN/ZH/JA humanizer, commit-message 문서유형 보유 | patina 는 재작성까지 수행. buntai 는 **재작성하지 않고** 지적과 조문만 제시. 용도 반전 설계 없음 |
-| [humanizer-ja](https://github.com/gonta223/humanizer-ja) 123★ | 일본어 AI 문체 20패턴 | Claude Code 스킬. buntai 는 CLI·훅 + 오탐률 공개 |
+| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) 1,095★ | 산문의 AI 패턴 | ai-kousei 는 조번호를 제시하고 CI 가 원문 대조 |
+| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) 218★ | JTF 표기 규칙 | 해당 프리셋은 JTF 2.1/2.2 기반, ai-kousei 는 **4.0(2026-07-25)** 인용 |
+| [patina](https://github.com/devswha/patina) 316★ | KO/EN/ZH/JA humanizer, commit-message 문서유형 보유 | patina 는 재작성까지 수행. ai-kousei 는 **재작성하지 않고** 지적과 조문만 제시. 용도 반전 설계 없음 |
+| [humanizer-ja](https://github.com/gonta223/humanizer-ja) 123★ | 일본어 AI 문체 20패턴 | Claude Code 스킬. ai-kousei 는 CLI·훅 + 오탐률 공개 |
 
 차이는 3가지입니다. **조문 단위로 추적되는 근거**, **용도에 따른 규칙 반전**, **측정해 공개한 오탐률**.
 
@@ -115,14 +115,14 @@ next: 対象と結果を書く。「決済リトライの上限を3回に変更�
 ## 명령
 
 ```bash
-buntai lint .git/COMMIT_EDITMSG            # 파일
-buntai lint -m "fix: 各種修正"              # 문자열
-git log -1 --format=%B | buntai lint       # 표준입력
-buntai lint report.md --profile report --json
-buntai rules --lang ja                     # 전 규칙 + 출처 + AS-IS/TO-BE
-buntai metrics -m "..."                    # 정량 지표를 코퍼스 실측치와 병렬 표시
-buntai template --lang ja                  # 커밋 / PR / 보고서 템플릿
-python -m buntai selftest                  # 77 규칙 / 7 팩
+ai-kousei lint .git/COMMIT_EDITMSG            # 파일
+ai-kousei lint -m "fix: 各種修正"              # 문자열
+git log -1 --format=%B | ai-kousei lint       # 표준입력
+ai-kousei lint report.md --profile report --json
+ai-kousei rules --lang ja                     # 전 규칙 + 출처 + AS-IS/TO-BE
+ai-kousei metrics -m "..."                    # 정량 지표를 코퍼스 실측치와 병렬 표시
+ai-kousei template --lang ja                  # 커밋 / PR / 보고서 템플릿
+python -m ai-kousei selftest                  # 77 규칙 / 7 팩
 python bench/run.py --lang ja --rules      # 측정 재현
 ```
 
@@ -133,6 +133,6 @@ python bench/run.py --lang ja --rules      # 측정 재현
 
 ## 기여
 
-일본어 규칙 추가에는 `source`(문서명·조번호·인용)와 `example`(AS-IS / TO-BE)이 필수입니다. 다른 언어는 `buntai/rules/<code>.json` 을 추가하고, 그 언어의 공적문서·업계표준을 출처로 삼아 주세요. `python -m buntai selftest` 통과 필수.
+일본어 규칙 추가에는 `source`(문서명·조번호·인용)와 `example`(AS-IS / TO-BE)이 필수입니다. 다른 언어는 `ai_kousei/rules/<code>.json` 을 추가하고, 그 언어의 공적문서·업계표준을 출처로 삼아 주세요. `python -m ai-kousei selftest` 통과 필수.
 
 MIT License. 출처는 조번호와 짧은 인용만 게재하며 원문은 재배포하지 않습니다.

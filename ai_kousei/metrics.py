@@ -10,7 +10,7 @@ Signals are grouped the way the machine-translation literature groups them:
 interference (English structure showing through), normalisation (uniform,
 flattened rhythm), and simplification (thin vocabulary).
 
-    python -m buntai metrics -m "<text>"
+    python -m ai_kousei metrics -m "<text>"
 """
 from __future__ import annotations
 

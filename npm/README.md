@@ -1,19 +1,19 @@
-# buntai 文体
+# ai-kousei ─ AI校正
 
 ![MIT](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Node](https://img.shields.io/badge/node-14%2B-blue) ![deps](https://img.shields.io/badge/dependencies-0-brightgreen) ![no api](https://img.shields.io/badge/API%20calls-none-brightgreen) ![rules](https://img.shields.io/badge/ja%20rules-23%20cited-orange)
 
 **AI に日本語のコミットや報告を書かせると、本文の敬体率が 1.0% から 83.3% に跳ねる。**
-buntai は、その差を公的文書の条文を根拠に、ローカルの正規表現だけで止めます。
+ai-kousei は、その差を公的文書の条文を根拠に、ローカルの正規表現だけで止めます。
 
 **日本語** ・ [English](README.en.md) ・ [한국어](README.ko.md)
 
-[デモを開く](https://aidenlee0011.github.io/buntai/) ・ 日本語 校正 / 日本語 リンター / AI 文章 判定 / コミットメッセージ 日本語 / Node.js 不要
+[デモを開く](https://aidenlee0011.github.io/ai-kousei/) ・ 日本語 校正 / 日本語 リンター / AI 文章 判定 / コミットメッセージ 日本語 / Node.js 不要
 
 ![AS-IS to TO-BE](docs/hero.png)
 
 ```bash
-pip install buntai-lint && buntai hook install --lang ja     # Python
-npx buntai-lint lint report.md --profile report              # Node
+npx ai-kousei lint report.md --profile report      # Node
+npx ai-kousei hook install --lang ja               # git hook
 ```
 
 ---
@@ -49,12 +49,12 @@ CI は毎回、出典 18 件をダウンロードして引用文が原文にあ�
 
 ## 近いツールとの違い
 
-| ツール | 対象 | buntai との違い |
+| ツール | 対象 | ai-kousei との違い |
 |---|---|---|
-| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) 1,095★ | 散文の AI パターン | 出典は自前の判断基準。buntai は条番号を提示し、CI が原文照合する |
-| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) 218★ | JTF 表記規則 | **JTF 2.1/2.2 版ベース**。buntai は **4.0 版（2026-07-25, CC BY 4.0）** を引用 |
-| [patina](https://github.com/devswha/patina) 316★ | KO/EN/ZH/JA の humanize・書き換え | 書き換えまで行う。buntai は**書き換えず**指摘と条文だけ出す。用途別に規則が反転する設計は無い |
-| [humanizer-ja](https://github.com/gonta223/humanizer-ja) 123★ | 日本語 AI 文体 20 パターン | Claude Code スキル。buntai は CLI とフック、根拠提示、誤検出の実測値を持つ |
+| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) 1,095★ | 散文の AI パターン | 出典は自前の判断基準。ai-kousei は条番号を提示し、CI が原文照合する |
+| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) 218★ | JTF 表記規則 | **JTF 2.1/2.2 版ベース**。ai-kousei は **4.0 版（2026-07-25, CC BY 4.0）** を引用 |
+| [patina](https://github.com/devswha/patina) 316★ | KO/EN/ZH/JA の humanize・書き換え | 書き換えまで行う。ai-kousei は**書き換えず**指摘と条文だけ出す。用途別に規則が反転する設計は無い |
+| [humanizer-ja](https://github.com/gonta223/humanizer-ja) 123★ | 日本語 AI 文体 20 パターン | Claude Code スキル。ai-kousei は CLI とフック、根拠提示、誤検出の実測値を持つ |
 
 「最初」でも「唯一」でもありません。**根拠が条番号でたどれること、用途で規則が反転すること、誤検出率を測って公開していること**が違いです。
 
@@ -134,14 +134,14 @@ next: 対象と結果を書く。「決済リトライの上限を3回に変更�
 ## コマンド
 
 ```bash
-buntai lint .git/COMMIT_EDITMSG            # ファイル
-buntai lint -m "fix: 各種修正"              # 文字列
-git log -1 --format=%B | buntai lint       # 標準入力
-buntai lint report.md --profile report --json
-buntai rules --lang ja                     # 全規則 + 出典 + AS-IS/TO-BE
-buntai metrics -m "..."                    # 定量指標をコーパス実測値と並べる
-buntai template --lang ja                  # コミット / PR / 報告書テンプレート
-python -m buntai selftest                  # 77 規則 / 7 パック
+ai-kousei lint .git/COMMIT_EDITMSG            # ファイル
+ai-kousei lint -m "fix: 各種修正"              # 文字列
+git log -1 --format=%B | ai-kousei lint       # 標準入力
+ai-kousei lint report.md --profile report --json
+ai-kousei rules --lang ja                     # 全規則 + 出典 + AS-IS/TO-BE
+ai-kousei metrics -m "..."                    # 定量指標をコーパス実測値と並べる
+ai-kousei template --lang ja                  # コミット / PR / 報告書テンプレート
+python -m ai-kousei selftest                  # 77 規則 / 7 パック
 python bench/run.py --lang ja --rules      # 実測の再現
 ```
 
@@ -152,6 +152,6 @@ python bench/run.py --lang ja --rules      # 実測の再現
 
 ## 貢献
 
-日本語の規則追加には `source`（文書名・条番号・引用）と `example`（AS-IS / TO-BE）が必須です。他言語は `buntai/rules/<code>.json` を追加し、その言語の公的文書・業界標準を出典にしてください。`python -m buntai selftest` が通ること。
+日本語の規則追加には `source`（文書名・条番号・引用）と `example`（AS-IS / TO-BE）が必須です。他言語は `ai_kousei/rules/<code>.json` を追加し、その言語の公的文書・業界標準を出典にしてください。`python -m ai-kousei selftest` が通ること。
 
 MIT License。出典は条番号と短い引用のみを掲載し、原文の再配布は行っていません。

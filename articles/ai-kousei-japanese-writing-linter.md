@@ -40,20 +40,20 @@ fix: 商品詳細APIにRedisキャッシュを追加
 
 そこで、この差を条文を根拠に指摘するリンターを作りました。
 
-- リポジトリ: https://github.com/AidenLee0011/buntai
-- ブラウザデモ（インストール不要）: https://aidenlee0011.github.io/buntai/
+- リポジトリ: https://github.com/AidenLee0011/ai-kousei
+- ブラウザデモ（インストール不要）: https://aidenlee0011.github.io/ai-kousei/
 
 ## 使い方
 
 Python でも Node でも動きます。依存パッケージはゼロ、モデル呼び出しもネットワークアクセスもありません。
 
 ```bash
-pip install buntai-lint
-buntai hook install --lang ja     # commit-msg フックを入れる
+pip install ai-kousei
+ai-kousei hook install --lang ja     # commit-msg フックを入れる
 ```
 
 ```bash
-npx buntai-lint lint report.md --profile report
+npx ai-kousei lint report.md --profile report
 ```
 
 生成文らしいコミットは、コミット前に止まります。
@@ -128,12 +128,12 @@ TO-BE  エラー時は最大3回・10秒間隔でリトライする。3回失敗
 
 「最初」でも「唯一」でもありません。日本語の AI 文体を扱うツールは既にあります。
 
-| ツール | 対象 | buntai との違い |
+| ツール | 対象 | ai-kousei との違い |
 |---|---|---|
-| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) | 散文の AI パターン | buntai は指摘に条番号を出し、CI が原文と照合する |
-| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) | JTF 表記規則 | 同 preset は JTF 2.1/2.2 版ベース。buntai は 4.0 版（2026-07-25, CC BY 4.0）を引用 |
-| [patina](https://github.com/devswha/patina) | KO/EN/ZH/JA の humanize | patina は書き換えまで行い commit-message 用の document type もある。buntai は書き換えず、指摘と条文だけ出す |
-| [humanizer-ja](https://github.com/gonta223/humanizer-ja) | 日本語 AI 文体 20 パターン | buntai は CLI・フック・誤検出率の実測値を持つ |
+| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) | 散文の AI パターン | ai-kousei は指摘に条番号を出し、CI が原文と照合する |
+| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) | JTF 表記規則 | 同 preset は JTF 2.1/2.2 版ベース。ai-kousei は 4.0 版（2026-07-25, CC BY 4.0）を引用 |
+| [patina](https://github.com/devswha/patina) | KO/EN/ZH/JA の humanize | patina は書き換えまで行い commit-message 用の document type もある。ai-kousei は書き換えず、指摘と条文だけ出す |
+| [humanizer-ja](https://github.com/gonta223/humanizer-ja) | 日本語 AI 文体 20 パターン | ai-kousei は CLI・フック・誤検出率の実測値を持つ |
 
 違いは 3 点です。**根拠が条番号でたどれること**、**用途によって規則が反転すること**、**誤検出率を測って公開していること**。
 
@@ -144,4 +144,4 @@ AI が書いた文章を直すための規則が作者の感覚で作られて�
 
 規則の追加は歓迎します。条件は 2 つで、出典（文書名・条番号・引用）と、AS-IS / TO-BE の書き換え例です。
 
-- https://github.com/AidenLee0011/buntai
+- https://github.com/AidenLee0011/ai-kousei

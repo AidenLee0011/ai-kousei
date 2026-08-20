@@ -1,7 +1,7 @@
-# buntai 配信用コピー / promo copy
+# ai-kousei 配信用コピー / promo copy
 
-素材: `buntai-demo-shorts-1080x1920.mp4`（縦・Shorts/Reels/TikTok）、`buntai-demo-square.mp4`（X・LinkedIn）、`buntai-demo.gif`（README・Reddit）
-リンク: https://github.com/AidenLee0011/buntai ・ https://aidenlee0011.github.io/buntai/
+素材: `ai-kousei-demo-shorts-1080x1920.mp4`（縦・Shorts/Reels/TikTok）、`ai-kousei-demo-square.mp4`（X・LinkedIn）、`ai-kousei-demo.gif`（README・Reddit）
+リンク: https://github.com/AidenLee0011/ai-kousei ・ https://aidenlee0011.github.io/ai-kousei/
 
 数字はすべて実測。誇張表現と絵文字は使わない。
 
@@ -15,7 +15,7 @@ AIに日本語のコミットを書かせると、本文の敬体率が 1.0% か
 
 その差を条文を根拠に止めるリンターを作った。依存ゼロ、モデル呼び出しなし。
 
-https://github.com/AidenLee0011/buntai
+https://github.com/AidenLee0011/ai-kousei
 ```
 
 スレッド 2 本目
@@ -32,9 +32,9 @@ https://github.com/AidenLee0011/buntai
 ```
 Ask an LLM for a Japanese commit message and the polite-form rate in the body goes 1.0% -> 83.3%.
 
-buntai flags that with local regex only. Every rule cites a clause of a Japanese public standard, and CI verifies those quotes verbatim against the original documents.
+ai-kousei flags that with local regex only. Every rule cites a clause of a Japanese public standard, and CI verifies those quotes verbatim against the original documents.
 
-https://github.com/AidenLee0011/buntai
+https://github.com/AidenLee0011/ai-kousei
 ```
 
 ## Reddit（r/opensource, r/coolgithubprojects, r/SideProject）
@@ -42,7 +42,7 @@ https://github.com/AidenLee0011/buntai
 タイトル
 
 ```
-buntai - a Japanese writing linter where every rule cites a government style clause, and CI verifies the quotes verbatim
+ai-kousei - a Japanese writing linter where every rule cites a government style clause, and CI verifies the quotes verbatim
 ```
 
 本文
@@ -66,8 +66,8 @@ So I built the linter around the standards instead of around my intuition:
 
 Not the first Japanese AI-writing tool. textlint-ja presets, patina and humanizer-ja exist. The difference is traceable sources, profile inversion, and published false-positive rates.
 
-Repo: https://github.com/AidenLee0011/buntai
-Browser demo: https://aidenlee0011.github.io/buntai/
+Repo: https://github.com/AidenLee0011/ai-kousei
+Browser demo: https://aidenlee0011.github.io/ai-kousei/
 ```
 
 ## YouTube Shorts / Reels / TikTok（読み上げ台本・35秒）
@@ -82,7 +82,7 @@ Browser demo: https://aidenlee0011.github.io/buntai/
       画面: profile を customer に切り替え、常体がエラー
 0:26  根拠は全部、公用文作成の考え方とJTFスタイルガイドの条文。
       CIが原文と一字一句照合している。
-0:33  buntai。リンクは概要欄。
+0:33  ai-kousei。リンクは概要欄。
 ```
 
 概要欄
@@ -91,8 +91,8 @@ Browser demo: https://aidenlee0011.github.io/buntai/
 AIが書いた日本語は敬体率83%、人が書いた記録は1%。
 公用文作成の考え方とJTF日本語標準スタイルガイドの条文を根拠に、コミット・報告書・エージェント間・対顧客の日本語を検査するリンターです。依存ゼロ、モデル呼び出しなし。
 
-GitHub: https://github.com/AidenLee0011/buntai
-デモ: https://aidenlee0011.github.io/buntai/
+GitHub: https://github.com/AidenLee0011/ai-kousei
+デモ: https://aidenlee0011.github.io/ai-kousei/
 解説記事: https://qiita.com/AidenLee0011/items/40faf0bfb8f230c37430
 ```
 

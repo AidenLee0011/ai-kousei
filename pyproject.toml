@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "buntai-lint"
+name = "ai-kousei"
 version = "0.1.0"
 description = "日本語リンター / Japanese writing linter for commits, reports, agent handoffs and customer-facing text. Every rule cites a Japanese public standard. Zero dependencies, no LLM."
 readme = "README.md"
@@ -27,10 +27,10 @@ classifiers = [
 dependencies = []
 
 [project.scripts]
-buntai = "buntai.__main__:main"
+ai-kousei = "ai_kousei.__main__:main"
 
 [tool.setuptools]
-packages = ["buntai"]
+packages = ["ai_kousei"]
 
 [tool.setuptools.package-data]
-buntai = ["rules/*.json"]
+ai_kousei = ["rules/*.json"]

@@ -44,7 +44,7 @@ def main():
     ap.add_argument("--lang", default="ja")
     a = ap.parse_args()
 
-    pack = json.load(io.open(os.path.join(ROOT, "buntai", "rules", "%s.json" % a.lang), encoding="utf-8"))
+    pack = json.load(io.open(os.path.join(ROOT, "ai_kousei", "rules", "%s.json" % a.lang), encoding="utf-8"))
     if not os.path.isdir(RAW):
         print("sources/raw is missing. Run: python sources/fetch_ja_sources.py")
         return 2

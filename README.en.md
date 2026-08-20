@@ -1,19 +1,19 @@
-# buntai 文体
+# ai-kousei ─ AI校正
 
 ![MIT](https://img.shields.io/badge/license-MIT-blue) ![Python](https://img.shields.io/badge/python-3.9%2B-blue) ![Node](https://img.shields.io/badge/node-14%2B-blue) ![deps](https://img.shields.io/badge/dependencies-0-brightgreen) ![no api](https://img.shields.io/badge/API%20calls-none-brightgreen) ![rules](https://img.shields.io/badge/ja%20rules-23%20cited-orange)
 
 **Ask an LLM for a Japanese commit message and the polite-form rate in the body jumps from 1.0% to 83.3%.**
-buntai catches that with local regular expressions, and every rule points at a clause in a Japanese public standard.
+ai-kousei catches that with local regular expressions, and every rule points at a clause in a Japanese public standard.
 
 [日本語](README.md) ・ **English** ・ [한국어](README.ko.md)
 
-[Open the demo](https://aidenlee0011.github.io/buntai/) ・ japanese writing linter / japanese proofreading / AI writing detection / commit message lint / no Node required
+[Open the demo](https://aidenlee0011.github.io/ai-kousei/) ・ japanese writing linter / japanese proofreading / AI writing detection / commit message lint / no Node required
 
 ![AS-IS to TO-BE](docs/hero.png)
 
 ```bash
-pip install buntai-lint && buntai hook install --lang ja     # Python
-npx buntai-lint lint report.md --profile report              # Node
+npx ai-kousei lint report.md --profile report      # Node
+npx ai-kousei hook install --lang ja               # git hook
 ```
 
 ---
@@ -53,10 +53,10 @@ Not the first and not the only one. Japanese AI-writing tools already exist.
 
 | tool | scope | difference |
 |---|---|---|
-| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) 1,095★ | AI patterns in prose | buntai prints the clause and CI verifies the quote |
-| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) 218★ | JTF notation rules | that preset tracks JTF 2.1/2.2; buntai cites **4.0 (2026-07-25, CC BY 4.0)** |
-| [patina](https://github.com/devswha/patina) 316★ | KO/EN/ZH/JA humanizer, has a commit-message document type | patina rewrites; buntai **never rewrites**, it reports and cites. No profile inversion there |
-| [humanizer-ja](https://github.com/gonta223/humanizer-ja) 123★ | 20 Japanese AI-writing patterns | a Claude Code skill; buntai is a CLI and a hook with published false-positive rates |
+| [textlint-rule-preset-ai-writing](https://github.com/textlint-ja/textlint-rule-preset-ai-writing) 1,095★ | AI patterns in prose | ai-kousei prints the clause and CI verifies the quote |
+| [textlint-rule-preset-JTF-style](https://github.com/textlint-ja/textlint-rule-preset-JTF-style) 218★ | JTF notation rules | that preset tracks JTF 2.1/2.2; ai-kousei cites **4.0 (2026-07-25, CC BY 4.0)** |
+| [patina](https://github.com/devswha/patina) 316★ | KO/EN/ZH/JA humanizer, has a commit-message document type | patina rewrites; ai-kousei **never rewrites**, it reports and cites. No profile inversion there |
+| [humanizer-ja](https://github.com/gonta223/humanizer-ja) 123★ | 20 Japanese AI-writing patterns | a Claude Code skill; ai-kousei is a CLI and a hook with published false-positive rates |
 
 The three differences are: **traceable clause-level sources**, **rules that invert by use**, and **a measured, published false-positive rate**.
 
@@ -115,14 +115,14 @@ Rules are JSON. The Python CLI, the Node CLI and the browser demo read the same 
 ## Commands
 
 ```bash
-buntai lint .git/COMMIT_EDITMSG            # file
-buntai lint -m "fix: 各種修正"              # string
-git log -1 --format=%B | buntai lint       # stdin
-buntai lint report.md --profile report --json
-buntai rules --lang ja                     # rules with citations and before/after
-buntai metrics -m "..."                    # deterministic signals vs the corpus
-buntai template --lang ja                  # commit / PR / report templates
-python -m buntai selftest                  # 77 rules / 7 packs
+ai-kousei lint .git/COMMIT_EDITMSG            # file
+ai-kousei lint -m "fix: 各種修正"              # string
+git log -1 --format=%B | ai-kousei lint       # stdin
+ai-kousei lint report.md --profile report --json
+ai-kousei rules --lang ja                     # rules with citations and before/after
+ai-kousei metrics -m "..."                    # deterministic signals vs the corpus
+ai-kousei template --lang ja                  # commit / PR / report templates
+python -m ai-kousei selftest                  # 77 rules / 7 packs
 python bench/run.py --lang ja --rules      # reproduce the measurements
 ```
 
@@ -133,6 +133,6 @@ There are 23 Japanese rules, far short of the textlint ecosystem's coverage, and
 
 ## Contributing
 
-A Japanese rule needs `source` (document, clause, quote) and `example` (before, after). A new language goes in `buntai/rules/<code>.json`, sourced from that language's public standards rather than intuition. `python -m buntai selftest` must pass.
+A Japanese rule needs `source` (document, clause, quote) and `example` (before, after). A new language goes in `ai_kousei/rules/<code>.json`, sourced from that language's public standards rather than intuition. `python -m ai-kousei selftest` must pass.
 
 MIT License. Sources are cited by clause with short quotations; no source document is redistributed.

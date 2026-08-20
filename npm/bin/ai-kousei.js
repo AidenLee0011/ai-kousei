@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* buntai — Japanese writing linter. Node build.
+/* ai-kousei — Japanese writing linter. Node build.
  *
  * Same rules, same engine as the Python package and the browser demo: the
  * rule packs in rules/ are the single source, lint.js is shared verbatim.
@@ -50,7 +50,7 @@ function cmdLint(args) {
     return r.passed ? 0 : 1;
   }
   if (!r.lang) {
-    console.log("buntai: language not detected. Japanese is the sourced pack; force with --lang ja");
+    console.log("ai-kousei: language not detected. Japanese is the sourced pack; force with --lang ja");
     return 0;
   }
   const fs_ = r.findings;
@@ -105,7 +105,7 @@ function cmdHook() {
   const hooks = path.join(gitDir, "hooks");
   fs.mkdirSync(hooks, { recursive: true });
   const p = path.join(hooks, "commit-msg");
-  fs.writeFileSync(p, "#!/bin/sh\n# buntai commit-msg hook\ncase \"$2\" in merge|squash|fixup) exit 0;; esac\nnpx --no-install buntai lint \"$1\" || exit 1\n", { mode: 0o755 });
+  fs.writeFileSync(p, "#!/bin/sh\n# ai-kousei commit-msg hook\ncase \"$2\" in merge|squash|fixup) exit 0;; esac\nnpx --no-install ai-kousei lint \"$1\" || exit 1\n", { mode: 0o755 });
   console.log("installed " + p);
   return 0;
 }
@@ -115,12 +115,12 @@ function main() {
   const cmd = args[0];
   if (!cmd || cmd === "-h" || cmd === "--help") {
     console.log([
-      "buntai — 日本語の文体リンター / Japanese writing linter",
+      "ai-kousei — 日本語の文体リンター / Japanese writing linter",
       "",
-      "  buntai lint <file>|-m \"text\" [--profile commit|report|agent|customer] [--lang ja] [--json] [--all]",
-      "  buntai rules [--lang ja]      規則と出典と AS-IS/TO-BE",
-      "  buntai template [--pr|--report]",
-      "  buntai hook                   commit-msg フックを入れる",
+      "  ai-kousei lint <file>|-m \"text\" [--profile commit|report|agent|customer] [--lang ja] [--json] [--all]",
+      "  ai-kousei rules [--lang ja]      規則と出典と AS-IS/TO-BE",
+      "  ai-kousei template [--pr|--report]",
+      "  ai-kousei hook                   commit-msg フックを入れる",
       "",
       "error があると exit 1。warning は表示のみ。"
     ].join("\n"));

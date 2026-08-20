@@ -1,10 +1,10 @@
-// buntai engine. Shared by the browser demo and the npm CLI so that a
+// ai-kousei engine. Shared by the browser demo and the npm CLI so that a
 // finding on the page and a finding in CI can never disagree.
 // Rules live in rules/*.json and are loaded by the caller.
 
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) module.exports = factory();
-  else root.buntai = factory();
+  else root.aiKousei = factory();
 }(typeof self !== 'undefined' ? self : this, function () {
 const LANGS = ["_common","ja","ko","zh","de","fr","es"];
 const PACKS = {};
@@ -19,7 +19,7 @@ const EN_LABELS = {
   subject_long:{title:"subject {w} > {max} columns",why:"",fix:"Move the detail into the body."},
   subject_period:{title:"subject ends with a period",why:"",fix:"Drop the trailing period."},
   bullets:{title:"{n} bullets in the body",why:"",fix:"Keep the {max} that matter."},
-  sections:{title:"report sections missing: {missing}",why:"",fix:"Use buntai template --lang {lang}."},
+  sections:{title:"report sections missing: {missing}",why:"",fix:"Use ai-kousei template --lang {lang}."},
   sentence_long:{title:"sentence of {n} characters > {max}",why:"",fix:"Split the sentence."},
   max_ten:{title:"{n} commas in one sentence > {max}",why:"",fix:"Split the sentence or use a list."},
   kanji_run:{title:"{n} ideographs in a row > {max}",why:"",fix:"Break the compound."},
@@ -158,7 +158,7 @@ function lint(text, forced, profile){
           score: Math.max(0, 100 - findings.reduce((s,f)=>s+f.weight,0)), passed: errors === 0};
 }
 
-// Deterministic signals, same definitions as buntai/metrics.py
+// Deterministic signals, same definitions as ai-kousei/metrics.py
 function metrics(text){
   const body = text.split("\n").slice(1).join("\n").trim() || text;
   const s = body.split(/[。．\n]+/).map(x=>x.trim()).filter(Boolean);

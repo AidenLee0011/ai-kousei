@@ -1,4 +1,4 @@
-"""buntai CLI — lint / template / hook / langs / selftest."""
+"""ai-kousei CLI — lint / template / hook / langs / selftest."""
 from __future__ import annotations
 
 import argparse
@@ -11,7 +11,7 @@ import sys
 from . import COMMON, __version__, detect_lang, lint, load_packs
 
 HOOK = """#!/bin/sh
-# buntai commit-msg hook
+# ai-kousei commit-msg hook
 case "$2" in merge|squash|fixup) exit 0;; esac
 %s lint "$1" %s || exit 1
 """
@@ -41,14 +41,14 @@ def cmd_lint(a) -> int:
     else:
         text = sys.stdin.read()
     # A kanji-only subject cannot be told apart from Chinese by script alone, so a
-    # repository can pin its language: git config buntai.lang ja
-    r = lint(text, a.lang or _git_config("buntai.lang"),
-             profile=a.profile or _git_config("buntai.profile") or "commit")
+    # repository can pin its language: git config ai-kousei.lang ja
+    r = lint(text, a.lang or _git_config("ai-kousei.lang"),
+             profile=a.profile or _git_config("ai-kousei.profile") or "commit")
     if a.json:
         _out(json.dumps(r, ensure_ascii=False, indent=2))
         return 0 if r["passed"] else 1
     if r["lang"] is None:
-        _out("buntai: language not detected. English is out of scope on purpose "
+        _out("ai-kousei: language not detected. English is out of scope on purpose "
              "(use blader/humanizer). Force with --lang ja|ko|zh|de|fr|es.")
         return 0
     # Output shape: the first line is the one thing to do next, then at most five
@@ -182,13 +182,13 @@ def cmd_hook(a) -> int:
         return 2
     path = os.path.join(gd, "hooks", "commit-msg")
     if a.action == "uninstall":
-        if os.path.exists(path) and "buntai" in open(path, encoding="utf-8").read():
+        if os.path.exists(path) and any(k in open(path, encoding="utf-8").read() for k in ("ai_kousei", "ai-kousei")):
             os.remove(path)
             _out("removed %s" % path)
         return 0
-    cmd = a.cmd or ("%s -m buntai" % os.path.basename(sys.executable).replace(".exe", ""))
+    cmd = a.cmd or ("%s -m ai_kousei" % os.path.basename(sys.executable).replace(".exe", ""))
     if a.lang:
-        subprocess.run(["git", "config", "buntai.lang", a.lang], capture_output=True, timeout=10)
+        subprocess.run(["git", "config", "ai-kousei.lang", a.lang], capture_output=True, timeout=10)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8", newline="\n") as f:
         f.write(HOOK % (cmd, ("--lang " + a.lang) if a.lang else ""))
@@ -317,7 +317,7 @@ def cmd_selftest(a) -> int:
 
 
 def main(argv=None) -> int:
-    p = argparse.ArgumentParser(prog="buntai", description="commit messages that read like a human wrote them, in your language")
+    p = argparse.ArgumentParser(prog="ai-kousei", description="commit messages that read like a human wrote them, in your language")
     p.add_argument("--version", action="version", version=__version__)
     sub = p.add_subparsers(dest="cmd", required=True)
 
@@ -326,7 +326,7 @@ def main(argv=None) -> int:
     q.add_argument("-m", "--message")
     q.add_argument("--lang")
     q.add_argument("--profile", choices=["commit", "report", "agent", "customer"],
-                   help="which rule set applies (default: commit, or git config buntai.profile)")
+                   help="which rule set applies (default: commit, or git config ai-kousei.profile)")
     q.add_argument("--json", action="store_true")
     q.add_argument("--quiet", action="store_true", help="findings only, no why/source")
     q.add_argument("--all", action="store_true", help="show every finding (default caps at 5)")
@@ -340,7 +340,7 @@ def main(argv=None) -> int:
     q = sub.add_parser("hook", help="install or remove the commit-msg hook")
     q.add_argument("action", choices=["install", "uninstall"])
     q.add_argument("--lang")
-    q.add_argument("--cmd", help="command used inside the hook (default: python -m buntai)")
+    q.add_argument("--cmd", help="command used inside the hook (default: python -m ai_kousei)")
     q.set_defaults(fn=cmd_hook)
 
     q = sub.add_parser("rules", help="print every rule with its citation and before/after example")
