@@ -1,5 +1,5 @@
 ---
-title: "AIが書いた日本語は敬体率83%、人が書いた記録は1%。公用文の条文を根拠に検査するリンターを作った"
+title: "AIが書いた日本語の見分け方 — 敬体率83% vs 1%。公用文の条文でチェックするリンターを作った"
 emoji: "📝"
 type: "tech"
 topics: ["japanese", "textlint", "python", "ai", "git"]

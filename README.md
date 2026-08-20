@@ -7,7 +7,7 @@ ai-kousei は、その差を公的文書の条文を根拠に、ローカルの�
 
 **日本語** ・ [English](README.en.md) ・ [한국어](README.ko.md)
 
-[デモを開く](https://aidenlee0011.github.io/ai-kousei/) ・ 日本語 校正 / 日本語 リンター / AI 文章 判定 / コミットメッセージ 日本語 / Node.js 不要
+[デモを開く](https://aidenlee0011.github.io/ai-kousei/) ・ AIが書いた文章の見分け方 / AI 文章 チェック / AI 文章 判定 / 日本語 校正 / コミットメッセージ 日本語
 
 ![AS-IS to TO-BE](docs/hero.png)
 
