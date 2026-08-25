@@ -15,7 +15,7 @@ ap.add_argument("--out", default=os.path.join(ROOT, "web"))
 a = ap.parse_args()
 
 os.makedirs(os.path.join(a.out, "rules"), exist_ok=True)
-for name in ("index.html", "lint.js"):
+for name in ("index.html", "lint.js", "sitemap.xml"):
     src = os.path.join(ROOT, "web", name)
     dst = os.path.join(a.out, name)
     if os.path.abspath(src) != os.path.abspath(dst):
@@ -25,6 +25,7 @@ for fn in os.listdir(os.path.join(ROOT, "ai_kousei", "rules")):
     if fn.endswith(".json"):
         shutil.copy2(os.path.join(ROOT, "ai_kousei", "rules", fn), os.path.join(a.out, "rules", fn))
         n += 1
+shutil.copy2(os.path.join(ROOT, "docs", "hero.png"), os.path.join(a.out, "hero.png"))
 # GitHub Pages runs Jekyll, which skips files beginning with an underscore.
 # _common.json is exactly that, so the marker file has to ship with the demo.
 io.open(os.path.join(a.out, ".nojekyll"), "w", encoding="utf-8").write("")
