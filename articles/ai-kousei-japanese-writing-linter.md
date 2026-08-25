@@ -6,6 +6,11 @@ topics: ["japanese", "textlint", "python", "ai", "git"]
 published: true
 ---
 
+:::message
+ブラウザで試す: https://aidenlee0011.github.io/ai-kousei/ （インストール不要・外部送信なし）
+リポジトリ: https://github.com/AidenLee0011/ai-kousei
+:::
+
 ## 測ってみたら、差ははっきりしていた
 
 LLM に日本語のコミットメッセージを書かせると、ほぼ必ずこうなります。
@@ -145,3 +150,5 @@ AI が書いた文章を直すための規則が作者の感覚で作られて�
 規則の追加は歓迎します。条件は 2 つで、出典（文書名・条番号・引用）と、AS-IS / TO-BE の書き換え例です。
 
 - https://github.com/AidenLee0011/ai-kousei
+
+規則の追加や誤検出の報告は Issue で受け付けています。役に立った場合は Star をいただけると継続の励みになります。
