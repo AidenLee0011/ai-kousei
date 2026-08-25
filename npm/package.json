@@ -41,5 +41,6 @@
   "dependencies": {},
   "scripts": {
     "test": "node bin/ai-kousei.js lint -m \"fix: キャッシュ追加\" --lang ja && node test-mcp.js"
-  }
+  },
+  "mcpName": "io.github.AidenLee0011/ai-kousei"
 }
