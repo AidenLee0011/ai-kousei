@@ -84,6 +84,23 @@ TO-BE  エラー時は最大3回・10秒間隔でリトライする。
 
 ---
 
+## MCP サーバーとして使う
+
+エージェントが自分の日本語を書き出す前に、同じ規則で自己点検できる。依存ゼロ・ネットワーク接続なし。
+
+```bash
+claude mcp add ai-kousei -- npx -y ai-kousei ai-kousei-mcp
+```
+
+```json
+{ "mcpServers": { "ai-kousei": { "command": "npx", "args": ["-y", "ai-kousei", "ai-kousei-mcp"] } } }
+```
+
+| ツール | 入力 | 返るもの |
+|---|---|---|
+| `lint_japanese` | text, profile（commit / report / agent / customer） | 指摘・直し方・条番号つき出典・スコア・合否 |
+| `japanese_metrics` | text | 敬体率・受動態率・指示語率・抽象接尾辞率・平均文長 |
+
 ## 出力
 
 ```

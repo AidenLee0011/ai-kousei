@@ -1,0 +1,19 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.AidenLee0011/ai-kousei",
+  "title": "ai-kousei",
+  "description": "Japanese writing linter where every rule cites a Japanese public standard. Checks commit messages, reports, agent handoffs and customer replies. No LLM, no network.",
+  "version": "0.4.0",
+  "repository": { "url": "https://github.com/AidenLee0011/ai-kousei", "source": "github" },
+  "websiteUrl": "https://aidenlee0011.github.io/ai-kousei/",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "ai-kousei",
+      "version": "0.4.0",
+      "transport": { "type": "stdio" },
+      "runtimeHint": "npx",
+      "runtimeArguments": [{ "type": "positional", "value": "ai-kousei-mcp" }]
+    }
+  ]
+}

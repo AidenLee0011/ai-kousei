@@ -85,6 +85,23 @@ TO-BE  エラー時は最大3回・10秒間隔でリトライする。
 
 ---
 
+## Use it as an MCP server
+
+An agent can check its own Japanese with the same rules before it writes anything. Zero dependencies, no network calls.
+
+```bash
+claude mcp add ai-kousei -- npx -y ai-kousei ai-kousei-mcp
+```
+
+```json
+{ "mcpServers": { "ai-kousei": { "command": "npx", "args": ["-y", "ai-kousei", "ai-kousei-mcp"] } } }
+```
+
+| Tool | Input | Returns |
+|---|---|---|
+| `lint_japanese` | text, profile (commit / report / agent / customer) | findings, fixes, the article each rule comes from, score, verdict |
+| `japanese_metrics` | text | polite / passive / demonstrative / abstract suffix rate, mean sentence length |
+
 ## Output
 
 ```

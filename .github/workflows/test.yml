@@ -41,3 +41,17 @@ jobs:
       - name: verify every quotation verbatim
         run: |
           python sources/verify_quotes.py --lang ja
+
+  mcp:
+    # The MCP server shares the engine and the rule packs with the CLI, so the
+    # smoke test fails as soon as either of them drifts.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: build the npm bundle
+        run: python docs/build_web.py
+      - name: mcp smoke test
+        run: node npm/test-mcp.js
